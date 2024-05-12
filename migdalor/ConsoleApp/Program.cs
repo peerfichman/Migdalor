@@ -5,5 +5,6 @@ MigdalorContext db = new MigdalorContext();
 
 foreach (TblUser user in db.TblUsers)
 {
-    Console.WriteLine($"{user.UserId}, {user.Username}, {user.Password}, {user.RoleNumber}, {user.RoleName}");
+    Console.WriteLine($"{user.UserId}, {user.Username}, " +
+        $"{user.Password}, {user.RoleNumber}, {user.RoleName}");
 }
