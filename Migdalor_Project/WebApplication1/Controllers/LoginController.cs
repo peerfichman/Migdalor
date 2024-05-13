@@ -1,6 +1,12 @@
 ﻿using ClassLibrary1.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Controllers
 {
@@ -9,23 +15,42 @@ namespace WebApplication1.Controllers
     public class LoginController : ControllerBase
     {
         MigdalorContext db = new MigdalorContext();
+        private readonly IConfiguration _configuration;
 
         //Check the username and password of the user how trying to login
         [HttpPost]
         [Route("Authenticate")]
         public IActionResult Authenticate(TblUser userInput)
         {
-            // Find the user in the database based on the provided username
-            var user = db.TblUsers.FirstOrDefault(u => u.Username == userInput.Username);
+            var user = db.TblUsers.FirstOrDefault(u => u.Username == userInput.Username && u.Password == userInput.Password);
 
-            if (user == null || user.Password != userInput.Password)
+            if (user == null)
             {
-                // Username or password is incorrect
-                return BadRequest("Incorrect username or password");
+                return BadRequest("Username or password is incorrect");
             }
 
-            // Authentication successful
-            return Ok("Login successful");
+            var token = GenerateJwtToken(user);
+
+            return Ok(new { Token = token });
+        }
+        private string GenerateJwtToken(TblUser user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Role, user.RoleName) // You can include additional claims as needed
+                }),
+                Expires = DateTime.UtcNow.AddHours(1), // Token expiration time
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         //create API for Forgot Password
