@@ -9,17 +9,10 @@ namespace WebApplication1.Controllers
     public class LoginController : ControllerBase
     {
         MigdalorContext db = new MigdalorContext();
-        public class UserInputModel
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public int RoleNumber { get; set; }
-            public string RoleName { get; set; }
-        }
 
+        //Gets all users in the DB
         [HttpGet]
         [Route("GetUsers")]
-        //Gets all users in the DB
         public IActionResult GetUsers()
         {
             try
@@ -43,10 +36,10 @@ namespace WebApplication1.Controllers
             }
         }
 
+        //Add new user to tblUsers
         [HttpPost]
         [Route("AddUser")]
-        //Add new user to tblUsers
-        public IActionResult AddUser([FromBody] UserInputModel userInput)
+        public IActionResult AddUser([FromBody] TblUser userInput)
         {
             try
             {
@@ -77,9 +70,10 @@ namespace WebApplication1.Controllers
             }
         }
 
+        //Update user to tblUsers
         [HttpPut]
         [Route("UpdateUser/{id}")]
-        public IActionResult UpdateUser(int id, UserInputModel userInput)
+        public IActionResult UpdateUser(int id, TblUser userInput)
         {
             var userToUpdate = db.TblUsers.FirstOrDefault(u => u.UserId == id);
 
