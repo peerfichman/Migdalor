@@ -11,7 +11,7 @@ public partial class TblGoodMorningPolicy
 
     public int? DepartmentId { get; set; }
 
-    public virtual TblDepartment? Department { get; set; }
+    public int? ResidentNumber { get; set; }
 
-    public virtual ICollection<TblResident> ResidentNumbers { get; set; } = new List<TblResident>();
+    public virtual TblDepartment? Department { get; set; }
 }

@@ -39,7 +39,7 @@ public partial class MigdalorContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=ANITA-LAPTOP\\SQLEXPRESS01;Database=Migdalor;Trusted_Connection=True;Encrypt=false");
+        => optionsBuilder.UseSqlServer("Server= ANITA-LAPTOP\\SQLEXPRESS01;Database=Migdalor;Trusted_Connection=True;Encrypt=false");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -157,23 +157,6 @@ public partial class MigdalorContext : DbContext
             entity.HasOne(d => d.Department).WithMany(p => p.TblGoodMorningPolicies)
                 .HasForeignKey(d => d.DepartmentId)
                 .HasConstraintName("FK__tblGoodMo__Depar__4CA06362");
-
-            entity.HasMany(d => d.ResidentNumbers).WithMany(p => p.IdentificationNumbers)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TblResidentDoGoodMorningPolicy",
-                    r => r.HasOne<TblResident>().WithMany()
-                        .HasForeignKey("ResidentNumber")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__tblReside__Resid__5070F446"),
-                    l => l.HasOne<TblGoodMorningPolicy>().WithMany()
-                        .HasForeignKey("IdentificationNumber")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__tblReside__Ident__4F7CD00D"),
-                    j =>
-                    {
-                        j.HasKey("IdentificationNumber", "ResidentNumber").HasName("PK__tblResid__28BDDC691AF4F4F7");
-                        j.ToTable("tblResidentDoGoodMorningPolicy");
-                    });
         });
 
         modelBuilder.Entity<TblHobby>(entity =>

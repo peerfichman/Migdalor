@@ -49,7 +49,5 @@ public partial class TblResident
 
     public virtual ICollection<TblHobby> HobbyNumbers { get; set; } = new List<TblHobby>();
 
-    public virtual ICollection<TblGoodMorningPolicy> IdentificationNumbers { get; set; } = new List<TblGoodMorningPolicy>();
-
     public virtual ICollection<TblInitiative> InitiativeNumbers { get; set; } = new List<TblInitiative>();
 }

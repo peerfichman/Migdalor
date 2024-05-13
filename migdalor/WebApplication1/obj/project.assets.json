@@ -2877,11 +2877,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\anita\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\anita\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2898,8 +2898,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ClassLibrary1\\ClassLibrary1.csproj": {
-              "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ClassLibrary1\\ClassLibrary1.csproj"
+            "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ClassLibrary1\\ClassLibrary1.csproj": {
+              "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ClassLibrary1\\ClassLibrary1.csproj"
             }
           }
         }

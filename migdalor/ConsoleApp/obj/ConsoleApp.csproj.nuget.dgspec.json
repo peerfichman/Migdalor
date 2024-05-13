@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ConsoleApp\\ConsoleApp.csproj": {}
+    "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ConsoleApp\\ConsoleApp.csproj": {}
   },
   "projects": {
     "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ClassLibrary1\\ClassLibrary1.csproj": {
@@ -74,14 +74,14 @@
         }
       }
     },
-    "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ConsoleApp\\ConsoleApp.csproj": {
+    "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ConsoleApp\\ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ConsoleApp\\ConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ConsoleApp\\ConsoleApp.csproj",
         "projectName": "ConsoleApp",
-        "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ConsoleApp\\ConsoleApp.csproj",
+        "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ConsoleApp\\ConsoleApp.csproj",
         "packagesPath": "C:\\Users\\anita\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\anita\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -98,8 +98,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ClassLibrary1\\ClassLibrary1.csproj": {
-                "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\migdalor\\ClassLibrary1\\ClassLibrary1.csproj"
+              "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ClassLibrary1\\ClassLibrary1.csproj": {
+                "projectPath": "C:\\Users\\anita\\Migdalor_Final_Project\\Migdalor\\ClassLibrary1\\ClassLibrary1.csproj"
               }
             }
           }
