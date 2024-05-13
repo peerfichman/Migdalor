@@ -28,6 +28,26 @@ namespace WebApplication1.Controllers
             return Ok("Login successful");
         }
 
+        //create API for Forgot Password
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword(string username)
+        {
+            // Find the user in the database based on the provided username
+            var user = db.TblUsers.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+            {
+                // User not found
+                return BadRequest("User not found");
+            }
+
+            // Implement your logic for password reset here
+            // For example, you could send an email to the user with a link to reset their password
+
+            return Ok("Password reset instructions sent to your email");
+        }
+
         //Gets all users in the DB
         [HttpGet]
         [Route("GetUsers")]
