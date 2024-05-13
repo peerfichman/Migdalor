@@ -10,6 +10,24 @@ namespace WebApplication1.Controllers
     {
         MigdalorContext db = new MigdalorContext();
 
+        //Check the username and password of the user how trying to login
+        [HttpPost]
+        [Route("Authenticate")]
+        public IActionResult Authenticate(TblUser userInput)
+        {
+            // Find the user in the database based on the provided username
+            var user = db.TblUsers.FirstOrDefault(u => u.Username == userInput.Username);
+
+            if (user == null || user.Password != userInput.Password)
+            {
+                // Username or password is incorrect
+                return BadRequest("Incorrect username or password");
+            }
+
+            // Authentication successful
+            return Ok("Login successful");
+        }
+
         //Gets all users in the DB
         [HttpGet]
         [Route("GetUsers")]
