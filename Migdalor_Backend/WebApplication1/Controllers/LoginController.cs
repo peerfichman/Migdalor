@@ -7,6 +7,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using WebApplication1.DTO;
 
 namespace WebApplication1.Controllers
 {
@@ -21,40 +23,78 @@ namespace WebApplication1.Controllers
             _configuration = configuration;
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login([FromBody] UserLogin userlogin)
+        {
+            IActionResult response = Unauthorized();
+            TblUser user = Authenticate(userlogin);
+            if(user != null)
+            {
+                var token = GenerateJwtToken(user);
+                return Ok(new { Token = token });
+            }
+            return response;
+        }
+
         //Check the username and password of the user how trying to login
         [HttpPost]
         [Route("Authenticate")]
-        public IActionResult Authenticate(TblUser userInput)
+        private TblUser Authenticate(UserLogin userInput)
         {
-            var user = db.TblUsers.FirstOrDefault(u => u.Username == userInput.Username && u.Password == userInput.Password);
-
-            if (user == null)
-            {
-                return BadRequest("Username or password is incorrect");
-            }
-
-            var token = GenerateJwtToken(user);
-
-            return Ok(new { Token = token });
+            return db.TblUsers.FirstOrDefault(u => u.Username == userInput.Username && u.Password == userInput.Password);
         }
+
+
         private string GenerateJwtToken(TblUser user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var Claims = new[]
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Role, user.RoleName) // You can include additional claims as needed
-                }),
-                Expires = DateTime.UtcNow.AddHours(1), // Token expiration time
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
+                new Claim(ClaimTypes.GivenName,user.Username),
+                new Claim(ClaimTypes.Role,user.RoleName)
             };
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                Claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: credentials
+                );
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        [HttpGet("GNARFJT")]
+        [Authorize]
+        public IActionResult GetNameAndRoleFromJwtToken()
+        {
+            TblUser user = GetCurrntUser();
+            return Ok($"Hi {user.Username},you are in role {user.RoleName}");
+        }
+
+        private TblUser GetCurrntUser()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity == null)
+            {
+                return null;
+            }
+            IEnumerable<Claim> claims = identity.Claims;
+
+            int id = int.Parse(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            string name = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value;
+            string role = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+
+            TblUser user = new TblUser()
+            {
+                UserId = id,
+                Username = name,
+                RoleName = role
+            };
+            return user;
         }
 
         //create API for Forgot Password
