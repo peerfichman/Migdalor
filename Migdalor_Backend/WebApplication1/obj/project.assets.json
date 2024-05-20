@@ -2763,7 +2763,9 @@
     "net6.0": [
       "ClassLibrary1 >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.30",
-      "Swashbuckle.AspNetCore >= 6.2.3"
+      "Microsoft.IdentityModel.Tokens >= 6.35.0",
+      "Swashbuckle.AspNetCore >= 6.2.3",
+      "System.IdentityModel.Tokens.Jwt >= 6.35.0"
     ]
   },
   "packageFolders": {
@@ -2813,9 +2815,17 @@
             "target": "Package",
             "version": "[6.0.30, )"
           },
+          "Microsoft.IdentityModel.Tokens": {
+            "target": "Package",
+            "version": "[6.35.0, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.2.3, )"
+          },
+          "System.IdentityModel.Tokens.Jwt": {
+            "target": "Package",
+            "version": "[6.35.0, )"
           }
         },
         "imports": [
