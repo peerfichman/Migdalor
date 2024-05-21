@@ -1,7 +1,6 @@
 import React, {useState}from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Glass from './Image/magnifying-glass.png';
 import Icons from './Image/Logo1.png';
 import SendMeassge from './SendMeassge';
 import OpeningHours from './OpeningHours';
