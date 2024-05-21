@@ -20,28 +20,7 @@ padding: 0;
 box-sizing: border-box;
 `;
 
-const SearchIcon = styled.button`
-background-image: url(${Glass});
-  width: 2px  ; // גודל הכפתור
-  height: 2px ; // גודל הכפתור
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 1rem;
-  background-size: cover; 
-  background-position: center;
-`;
 
-const SearchInput = styled.input`
-  display: ${props => props.isOpen ? 'block' : 'none'};
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 1rem;
-  cursor: pointer;
-`;
 
 
 
@@ -96,15 +75,14 @@ transition: background-color 0.3s;
 
 
 const Home = () => {
-    const [isSearchOpen, setSearchOpen] = useState(false);
+    
     const [activeComponent, setActiveComponent] = useState(null);
 
     
   
   return (
     <PageContainer>
-         <SearchIcon onClick={() => setSearchOpen(!isSearchOpen)} />
-         <SearchInput isOpen={isSearchOpen} placeholder='חיפוש...' />
+        
          <BurgerButton>☰</BurgerButton>
 
          <div className='Icon'>
