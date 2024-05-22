@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
         //Add new user to tblUsers
         [HttpPost]
         [Route("AddUser")]
-        [Authorize(Roles ="SuperAdmin")]
+        //[Authorize(Roles ="SuperAdmin")]
         public IActionResult AddUser([FromBody] TblUser userInput)
         {
             try
