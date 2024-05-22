@@ -17,6 +17,7 @@ export default function Login(props) {
         })
 
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({})
       
     const handleChange = (e) => {
         const {name, value} = e.target;
