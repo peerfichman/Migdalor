@@ -18,11 +18,6 @@ export default function Login(props) {
 
     const navigate = useNavigate();
       
-    const [errors, setErrors] = useState({})
-    const regexUsername = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{}|;':",./<>?\\]+$/;
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{7,12}$/;
-
-
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData({
@@ -30,27 +25,31 @@ export default function Login(props) {
         })
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-    
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8'
-                }
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        
+        fetch(apiUrl, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: new Headers({
+                'Content-type': 'application/json; charset=UTF-8' // very important to add the 'charset=UTF-8'!!!!
+            })
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
             }
-    
-            const result = await response.json();
-            console.log("Successfully Logged in!", result);
-        } catch (error) {
-            console.error("Error during POST:", error);
-        }
+            return res.json()
+        })
+        .then(
+            (result) => {
+                console.log("Successfully logged in!", result);
+                navigate('/home'); // navigate to the home page
+            },
+            (error) => {
+                console.log("Error during POST:", error);
+            }
+        );
     }
     
     
