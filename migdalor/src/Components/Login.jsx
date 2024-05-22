@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 import myImage from "./Image/logo.png";
 import backgroundImg from "./Image/backgroundImg.jpeg";
 
-const apiUrl= "https://localhost:7149/Login/Login";
+const apiUrl = "https://localhost:7149/api/Login/Login"; 
 
 export default function Login(props) {
     const [formData, setFormData] = useState({
@@ -30,87 +30,30 @@ export default function Login(props) {
         })
     }
 
-    const handleSubmit = (e) => {
-        const apiUrl= "https://localhost:7149/Login/Login";
-        
-        fetch(this.apiUrl, {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: new Headers({
-            'Content-type': 'application/json; charset=UTF-8' //very important to add the 'charset=UTF-8'!!!!
-            })
-            })
-            .then(res => {
-            console.log('res=', res);
-            return res.json()
-            })
-            .then(
-            (result) => {
-            console.log("Successfully Loged in!", result);
-            },
-            (error) => {
-            console.log("err post=", error);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                }
             });
-
-        if (formData.username === "admin" && formData.password === 'ad12343211ad') {//חיבור לפטצ במקום הקוד הקיים
-            console.log("Successfully Loged as Admin!");
-            //navigate('/systemadmin');
-            sessionStorage.setItem('loggedInUser', JSON.stringify({username:"admin"}));
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            console.log("Successfully Logged in!", result);
+        } catch (error) {
+            console.error("Error during POST:", error);
         }
-        else e.preventDefault()
-                const validationErrors = {}
-            //מעבר על הלוקאל סטורג וחיפוש אחר השם משתמש
-            let usernameInList = props.sendUsers.find(
-                user => user.username === formData.username
-            );
-
-            if(!formData.username.trim()) {
-                validationErrors.username = "Username is required"
-            }
-            else if (formData.username.length > 60 || !regexUsername.test(formData.username)) {
-                validationErrors.username = "Invalid Username"
-            }
-            //אם לא קיים במערך המתשמשים משתמש עם השם הזה, תחזור שגיאה
-            else if (!usernameInList) {
-                validationErrors.username = "Username not found, Please Register"
-            }
-            else{
-                console.log(usernameInList.username);
-            }
-        
-
-
-            let passwordInList = props.sendUsers.find(
-                user => user.username === formData.username && user.password === formData.password
-            );
-
-            if(!formData.password.trim()) {
-                validationErrors.password = "Password is required"
-            } else if(formData.password.length < 7 || formData.password.length > 12 || !regexPassword.test(formData.password)){
-                validationErrors.password = "Invalid Password"
-            }
-            //אם הסיסמה לא תואמת את השם משתמש, תחזור שגיאה
-            else if (!passwordInList) {
-                validationErrors.password = "Password is incorrect"
-            }
-            else{
-                console.log(usernameInList.password);
-            }
-
-            setErrors(validationErrors)
-        
-
-            if(Object.keys(validationErrors).length === 0) {
-                console.log("Successfully Loged!");
-                props.sendUserToApp(usernameInList);
-                let user = props.sendUsers.find(
-                u => u.username === formData.username && u.password === formData.password
-                );
-                sessionStorage.setItem("loggedInUser", JSON.stringify(user));
-                navigate('/profile',{state:user});
-            }
-        
-        }
+    }
+    
+    
   return (
     <div style={{ backgroundImage: backgroundImg }}>
     <img src={myImage} alt="react logo" />
