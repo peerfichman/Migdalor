@@ -5,13 +5,14 @@ import Icons from './Image/Logo1.png';
 import backgroundIMG from './Image/Background.jpg';
 import SendMeassge from './SendMeassge';
 import OpeningHours from './OpeningHours';
+import AddTenant from './AddTenant';
 
 
 const BackgroundDiv = styled.div`
   background-image: url(${backgroundIMG});
   background-size: cover;
   background-position: center;
-  height: 50vh; /* גובה החלק העליון עם התמונה */
+  height: 30vh; /* גובה החלק העליון עם התמונה */
   width: 100vw;
 `;
 
@@ -21,7 +22,6 @@ const PageContainer = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* נעילת תמונת הרקע במקום כדי שתגלגל עם הדף */
-  opacity: 0.85; /* שקיפות של 50% */
   color: #333;
   font-family: 'Arial', sans-serif;
   height: 100vh; /* Ensure it covers the full height of the viewport */
@@ -33,8 +33,6 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-
   background-color: #38588e; /* צבע רקע כחול */
   color: #fff;
   font-family: 'Arial', sans-serif;
@@ -48,19 +46,6 @@ const PageContainer = styled.div`
 `;
 
 
-const ContentWrapper = styled.div`
-  background-color: #3e6ab7; /* רקע כחול נוסף */
-  width: 60%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 2rem;
-  position: relative;
-`;
 
 
 
@@ -68,13 +53,29 @@ const ContentWrapper = styled.div`
 
 
 const BurgerButton = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: fixed;
+  right: 1rem;
+  top: 2.5rem;
   padding: 1rem;
   cursor: pointer;
-  z-index: 2; /* Ensure the button is on top */
+  z-index: 2;
+  color: #fff;
+  background-color: #38588e;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem; /* גובה ורוחב זהים כדי ליצור עיגול */
+  height: 1.5rem; /* גובה ורוחב זהים כדי ליצור עיגול */
+
+  &:hover {
+    background-color: #2d4f7d;
+  }
 `;
+
+
 
 
 const NavBar = styled.nav`
@@ -87,8 +88,10 @@ const NavBar = styled.nav`
 
 
 
-const Icon = styled.img`
-    margin-right: 0.5rem;
+const StyledIcon = styled.img`
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
 `;
 
 const ButtonRow = styled.div`
@@ -122,7 +125,7 @@ const SideMenu = styled.div`
   right: ${props => (props.open ? '0' : '-100%')}; /* Show or hide menu */
   width: 250px;
   height: 100%;
-  background-color: #add8e6; /* Light blue background */
+  background-color: #38588e; /* Light blue background */
   color: black;
   display: flex;
   flex-direction: column;
@@ -131,6 +134,7 @@ const SideMenu = styled.div`
   transition: right 0.3s ease;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 1;
+  
 `;
 
 const CloseButton = styled.div`
@@ -165,73 +169,62 @@ const LogoutButton = styled(MenuButton)`
   }
 `;
 
+const Title = styled.h2`
+  margin-top: 10px; /* מרווח עליון קטן */
+  margin-bottom: 20px; /* ביטול המרווח התחתון */
+  
+`;
+
 
 const Home = () => {
-    
-    const [activeComponent, setActiveComponent] = useState(null);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const toggleMenu = () => {
-      setMenuOpen(!menuOpen);
-    };
-    
-  
+  const [activeComponent, setActiveComponent] = useState(null); // <--- מצב לרכיב הפעיל
+  const [menuOpen, setMenuOpen] = useState(false); // <--- מצב לתפריט הצד
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // <--- פעולה לפתיחת/סגירת תפריט הצד
+  };
+
   return (
-
     <>
-    <BackgroundDiv />
-
-    <PageContainer>
-        
-        <BurgerButton onClick={toggleMenu}>☰</BurgerButton>
-
-         <div className='Icon'>
-         <Icon src={Icons} alt='icon' style={{ width: '100px', height: '100px' }} />
-         </div>
-         
-      <NavBar>
-        
-        דף הבית
-      </NavBar>
-      <ButtonRow>
-    
-
-    <Button onClick={() => setActiveComponent('form')}>שליחת הודעה</Button>
-    <Button onClick={() => setActiveComponent('hours')}>שעות פתיחה</Button>
-    
-
-        <Button>הוספת דייר</Button>
-        <Button>יצירת פעילות</Button>
-        <Button>כתיבת מודעת אבל</Button>
-        <Button>נוהל בוקר טוב</Button>
-        <Button> ועד דיירים</Button>
-        
-        <Button>עדכון פרטי מחלקה</Button>
-        
-      </ButtonRow>
-      <div>
-      {activeComponent === 'form' && <SendMeassge />}
-      {activeComponent === 'hours' && <OpeningHours />}
+      <BackgroundDiv />
       
-      </div>
+      <PageContainer>
 
-       <SideMenu open={menuOpen}>
-        <CloseButton onClick={toggleMenu}>×</CloseButton>
-        <MenuButton onClick={() => setActiveComponent('form')}>שליחת הודעה</MenuButton>
-        <MenuButton onClick={() => setActiveComponent('hours')}>שעות פתיחה</MenuButton>
-        <MenuButton>הוספת דייר</MenuButton>
-        <MenuButton>יצירת פעילות</MenuButton>
-        <MenuButton>כתיבת מודעת אבל</MenuButton>
-        <MenuButton>נוהל בוקר טוב</MenuButton>
-        <MenuButton>ועד דיירים</MenuButton>
-        <MenuButton>עדכון פרטי מחלקה</MenuButton>
-        <LogoutButton>התנתקות</LogoutButton>
-      </SideMenu>
+      <BurgerButton onClick={toggleMenu}>☰</BurgerButton>
       
-    </PageContainer>
+        <StyledIcon src={Icons} alt="icon" />
+        <Title>ברוכים הבאים למערכת ניהול הדיור המוגן</Title>
+        
+        <NavBar>דף הבית</NavBar>
+        <ButtonRow>
+          <Button onClick={() => setActiveComponent('form')}>שליחת הודעה</Button> 
+          <Button onClick={() => setActiveComponent('hours')}>שעות פתיחה</Button>
+          <Button onClick={() => setActiveComponent('addTenant')}>הוספת דייר</Button> 
+          <Button>יצירת פעילות</Button>
+          <Button>כתיבת מודעת אבל</Button>
+          <Button>נוהל בוקר טוב</Button>
+          <Button>ועד דיירים</Button>
+          <Button>עדכון פרטי מחלקה</Button>
+        </ButtonRow>
+        <div>
+          {activeComponent === 'form' && <SendMeassge />} 
+          {activeComponent === 'hours' && <OpeningHours />} 
+          {activeComponent === 'addTenant' && <AddTenant />} 
+        </div>
+        <SideMenu open={menuOpen}>
+          <CloseButton onClick={toggleMenu}>×</CloseButton>
+          <MenuButton onClick={() => setActiveComponent('form')}>שליחת הודעה</MenuButton> 
+          <MenuButton onClick={() => setActiveComponent('hours')}>שעות פתיחה</MenuButton>
+          <MenuButton onClick={() => setActiveComponent('addTenant')}>הוספת דייר</MenuButton> 
+          <MenuButton>יצירת פעילות</MenuButton>
+          <MenuButton>כתיבת מודעת אבל</MenuButton>
+          <MenuButton>נוהל בוקר טוב</MenuButton>
+          <MenuButton>ועד דיירים</MenuButton>
+          <MenuButton>עדכון פרטי מחלקה</MenuButton>
+          <LogoutButton>התנתקות</LogoutButton>
+        </SideMenu>
+      </PageContainer>
     </>
-    
   );
-  
 };
 
 export default Home;
