@@ -1,83 +1,93 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #F6F2E4;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-`;
-
-const Title = styled.h2`
-  color: #38588e;
-  margin-bottom: 20px;
-`;
-
-const FormRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 10px;
-`;
-
-const Input = styled.input`
-  width: calc(50% - 10px);
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-`;
-
-const Button = styled.button`
-  background-color: #ffd700;
-  color: #fff;
-  padding: 10px 20px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-
-  &:hover {
-    background-color: #e0b800;
-  }
-`;
+import React, { useState } from 'react';
+import './styled123.css';
 
 const AddTenant = () => {
+  const [formData, setFormData] = useState({
+    lastName: '',
+    firstName: '',
+    birthDate: '',
+    idNumber: '',
+    entryDate: '',
+    previousCity: '',
+    phone: '',
+    profession: '',
+    relativePhone: '',
+    relativeContact: '',
+    picture: null,
+    hobbies: ''
+  });
+
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    setSuccessMessage(`הדייר ${formData.firstName} ${formData.lastName} נוסף בהצלחה`);
+  };
+
+  const handleSuccessMessageClose = () => {
+    setSuccessMessage('');
+    setFormData({
+      lastName: '',
+      firstName: '',
+      birthDate: '',
+      idNumber: '',
+      entryDate: '',
+      previousCity: '',
+      phone: '',
+      profession: '',
+      relativePhone: '',
+      relativeContact: '',
+      picture: null,
+      hobbies: ''
+    });
+  };
+
   return (
-    <FormContainer>
-      <Title>הוספת דייר</Title>
-      <FormRow>
-        <Input type="text" placeholder="שם משפחה" />
-        <Input type="text" placeholder="שם פרטי" />
-      </FormRow>
-      <FormRow>
-        <Input type="date" placeholder="תאריך לידה" />
-        <Input type="text" placeholder="תעודת זהות" />
-      </FormRow>
-      <FormRow>
-        <Input type="date" placeholder="תאריך כניסה לבית" />
-        <Input type="text" placeholder="עיר מגורים קודמת" />
-      </FormRow>
-      <FormRow>
-        <Input type="text" placeholder="טלפון" />
-        <Input type="text" placeholder="מקצוע" />
-      </FormRow>
-      <FormRow>
-        <Input type="text" placeholder="טלפון קרוב משפחה" />
-        <Input type="text" placeholder="איש קשר קרוב משפחה" />
-      </FormRow>
-      <FormRow>
-        <Input type="file" placeholder="תמונה" />
-        <Input type="text" placeholder="חוגים" />
-      </FormRow>
-      <Button>הוספה</Button>
-    </FormContainer>
+    <div className="form-container">
+      <h2 className="title">הוספת דייר</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-row">
+          <input type="text" name="lastName" className="input" placeholder="שם משפחה" value={formData.lastName} onChange={handleChange} />
+          <input type="text" name="firstName" className="input" placeholder="שם פרטי" value={formData.firstName} onChange={handleChange} />
+        </div>
+        <div className="form-row">
+          <input type="date" name="birthDate" className="input" placeholder="תאריך לידה" value={formData.birthDate} onChange={handleChange} />
+          <input type="text" name="idNumber" className="input" placeholder="תעודת זהות" value={formData.idNumber} onChange={handleChange} />
+        </div>
+        <div className="form-row">
+          <input type="date" name="entryDate" className="input" placeholder="תאריך כניסה לבית" value={formData.entryDate} onChange={handleChange} />
+          <input type="text" name="previousCity" className="input" placeholder="עיר מגורים קודמת" value={formData.previousCity} onChange={handleChange} />
+        </div>
+        <div className="form-row">
+          <input type="text" name="phone" className="input" placeholder="טלפון" value={formData.phone} onChange={handleChange} />
+          <input type="text" name="profession" className="input" placeholder="מקצוע" value={formData.profession} onChange={handleChange} />
+        </div>
+        <div className="form-row">
+          <input type="text" name="relativePhone" className="input" placeholder="טלפון קרוב משפחה" value={formData.relativePhone} onChange={handleChange} />
+          <input type="text" name="relativeContact" className="input" placeholder="איש קשר קרוב משפחה" value={formData.relativeContact} onChange={handleChange} />
+        </div>
+        <div className="form-row">
+          <input type="file" name="picture" className="input" placeholder="תמונה" onChange={handleChange} />
+          <input type="text" name="hobbies" className="input" placeholder="חוגים" value={formData.hobbies} onChange={handleChange} />
+        </div>
+        <button type="submit" className="button">הוספה</button>
+      </form>
+      {successMessage && (
+        <div className="success-message">
+          <div>{successMessage}</div>
+          <button onClick={handleSuccessMessageClose} className="button">אישור</button>
+        </div>
+      )}
+    </div>
   );
 };
 
