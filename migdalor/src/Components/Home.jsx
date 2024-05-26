@@ -1,128 +1,121 @@
-import React, {useState}from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Icons from './Image/Logo1.png';
 import backgroundIMG from './Image/Background.jpg';
 import SendMeassge from './SendMeassge';
 import OpeningHours from './OpeningHours';
-
+import AddTenant from './AddTenant';
 
 const BackgroundDiv = styled.div`
   background-image: url(${backgroundIMG});
   background-size: cover;
   background-position: center;
-  height: 50vh; /* גובה החלק העליון עם התמונה */
+  height: 30vh;
   width: 100vw;
 `;
 
 const PageContainer = styled.div`
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* נעילת תמונת הרקע במקום כדי שתגלגל עם הדף */
-  opacity: 0.85; /* שקיפות של 50% */
-  color: #333;
   font-family: 'Arial', sans-serif;
-  height: 100vh; /* Ensure it covers the full height of the viewport */
-  width: 100vw; /* Ensure it covers the full width of the viewport */
+  min-height: 100vh;
+  width: 100vw;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-
-  background-color: #38588e; /* צבע רקע כחול */
+  background-color: #F6F2E4;
   color: #fff;
-  font-family: 'Arial', sans-serif;
-  min-height: 50vh; /* גובה מינימלי לחלק התחתון */
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  margin-left:
   
 `;
 
-
-const ContentWrapper = styled.div`
-  background-color: #3e6ab7; /* רקע כחול נוסף */
-  width: 60%;
-  height: auto;
+const ContentContainer = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 2rem;
-  position: relative;
+  justify-content: flex-start;
+  overflow: auto;
+  width: 100%;
+  padding: 20px;
+  background-color: #38588e;
+  margin-top: 2rem;
 `;
-
-
-
-
-
 
 const BurgerButton = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: fixed;
+  right: 1rem;
+  top: 0.7rem;
   padding: 1rem;
   cursor: pointer;
-  z-index: 2; /* Ensure the button is on top */
-`;
+  z-index: 2;
+  color: #fff;
+  background-color: #38588e;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
 
+  &:hover {
+    background-color: #2d4f7d;
+  }
+`;
 
 const NavBar = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #ffd700;
+  background-color: #bea029;
   padding: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+ 
 `;
 
-
-
-const Icon = styled.img`
-    margin-right: 0.5rem;
+const StyledIcon = styled.img`
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
 `;
 
 const ButtonRow = styled.div`
-display: grid;
-grid-template-columns: repeat(4, 1fr); /* 3 columns with equal width */
-gap: 10px; /* gap between buttons */
-margin-top: 1rem;
-padding: 0 10px; /* padding for the row */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 0 10px;
 `;
 
 const Button = styled.button`
-background-color: #f0f0f0; /* Light grey background */
-padding: 1rem;
-text-align: center;
-border-radius: 8px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-font-size: 1rem;
-font-weight: bold;
-color: #333;
-cursor: pointer;
-transition: background-color 0.3s;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
 
-&:hover {
-  background-color: #e0e0e0; /* Slightly darker grey on hover */
-}
+  &:hover {
+    background-color: #e0e0e0;
+  }
 `;
 
 const SideMenu = styled.div`
   position: fixed;
   top: 0;
-  right: ${props => (props.open ? '0' : '-100%')}; /* Show or hide menu */
+  right: ${props => (props.open ? '0' : '-100%')};
   width: 250px;
   height: 100%;
-  background-color: #add8e6; /* Light blue background */
+  background-color: #38588e;
   color: black;
   display: flex;
   flex-direction: column;
@@ -134,22 +127,23 @@ const SideMenu = styled.div`
 `;
 
 const CloseButton = styled.div`
-  align-self: flex-start; /* Align to the start (left) */
+  align-self: flex-start;
   cursor: pointer;
   font-size: 1.5rem;
+  color: #fff;
 `;
 
 const MenuButton = styled.button`
   background-color: #ffffff;
   color: black;
-  padding: 0.5rem; /* Smaller padding for smaller buttons */
+  padding: 0.5rem;
   text-align: center;
   border: none;
   border-radius: 8px;
   margin: 0.5rem 0;
   width: 100%;
   cursor: pointer;
-  font-size: 0.875rem; /* Slightly smaller font size */
+  font-size: 0.875rem;
 
   &:hover {
     background-color: #e0e0e0;
@@ -157,97 +151,72 @@ const MenuButton = styled.button`
 `;
 
 const LogoutButton = styled(MenuButton)`
-  background-color: #ff4d4d; /* Red background */
+  background-color: #ff4d4d;
   color: white;
 
   &:hover {
-    background-color: #ff1a1a; /* Darker red on hover */
+    background-color: #ff1a1a;
   }
 `;
 
 
 const Home = () => {
-    
-    const [activeComponent, setActiveComponent] = useState(null);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const toggleMenu = () => {
-      setMenuOpen(!menuOpen);
-    };
-    
-  
+  const [activeComponent, setActiveComponent] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const contentRef = useRef(null);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleClick = (component) => {
+    setActiveComponent(component);
+    setTimeout(() => {
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 0);
+  };
+
   return (
-
     <>
-    <BackgroundDiv />
-
-    <PageContainer>
+      <BackgroundDiv />
+      <PageContainer>
         
         <BurgerButton onClick={toggleMenu}>☰</BurgerButton>
-
-         <div className='Icon'>
-         <Icon src={Icons} alt='icon' style={{ width: '100px', height: '100px' }} />
-         </div>
-         
-      <NavBar>
+        <StyledIcon src={Icons} alt="icon" />
+        <NavBar>ברוכים הבאים למערכת ניהול הדיור המוגן</NavBar>
         
-        דף הבית
-      </NavBar>
-      <ButtonRow>
-    
-
-    <Button onClick={() => setActiveComponent('form')}>שליחת הודעה</Button>
-    <Button onClick={() => setActiveComponent('hours')}>שעות פתיחה</Button>
-    
-
-        <Button>הוספת דייר</Button>
-        <Button>יצירת פעילות</Button>
-        <Button>כתיבת מודעת אבל</Button>
-        <Button>נוהל בוקר טוב</Button>
-        <Button> ועד דיירים</Button>
-        
-        <Button>עדכון פרטי מחלקה</Button>
-        
-      </ButtonRow>
-      <div>
-      {activeComponent === 'form' && <SendMeassge />}
-      {activeComponent === 'hours' && <OpeningHours />}
-      
-      </div>
-
-       <SideMenu open={menuOpen}>
-        <CloseButton onClick={toggleMenu}>×</CloseButton>
-        <MenuButton onClick={() => setActiveComponent('form')}>שליחת הודעה</MenuButton>
-        <MenuButton onClick={() => setActiveComponent('hours')}>שעות פתיחה</MenuButton>
-        <MenuButton>הוספת דייר</MenuButton>
-        <MenuButton>יצירת פעילות</MenuButton>
-        <MenuButton>כתיבת מודעת אבל</MenuButton>
-        <MenuButton>נוהל בוקר טוב</MenuButton>
-        <MenuButton>ועד דיירים</MenuButton>
-        <MenuButton>עדכון פרטי מחלקה</MenuButton>
-        <LogoutButton>התנתקות</LogoutButton>
-      </SideMenu>
-      
-    </PageContainer>
+        <ButtonRow>
+          <Button onClick={() => handleClick('form')}>שליחת הודעה</Button>
+          <Button onClick={() => handleClick('hours')}>שעות פתיחה</Button>
+          <Button onClick={() => handleClick('addTenant')}>הוספת דייר</Button>
+          <Button>יצירת פעילות</Button>
+          <Button>כתיבת מודעת אבל</Button>
+          <Button>נוהל בוקר טוב</Button>
+          <Button>ועד דיירים</Button>
+          <Button>עדכון פרטי מחלקה</Button>
+        </ButtonRow>
+        <ContentContainer ref={contentRef}>
+          {activeComponent === 'form' && <SendMeassge />}
+          {activeComponent === 'hours' && <OpeningHours />}
+          {activeComponent === 'addTenant' && <AddTenant />}
+        </ContentContainer>
+        <SideMenu open={menuOpen}>
+          <CloseButton onClick={toggleMenu}>×</CloseButton>
+          <MenuButton onClick={() => handleClick('form')}>שליחת הודעה</MenuButton>
+          <MenuButton onClick={() => handleClick('hours')}>שעות פתיחה</MenuButton>
+          <MenuButton onClick={() => handleClick('addTenant')}>הוספת דייר</MenuButton>
+          <MenuButton>יצירת פעילות</MenuButton>
+          <MenuButton>כתיבת מודעת אבל</MenuButton>
+          <MenuButton>נוהל בוקר טוב</MenuButton>
+          <MenuButton>ועד דיירים</MenuButton>
+          <MenuButton>עדכון פרטי מחלקה</MenuButton>
+          <LogoutButton>התנתקות</LogoutButton>
+        </SideMenu>
+      </PageContainer>
     </>
-    
   );
-  
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
