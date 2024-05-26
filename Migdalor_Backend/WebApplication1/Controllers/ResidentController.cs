@@ -61,7 +61,10 @@ namespace WebApplication1.Controllers
                     LastName = resident.LastName,
                     PhoneNumber = resident.PhoneNumber,
                     Id = resident.Id,
-                    DateOfBirth = resident.DateOfBirth,
+                    DateOfGoodMorningPolicy = db.TblGoodMorningPolicies
+                .Where(gmp => gmp.ResidentNumber == resident.ResidentNumber)
+                .Select(gmp => gmp.DateTime)
+                .FirstOrDefault(),
                     HasGoodMorningPolicy = db.TblGoodMorningPolicies
                         .Any(gmp => gmp.ResidentNumber == resident.ResidentNumber)
                 })
