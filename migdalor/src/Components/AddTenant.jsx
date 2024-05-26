@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './AddTenantStyle.css';
 
+const apiUrl = "https://localhost:7149/api/Resident/AddResident";
+
 const hobbiesList = [
   "קריאה", "כתיבה", "ציור", "בישול", "אפייה", "טיפוח גינה", "ספורט", "ריצה", "שחייה",
   "רכיבה על אופניים", "טיולים בטבע", "דיג", "נגרות", "סרגיה", "משחקי קופסה", "שחמט",
@@ -68,6 +70,30 @@ const AddTenant = () => {
     setUserDetails({ username, password });
     setSuccessMessage(`הדייר ${formData.firstName} ${formData.lastName} נוסף בהצלחה`);
     console.log(formData);
+
+    fetch(apiUrl, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: new Headers({
+          'Content-type': 'application/json; charset=UTF-8' // very important to add the 'charset=UTF-8'!!!!
+      })
+  })
+  .then(res => {
+      if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json()
+  })
+  .then(
+      (result) => {
+          console.log("Resident added!", result);
+          navigate('/home'); // navigate to the home page
+      },
+      (error) => {
+          console.log("Error during POST:", error);
+      }
+        );
+
   };
 
   const handleSuccessMessageClose = () => {
