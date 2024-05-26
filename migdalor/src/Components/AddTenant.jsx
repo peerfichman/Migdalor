@@ -27,19 +27,19 @@ const AddTenant = () => {
   const [formData, setFormData] = useState({
     lastName: '',
     firstName: '',
-    birthDate: '',
-    idNumber: '',
+    DateOfBirth: '',
+    Id: '',
     entryDate: '',
     previousCity: '',
     phone: '',
     additionalPhone: '',
     email: '',
     additionalEmail: '',
-    profession: '',
+    Profession: '',
     relativePhone: '',
     relativeContact: '',
-    picture: null,
-    selectedHobbies: []
+    ResidentImage: null,
+    TblResidentHasHobbies : []
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -56,10 +56,10 @@ const AddTenant = () => {
   const handleHobbyChange = (e) => {
     const hobby = e.target.value;
     setFormData((prevData) => {
-      const selectedHobbies = prevData.selectedHobbies.includes(hobby)
-        ? prevData.selectedHobbies.filter((h) => h !== hobby)
-        : [...prevData.selectedHobbies, hobby].slice(0, 10); // Limit to 10 hobbies
-      return { ...prevData, selectedHobbies };
+      const TblResidentHasHobbies = prevData.TblResidentHasHobbies.includes(hobby)
+        ? prevData.TblResidentHasHobbies.filter((h) => h !== hobby)
+        : [...prevData.TblResidentHasHobbies, hobby].slice(0, 10); // Limit to 10 hobbies
+      return { ...prevData, TblResidentHasHobbies};
     });
   };
 
@@ -101,19 +101,19 @@ const AddTenant = () => {
     setFormData({
       lastName: '',
       firstName: '',
-      birthDate: '',
-      idNumber: '',
+      DateOfBirth: '',
+      Id: '',
       entryDate: '',
       previousCity: '',
       phone: '',
       additionalPhone: '',
       email: '',
       additionalEmail: '',
-      profession: '',
+      Profession: '',
       relativePhone: '',
       relativeContact: '',
-      picture: null,
-      selectedHobbies: []
+      ResidentImage: null,
+      TblResidentHasHobbies : []
     });
     setUserDetails({ username: '', password: '' });
   };
@@ -133,8 +133,8 @@ const AddTenant = () => {
           <input type="text" name="lastName" className="input" placeholder="שם משפחה" value={formData.lastName} onChange={handleChange} />
         </div>
         <div className="form-row">
-          <input type="text" name="idNumber" className="input" placeholder="תעודת זהות" value={formData.idNumber} onChange={handleChange} />
-          <input type="text" name="birthDate" className="input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.birthDate} onChange={handleChange} />
+          <input type="text" name="Id" className="input" placeholder="תעודת זהות" value={formData.idNumber} onChange={handleChange} />
+          <input type="text" name="DateOfBirth" className="input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.birthDate} onChange={handleChange} />
         </div>
         <div className="form-row">
           <input type="text" name="previousCity" className="input" placeholder="עיר מגורים קודמת" value={formData.previousCity} onChange={handleChange} />
@@ -146,14 +146,14 @@ const AddTenant = () => {
         </div>
         <div className="form-row">
           <input type="email" name="email" className="input" placeholder="אימייל" value={formData.email} onChange={handleChange} />
-          <input type="text" name="profession" className="input" placeholder="מקצוע" value={formData.profession} onChange={handleChange} />
+          <input type="text" name="Profession" className="input" placeholder="מקצוע" value={formData.profession} onChange={handleChange} />
         </div>
         <div className="form-row">
           <input type="text" name="relativePhone" className="input" placeholder="טלפון קרוב משפחה" value={formData.relativePhone} onChange={handleChange} />
           <input type="text" name="relativeContact" className="input" placeholder="איש קשר קרוב משפחה" value={formData.relativeContact} onChange={handleChange} />
         </div>
         <div className="form-row">
-          <input type="file" name="picture" className="input" placeholder="תמונה" onChange={handleChange} />
+          <input type="file" name="ResidentImage" className="input" placeholder="תמונה" onChange={handleChange} />
         </div>
         <div className="form-row">
           <select name="hobbies" className="input hobby-select" onChange={handleHobbyChange}>
