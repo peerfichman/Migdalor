@@ -1,6 +1,7 @@
 ﻿using ClassLibrary1.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DTO;
 
 namespace WebApplication1.Controllers
 {
@@ -46,6 +47,27 @@ namespace WebApplication1.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
+        }
+
+        [HttpGet]
+        [Route("GetResidentsWithGoodMorningPolicy")]
+        public IActionResult GetResidentsWithGoodMorningPolicy()
+        {
+            var residents = db.TblResidents
+                .Select(resident => new ResidentWithGoodMorningPolicy
+                {
+                    ResidentNumber = resident.ResidentNumber,
+                    FirstName = resident.FirstName,
+                    LastName = resident.LastName,
+                    PhoneNumber = resident.PhoneNumber,
+                    Id = resident.Id,
+                    DateOfBirth = resident.DateOfBirth,
+                    HasGoodMorningPolicy = db.TblGoodMorningPolicies
+                        .Any(gmp => gmp.ResidentNumber == resident.ResidentNumber)
+                })
+                .ToList();
+
+            return Ok(residents);
         }
     }
 }

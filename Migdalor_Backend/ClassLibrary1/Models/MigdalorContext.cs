@@ -145,6 +145,7 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.DateTime).HasColumnType("datetime");
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
 
+
             entity.HasOne(d => d.Department).WithMany(p => p.TblGoodMorningPolicies)
                 .HasForeignKey(d => d.DepartmentId)
                 .HasConstraintName("FK__tblGoodMo__Depar__4CA06362");
