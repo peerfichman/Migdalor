@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Icons from './Image/Logo1.png';
 import SendMeassge from './SendMeassge';
 import OpeningHours from './OpeningHours';
 import AddTenant from './AddTenant';
+import CreateActivity from './CreateActivity'; // Import the new component
 import './HomeStyle.css';
 
 const Home = () => {
@@ -38,7 +39,7 @@ const Home = () => {
           <button className="button" onClick={() => handleClick('form')}>שליחת הודעה</button>
           <button className="button" onClick={() => handleClick('hours')}>שעות פתיחה</button>
           <button className="button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
-          <button className="button">יצירת פעילות</button>
+          <button className="button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="button">כתיבת מודעת אבל</button>
           <button className="button">נוהל בוקר טוב</button>
           <button className="button">ועד דיירים</button>
@@ -48,13 +49,14 @@ const Home = () => {
           {activeComponent === 'form' && <SendMeassge />}
           {activeComponent === 'hours' && <OpeningHours />}
           {activeComponent === 'addTenant' && <AddTenant />}
+          {activeComponent === 'createActivity' && <CreateActivity />} {/* Render the new component */}
         </div>
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <div className="close-button" onClick={toggleMenu}>×</div>
           <button className="menu-button" onClick={() => handleClick('form')}>שליחת הודעה</button>
           <button className="menu-button" onClick={() => handleClick('hours')}>שעות פתיחה</button>
           <button className="menu-button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
-          <button className="menu-button">יצירת פעילות</button>
+          <button className="menu-button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="menu-button">כתיבת מודעת אבל</button>
           <button className="menu-button">נוהל בוקר טוב</button>
           <button className="menu-button">ועד דיירים</button>
