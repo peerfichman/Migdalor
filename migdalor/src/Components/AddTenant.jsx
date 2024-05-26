@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import './AddTenantStyle.css';
 
+const hobbiesList = [
+  "קריאה", "כתיבה", "ציור", "בישול", "אפייה", "טיפוח גינה", "ספורט", "ריצה", "שחייה",
+  "רכיבה על אופניים", "טיולים בטבע", "דיג", "נגרות", "סרגיה", "משחקי קופסה", "שחמט",
+  "פאזלים", "יוגה", "מדיטציה", "צילום", "מוזיקה", "נגינה", "שירה", "איסוף בולים",
+  "איסוף מטבעות", "איסוף כרטיסים", "צפייה בסרטים", "ביקור במוזיאונים", "תיאטרון", "ריקוד"
+];
 
 const generateRandomPassword = () => {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -61,6 +67,7 @@ const AddTenant = () => {
     const username = formData.idNumber;
     setUserDetails({ username, password });
     setSuccessMessage(`הדייר ${formData.firstName} ${formData.lastName} נוסף בהצלחה`);
+    console.log(formData);
   };
 
   const handleSuccessMessageClose = () => {
@@ -89,12 +96,7 @@ const AddTenant = () => {
     setUserDetails({ username: '', password: '' });
   };
 
-  const hobbiesList = [
-    "קריאה", "כתיבה", "ציור", "בישול", "אפייה", "טיפוח גינה", "ספורט", "ריצה", "שחייה",
-    "רכיבה על אופניים", "טיולים בטבע", "דיג", "נגרות", "סרגיה", "משחקי קופסה", "שחמט",
-    "פאזלים", "יוגה", "מדיטציה", "צילום", "מוזיקה", "נגינה", "שירה", "איסוף בולים",
-    "איסוף מטבעות", "איסוף כרטיסים", "צפייה בסרטים", "ביקור במוזיאונים", "תיאטרון", "ריקוד"
-  ];
+  
 
   return (
     <div className="form-container">
@@ -150,9 +152,12 @@ const AddTenant = () => {
       </form>
       {userDetails.username && userDetails.password && (
         <div className="user-details-modal">
-          <div className="success-message">
+           {successMessage && (
+        <div className="success-message">
           <div>{successMessage}</div>
+
         </div>
+      )}
           <div className="user-details">
             
             <div className="detail-row">
