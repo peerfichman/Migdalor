@@ -32,7 +32,20 @@ namespace WebApplication1.Controllers
                 var resident = new TblResident
                 {
                     Username = userInput.Username,
-                    Password = userInput.Password
+                    Password = userInput.Password,
+                    ResidentNumber = userInput.ResidentNumber,
+                    FirstName = userInput.FirstName,
+                    LastName = userInput.LastName,
+                    PhoneNumber = userInput.PhoneNumber,
+                    Id = userInput.Id,
+                    DateOfBirth = userInput.DateOfBirth,
+                    PreviousAddress = userInput.PreviousAddress,
+                    Seniority = userInput.Seniority,
+                    CurrentAddress = userInput.CurrentAddress,
+                    ResidentImage = userInput.ResidentImage,
+                    Profession = userInput.Profession,
+                    Email = userInput.Email,
+                    TblResidentHasHobbies = userInput.TblResidentHasHobbies
                 };
 
                 // Add the user to the context
