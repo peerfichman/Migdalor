@@ -10,6 +10,7 @@ namespace WebApplication1.Controllers
     public class ResidentController : ControllerBase
     {
         MigdalorContext db = new MigdalorContext();
+        Random random = new Random();
 
         [HttpPost]
         [Route("AddResident")]
@@ -27,13 +28,14 @@ namespace WebApplication1.Controllers
                 {
                     return BadRequest("Username already exists");
                 }
+                int randomResidentNumber = random.Next(0, 2147483647);
 
                 // Map the userInput to TblUser
                 var resident = new TblResident
                 {
                     Username = userInput.Username,
                     Password = userInput.Password,
-                    ResidentNumber = userInput.ResidentNumber,
+                    ResidentNumber = randomResidentNumber,
                     FirstName = userInput.FirstName,
                     LastName = userInput.LastName,
                     PhoneNumber = userInput.PhoneNumber,
