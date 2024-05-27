@@ -47,10 +47,10 @@ const AddTenant = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: files ? files[0] : value
-    });
+    }));
   };
 
   const handleHobbyChange = (e) => {
@@ -59,14 +59,14 @@ const AddTenant = () => {
       const TblResidentHasHobbies = prevData.TblResidentHasHobbies.includes(hobby)
         ? prevData.TblResidentHasHobbies.filter((h) => h !== hobby)
         : [...prevData.TblResidentHasHobbies, hobby].slice(0, 10); // Limit to 10 hobbies
-      return { ...prevData, TblResidentHasHobbies};
+      return { ...prevData, TblResidentHasHobbies };
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const password = generateRandomPassword();
-    const username = formData.idNumber;
+    const username = formData.Id;
     setUserDetails({ username, password });
     setSuccessMessage(`הדייר ${formData.firstName} ${formData.lastName} נוסף בהצלחה`);
     console.log(formData);
@@ -77,23 +77,22 @@ const AddTenant = () => {
       headers: new Headers({
           'Content-type': 'application/json; charset=UTF-8' // very important to add the 'charset=UTF-8'!!!!
       })
-  })
-  .then(res => {
+    })
+    .then(res => {
       if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
-      return res.json()
-  })
-  .then(
+      return res.json();
+    })
+    .then(
       (result) => {
-          console.log("Resident added!", result);
-          navigate('/home'); // navigate to the home page
+        console.log("Resident added!", result);
+        // navigate('/home'); // navigate to the home page (make sure to use useNavigate hook if you're using react-router)
       },
       (error) => {
-          console.log("Error during POST:", error);
-      }
-        );
-
+        console.log("Error during POST:", error);
+      }
+    );
   };
 
   const handleSuccessMessageClose = () => {
@@ -118,12 +117,6 @@ const AddTenant = () => {
     setUserDetails({ username: '', password: '' });
   };
 
-  const handleUserDetailsClose = () => {
-    setUserDetails({ username: '', password: '' });
-  };
-
-  
-
   return (
     <div className="form-container">
       <h2 className="title">הוספת דייר</h2>
@@ -133,8 +126,8 @@ const AddTenant = () => {
           <input type="text" name="lastName" className="input" placeholder="שם משפחה" value={formData.lastName} onChange={handleChange} />
         </div>
         <div className="form-row">
-          <input type="text" name="Id" className="input" placeholder="תעודת זהות" value={formData.idNumber} onChange={handleChange} />
-          <input type="text" name="DateOfBirth" className="input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.birthDate} onChange={handleChange} />
+          <input type="text" name="Id" className="input" placeholder="תעודת זהות" value={formData.Id} onChange={handleChange} />
+          <input type="text" name="DateOfBirth" className="input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.DateOfBirth} onChange={handleChange} />
         </div>
         <div className="form-row">
           <input type="text" name="previousCity" className="input" placeholder="עיר מגורים קודמת" value={formData.previousCity} onChange={handleChange} />
@@ -146,7 +139,7 @@ const AddTenant = () => {
         </div>
         <div className="form-row">
           <input type="email" name="email" className="input" placeholder="אימייל" value={formData.email} onChange={handleChange} />
-          <input type="text" name="Profession" className="input" placeholder="מקצוע" value={formData.profession} onChange={handleChange} />
+          <input type="text" name="Profession" className="input" placeholder="מקצוע" value={formData.Profession} onChange={handleChange} />
         </div>
         <div className="form-row">
           <input type="text" name="relativePhone" className="input" placeholder="טלפון קרוב משפחה" value={formData.relativePhone} onChange={handleChange} />
@@ -167,7 +160,7 @@ const AddTenant = () => {
           <span className="hobby-note">*ניתן להוסיף עד 10 תחביבים שונים</span>
         </div>
         <div className="form-row hobbies-container">
-          {formData.selectedHobbies.map((hobby, index) => (
+          {formData.TblResidentHasHobbies.map((hobby, index) => (
             <div key={index} className="hobby-item">
               <input type="checkbox" checked readOnly />
               <label>{hobby}</label>
@@ -178,17 +171,15 @@ const AddTenant = () => {
       </form>
       {userDetails.username && userDetails.password && (
         <div className="user-details-modal">
-           {successMessage && (
-        <div className="success-message">
-          <div>{successMessage}</div>
-
-        </div>
-      )}
+          {successMessage && (
+            <div className="success-message">
+              <div>{successMessage}</div>
+            </div>
+          )}
           <div className="user-details">
-            
             <div className="detail-row">
               <label>שם משתמש:</label>
-              <input type="text" name="username" className="input" value={userDetails.username} readOnly  />
+              <input type="text" name="username" className="input" value={userDetails.username} readOnly />
             </div>
             <div className="detail-row">
               <label>סיסמא:</label>
@@ -198,7 +189,6 @@ const AddTenant = () => {
           </div>
         </div>
       )}
-     
     </div>
   );
 };
