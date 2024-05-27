@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [Route("AddResident")]
-        public IActionResult AddResident([FromBody] TblResident userInput)
+        public IActionResult AddResident([FromBody] ResidentDTO userInput)
         {
             try
             {
@@ -30,28 +30,31 @@ namespace WebApplication1.Controllers
                 }
                 int randomResidentNumber = random.Next(0, 2147483647);
 
-                // Map the userInput to TblUser
-                var resident = new TblResident
-                {
-                    Username = userInput.Username,
-                    Password = userInput.Password,
-                    ResidentNumber = randomResidentNumber,
-                    FirstName = userInput.FirstName,
-                    LastName = userInput.LastName,
-                    PhoneNumber = userInput.PhoneNumber,
-                    Id = userInput.Id,
-                    DateOfBirth = userInput.DateOfBirth,
-                    PreviousAddress = userInput.PreviousAddress,
-                    Seniority = userInput.Seniority,
-                    CurrentAddress = userInput.CurrentAddress,
-                    ResidentImage = userInput.ResidentImage,
-                    Profession = userInput.Profession,
-                    Email = userInput.Email,
-                    TblResidentHasHobbies = userInput.TblResidentHasHobbies
-                };
+                //
+                // לייצר DTO
+                //var resident = new TblResident
+                //{
+                //    Username = userInput.Username,
+                //    Password = userInput.Password,
+                //    ResidentNumber = randomResidentNumber,
+                //    FirstName = userInput.FirstName,
+                //    LastName = userInput.LastName,
+                //    PhoneNumber = userInput.PhoneNumber,
+                //    Id = userInput.Id,
+                //    DateOfBirth = userInput.DateOfBirth,
+                //    PreviousAddress = userInput.PreviousAddress,
+                //    Seniority = userInput.Seniority,
+                //    CurrentAddress = userInput.CurrentAddress,
+                //    ResidentImage = userInput.ResidentImage,
+                //    Profession = userInput.Profession,
+                //    Email = userInput.Email,
+                //    TblResidentHasHobbies = userInput.TblResidentHasHobbies
+                //};
+
+
 
                 // Add the user to the context
-                db.TblResidents.Add(resident);
+                //db.TblResidents.Add(userInput);
 
                 // Save changes to the database
                 db.SaveChanges();

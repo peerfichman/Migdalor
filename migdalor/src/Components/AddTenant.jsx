@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AddTenantStyle.css';
 
-const apiUrl = "https://localhost:7149/api/Resident/AddResident";
+const apiUrl = "https://localhost:7149/api/Resident/";
 
 const hobbiesList = [
   "קריאה", "כתיבה", "ציור", "בישול", "אפייה", "טיפוח גינה", "ספורט", "ריצה", "שחייה",
@@ -25,21 +25,21 @@ const generateRandomPassword = () => {
 
 const AddTenant = () => {
   const [formData, setFormData] = useState({
-    lastName: '',
-    firstName: '',
+    LastName: '',
+    FirstName: '',
     DateOfBirth: '',
     Id: '',
-    entryDate: '',
-    previousCity: '',
-    phone: '',
-    additionalPhone: '',
-    email: '',
-    additionalEmail: '',
+    EntryDate: '',
+    PreviousAddress: '',
+    Phone: '',
+    AdditionalPhone: '',
+    Email: '',
+    AdditionalEmail: '',
     Profession: '',
-    relativePhone: '',
-    relativeContact: '',
+    //RelativePhone: '',
+    //RelativeContact: '',
     ResidentImage: null,
-    TblResidentHasHobbies : []
+    //TblResidentHasHobbies : []
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -71,11 +71,15 @@ const AddTenant = () => {
     setSuccessMessage(`הדייר ${formData.firstName} ${formData.lastName} נוסף בהצלחה`);
     console.log(formData);
 
-    fetch(apiUrl, {
+    debugger;
+
+    fetch(apiUrl+"AddResident", {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: new Headers({
-          'Content-type': 'application/json; charset=UTF-8' // very important to add the 'charset=UTF-8'!!!!
+          'Content-type': 'application/json; charset=UTF-8',//מה אני שולח
+          'Accept': 'application/json; charset=UTF-8'//מה אני מקבל
+          // very important to add the 'charset=UTF-8'!!!!
       })
     })
     .then(res => {
@@ -160,12 +164,12 @@ const AddTenant = () => {
           <span className="hobby-note">*ניתן להוסיף עד 10 תחביבים שונים</span>
         </div>
         <div className="form-row hobbies-container">
-          {formData.TblResidentHasHobbies.map((hobby, index) => (
+          {/* {formData.TblResidentHasHobbies.map((hobby, index) => (
             <div key={index} className="hobby-item">
               <input type="checkbox" checked readOnly />
               <label>{hobby}</label>
             </div>
-          ))}
+          ))} */}
         </div>
         <button type="submit" className="form-button">הוספה</button>
       </form>
