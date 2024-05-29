@@ -25,21 +25,19 @@ const generateRandomPassword = () => {
 
 const AddTenant = () => {
   const [formData, setFormData] = useState({
-    LastName: '',
     FirstName: '',
-    DateOfBirth: '',
+    LastName: '',
+    PhoneNumber: '',
     Id: '',
-    EntryDate: '',
+    DateOfBirth: '',
     PreviousAddress: '',
-    Phone: '',
-    AdditionalPhone: '',
-    Email: '',
-    AdditionalEmail: '',
+    CurrentAddress: '',
+    ResidentImage: '',
     Profession: '',
-    //RelativePhone: '',
-    //RelativeContact: '',
-    ResidentImage: null,
-    //TblResidentHasHobbies : []
+    Email: '',
+    Username: '',
+    Password: '',
+    TblResidentHasHobbies: [],
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -58,8 +56,7 @@ const AddTenant = () => {
     setFormData((prevData) => {
       const TblResidentHasHobbies = prevData.TblResidentHasHobbies.includes(hobby)
         ? prevData.TblResidentHasHobbies.filter((h) => h !== hobby)
-        : [...prevData.TblResidentHasHobbies, hobby].slice(0, 10); // Limit to 10 hobbies
-      return { ...prevData, TblResidentHasHobbies };
+        : [...prevData.TblResidentHasHobbies, hobby].slice(0, 10); 
     });
   };
 
@@ -68,128 +65,128 @@ const AddTenant = () => {
     const password = generateRandomPassword();
     const username = formData.Id;
     setUserDetails({ username, password });
-    setSuccessMessage(`הדייר ${formData.firstName} ${formData.lastName} נוסף בהצלחה`);
-    console.log(formData);
+    setSuccessMessage(`הדייר ${formData.FirstName} ${formData.LastName} נוסף בהצלחה`);
 
-    debugger;
+    const dataToSend = { ...formData, Username: username, Password: password };
 
-    fetch(apiUrl+"AddResident", {
+    console.log("Data to be sent:", dataToSend); // Logging the data to be sent
+
+    fetch(apiUrl + "AddResident", {
       method: 'POST',
-      body: JSON.stringify(formData),
+      body: JSON.stringify(dataToSend),
       headers: new Headers({
-          'Content-type': 'application/json; charset=UTF-8',//מה אני שולח
-          'Accept': 'application/json; charset=UTF-8'//מה אני מקבל
-          // very important to add the 'charset=UTF-8'!!!!
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json; charset=UTF-8'
       })
     })
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json();
-    })
-    .then(
-      (result) => {
-        console.log("Resident added!", result);
-        // navigate('/home'); // navigate to the home page (make sure to use useNavigate hook if you're using react-router)
-      },
-      (error) => {
-        console.log("Error during POST:", error);
-      }
-    );
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("Resident added!", result);
+        },
+        (error) => {
+          console.log("Error during POST:", error);
+        }
+      );
   };
 
   const handleSuccessMessageClose = () => {
     setSuccessMessage('');
     setFormData({
-      lastName: '',
-      firstName: '',
-      DateOfBirth: '',
+      FirstName: '',
+      LastName: '',
+      PhoneNumber: '',
       Id: '',
-      entryDate: '',
-      previousCity: '',
-      phone: '',
-      additionalPhone: '',
-      email: '',
-      additionalEmail: '',
+      DateOfBirth: '',
+      PreviousAddress: '',
+      CurrentAddress: '',
+      ResidentImage: '',
       Profession: '',
-      relativePhone: '',
-      relativeContact: '',
-      ResidentImage: null,
-      TblResidentHasHobbies : []
+      Email: '',
+      Username: '',
+      Password: '',
+      TblResidentHasHobbies: [],
     });
     setUserDetails({ username: '', password: '' });
   };
 
   return (
-    <div className="form-container">
-      <h2 className="title">הוספת דייר</h2>
+    <div className="add-tenant-form-container">
+      <h2 className="add-tenant-title">הוספת דייר חדש</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-row">
-          <input type="text" name="firstName" className="input" placeholder="שם פרטי" value={formData.firstName} onChange={handleChange} />
-          <input type="text" name="lastName" className="input" placeholder="שם משפחה" value={formData.lastName} onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          <input type="text" name="FirstName" className="add-tenant-input" placeholder="שם פרטי" value={formData.FirstName} onChange={handleChange} />
+          <input type="text" name="LastName" className="add-tenant-input" placeholder="שם משפחה" value={formData.LastName} onChange={handleChange} />
         </div>
-        <div className="form-row">
-          <input type="text" name="Id" className="input" placeholder="תעודת זהות" value={formData.Id} onChange={handleChange} />
-          <input type="text" name="DateOfBirth" className="input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.DateOfBirth} onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          <input type="text" name="Id" className="add-tenant-input" placeholder="תעודת זהות" value={formData.Id} onChange={handleChange} />
+          <input type="text" name="DateOfBirth" className="add-tenant-input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.DateOfBirth} onChange={handleChange} />
         </div>
-        <div className="form-row">
-          <input type="text" name="previousCity" className="input" placeholder="עיר מגורים קודמת" value={formData.previousCity} onChange={handleChange} />
-          <input type="text" name="entryDate" className="input" placeholder="תאריך כניסה לבית" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.entryDate} onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          <input type="text" name="PreviousAddress" className="add-tenant-input" placeholder="עיר מגורים קודמת" value={formData.PreviousAddress} onChange={handleChange} />
+          {/* <input type="text" name="EntryDate" className="add-tenant-input" placeholder="תאריך כניסה לבית" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.EntryDate} onChange={handleChange} /> */}
         </div>
-        <div className="form-row">
-          <input type="text" name="phone" className="input" placeholder="טלפון" value={formData.phone} onChange={handleChange} />
-          <input type="text" name="additionalPhone" className="input" placeholder="טלפון נוסף" value={formData.additionalPhone} onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          <input type="text" name=" PhoneNumber" className="add-tenant-input" placeholder="טלפון" value={formData. PhoneNumber} onChange={handleChange} />
+          {/* <input type="text" name="AdditionalPhone" className="add-tenant-input" placeholder="טלפון נוסף" value={formData.AdditionalPhone} onChange={handleChange} /> */}
         </div>
-        <div className="form-row">
-          <input type="email" name="email" className="input" placeholder="אימייל" value={formData.email} onChange={handleChange} />
-          <input type="text" name="Profession" className="input" placeholder="מקצוע" value={formData.Profession} onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          <input type="email" name="Email" className="add-tenant-input" placeholder="אימייל" value={formData.Email} onChange={handleChange} />
+          <input type="text" name="Profession" className="add-tenant-input" placeholder="מקצוע" value={formData.Profession} onChange={handleChange} />
         </div>
-        <div className="form-row">
-          <input type="text" name="relativePhone" className="input" placeholder="טלפון קרוב משפחה" value={formData.relativePhone} onChange={handleChange} />
-          <input type="text" name="relativeContact" className="input" placeholder="איש קשר קרוב משפחה" value={formData.relativeContact} onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          {/* <input type="text" name="RelativePhone" className="add-tenant-input" placeholder="טלפון קרוב משפחה" value={formData.RelativePhone} onChange={handleChange} />
+          <input type="text" name="RelativeContact" className="add-tenant-input" placeholder="איש קשר קרוב משפחה" value={formData.RelativeContact} onChange={handleChange} /> */}
         </div>
-        <div className="form-row">
-          <input type="file" name="ResidentImage" className="input" placeholder="תמונה" onChange={handleChange} />
+        <div className="add-tenant-form-row">
+          <input type="file" name="ResidentImage" className="add-tenant-input" placeholder="תמונה" onChange={handleChange} />
+          <div>
+          <span className="add-tenant-hobby-note">*הוספת תמונת הדייר</span>
+          </div>
         </div>
-        <div className="form-row">
-          <select name="hobbies" className="input hobby-select" onChange={handleHobbyChange}>
+        <div className="add-tenant-form-row">
+          <select name="hobbies" className="add-tenant-input add-tenant-hobby-select" onChange={handleHobbyChange}>
             <option value="">בחר תחביב</option>
             {hobbiesList.map((hobby, index) => (
               <option key={index} value={hobby}>{hobby}</option>
             ))}
           </select>
         </div>
-        <div className="form-row">
-          <span className="hobby-note">*ניתן להוסיף עד 10 תחביבים שונים</span>
+        <div className="add-tenant-form-row">
+          <span className="add-tenant-hobby-note">*ניתן להוסיף עד 10 תחביבים שונים</span>
         </div>
-        <div className="form-row hobbies-container">
-          {/* {formData.TblResidentHasHobbies.map((hobby, index) => (
-            <div key={index} className="hobby-item">
-              <input type="checkbox" checked readOnly />
+        <div className="add-tenant-form-row add-tenant-hobbies-container">
+          {formData.TblResidentHasHobbies.map((hobby, index) => (
+            <div key={index} className="add-tenant-hobby-item">
+              <input type="checkbox" checked onChange={() => handleHobbyChange({ target: { value: hobby } })} />
               <label>{hobby}</label>
             </div>
-          ))} */}
+          ))}
         </div>
-        <button type="submit" className="form-button">הוספה</button>
+        <button type="submit" className="add-tenant-form-button">הוספה</button>
       </form>
       {userDetails.username && userDetails.password && (
-        <div className="user-details-modal">
+        <div className="add-tenant-user-details-modal">
           {successMessage && (
-            <div className="success-message">
+            <div className="add-tenant-success-message">
               <div>{successMessage}</div>
             </div>
           )}
-          <div className="user-details">
-            <div className="detail-row">
+          <div className="add-tenant-user-details">
+            <div className="add-tenant-detail-row">
               <label>שם משתמש:</label>
-              <input type="text" name="username" className="input" value={userDetails.username} readOnly />
+              <input type="text" name="username" className="add-tenant-input" value={userDetails.username} readOnly />
             </div>
-            <div className="detail-row">
+            <div className="add-tenant-detail-row">
               <label>סיסמא:</label>
-              <input type="text" name="password" className="input" value={userDetails.password} readOnly />
+              <input type="text" name="password" className="add-tenant-input" value={userDetails.password} readOnly />
             </div>
-            <button onClick={handleSuccessMessageClose} className="form-button">אישור</button>
+            <button onClick={handleSuccessMessageClose} className="add-tenant-form-button">אישור</button>
           </div>
         </div>
       )}
