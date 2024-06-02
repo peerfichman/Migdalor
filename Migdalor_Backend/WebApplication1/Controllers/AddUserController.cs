@@ -11,46 +11,51 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class AddUserController : ControllerBase
     {
-        MigdalorContext db = new MigdalorContext();
+        //for future developing
 
-        //Add new user to tblUsers
-        [HttpPost]
-        [Route("AddUser")]
-        public IActionResult AddUser([FromBody] TblUser userInput)
-        {
-            try
-            {
-                if (userInput == null)
-                {
-                    return BadRequest("User input is null");
-                }
 
-                // Check if the username already exists
-                if (db.TblUsers.Any(u => u.Username == userInput.Username))
-                {
-                    return BadRequest("Username already exists");
-                }
 
-                // Map the userInput to TblUser
-                var user = new TblUser
-                {
-                    Username = userInput.Username,
-                    Password = userInput.Password,
-                    RoleNumber = userInput.RoleNumber,
-                    RoleName = userInput.RoleName
-                };
 
-                // Add the user to the context
-                db.TblUsers.Add(user);
-                // Save changes to the database
-                db.SaveChanges();
+        //MigdalorContext db = new MigdalorContext();
 
-                return Ok("User added successfully");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
+        ////Add new user to tblUsers
+        //[HttpPost]
+        //[Route("AddUser")]
+        //public IActionResult AddUser([FromBody] TblUser userInput)
+        //{
+        //    try
+        //    {
+        //        if (userInput == null)
+        //        {
+        //            return BadRequest("User input is null");
+        //        }
+
+        //        // Check if the username already exists
+        //        if (db.TblUsers.Any(u => u.Username == userInput.Username))
+        //        {
+        //            return BadRequest("Username already exists");
+        //        }
+
+        //        // Map the userInput to TblUser
+        //        var user = new TblUser
+        //        {
+        //            Username = userInput.Username,
+        //            Password = userInput.Password,
+        //            RoleNumber = userInput.RoleNumber,
+        //            RoleName = userInput.RoleName
+        //        };
+
+        //        // Add the user to the context
+        //        db.TblUsers.Add(user);
+        //        // Save changes to the database
+        //        db.SaveChanges();
+
+        //        return Ok("User added successfully");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex.Message}");
+        //    }
+        //}
     }
 }
