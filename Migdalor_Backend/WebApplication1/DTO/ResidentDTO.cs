@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.DTO
+﻿using ClassLibrary1.Models;
+
+namespace WebApplication1.DTO
 {
     public class ResidentDTO
     {
@@ -15,7 +17,7 @@
 
         public string? PreviousAddress { get; set; }
 
-        public string? CurrentAddress { get; set; }
+        //public string? CurrentAddress { get; set; }
 
         public byte[]? ResidentImage { get; set; }
 
