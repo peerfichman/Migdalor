@@ -10,7 +10,6 @@ namespace WebApplication1.Controllers
     public class ResidentController : ControllerBase
     {
         MigdalorContext db = new MigdalorContext();
-        Random random = new Random();
 
         
         [HttpPost]

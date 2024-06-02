@@ -17,6 +17,8 @@ namespace WebApplication1.Controllers
     public class LoginController : ControllerBase
     {
         MigdalorContext db = new MigdalorContext();
+
+        //provides methods to retrieve configuration values, typically from sources like JSON files
         private readonly IConfiguration _configuration;
         public LoginController(IConfiguration configuration)
         {
@@ -28,6 +30,7 @@ namespace WebApplication1.Controllers
         [Route("Login")]
         public IActionResult Login([FromBody] UserLogin userlogin)
         {
+            //IActionResult = allows you to return various types of responses from your action methods
             IActionResult response = Unauthorized();
             TblUser user = Authenticate(userlogin);
             if(user != null)
@@ -67,105 +70,63 @@ namespace WebApplication1.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpGet("GNARFJT")]
-        [Authorize]
-        public IActionResult GetNameAndRoleFromJwtToken()
-        {
-            TblUser user = GetCurrntUser();
-            return Ok($"Hi {user.Username},you are in role {user.RoleName}");
-        }
 
-        private TblUser GetCurrntUser()
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            if (identity == null)
-            {
-                return null;
-            }
-            IEnumerable<Claim> claims = identity.Claims;
+        //for future developing
+        //[HttpGet("GNARFJT")]
+        //[Authorize]
+        //public IActionResult GetNameAndRoleFromJwtToken()
+        //{
+        //    TblUser user = GetCurrntUser();
+        //    return Ok($"Hi {user.Username},you are in role {user.RoleName}");
+        //}
 
-            int id = int.Parse(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            string name = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value;
-            string role = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
 
-            TblUser user = new TblUser()
-            {
-                UserId = id,
-                Username = name,
-                RoleName = role
-            };
-            return user;
-        }
 
+        //for future developing
+        //private TblUser GetCurrntUser()
+        //{
+        //    var identity = HttpContext.User.Identity as ClaimsIdentity;
+        //    if (identity == null)
+        //    {
+        //        return null;
+        //    }
+        //    IEnumerable<Claim> claims = identity.Claims;
+
+        //    int id = int.Parse(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        //    string name = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value;
+        //    string role = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+
+        //    TblUser user = new TblUser()
+        //    {
+        //        UserId = id,
+        //        Username = name,
+        //        RoleName = role
+        //    };
+        //    return user;
+        //}
+
+
+
+        //for future developing
         //create API for Forgot Password
-        [HttpPost]
-        [Route("ForgotPassword")]
-        public IActionResult ForgotPassword(string username)
-        {
-            // Find the user in the database based on the provided username
-            var user = db.TblUsers.FirstOrDefault(u => u.Username == username);
+        //[HttpPost]
+        //[Route("ForgotPassword")]
+        //public IActionResult ForgotPassword(string username)
+        //{
+        //    // Find the user in the database based on the provided username
+        //    var user = db.TblUsers.FirstOrDefault(u => u.Username == username);
 
-            if (user == null)
-            {
-                // User not found
-                return BadRequest("User not found");
-            }
+        //    if (user == null)
+        //    {
+        //        // User not found
+        //        return BadRequest("User not found");
+        //    }
 
-            // Implement your logic for password reset here
-            // For example, you could send an email to the user with a link to reset their password
+        //    // Implement your logic for password reset here
+        //    // For example, you could send an email to the user with a link to reset their password
 
-            return Ok("Password reset instructions sent to your email");
-        }
+        //    return Ok("Password reset instructions sent to your email");
+        //}
 
-        //Gets all users in the DB
-        [HttpGet]
-        [Route("GetUsers")]
-        public IActionResult GetUsers()
-        {
-            try
-            {
-                // Retrieve users from the database
-                var users = db.TblUsers.ToList();
-
-                // Check if any users were found
-                if (users == null || users.Count == 0)
-                {
-                    return NotFound("No users found");
-                }
-
-                // Return the list of users
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception or handle it appropriately
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
-        
-
-        //Update user to tblUsers
-        [HttpPut]
-        [Route("UpdateUser/{id}")]
-        public IActionResult UpdateUser(int id, TblUser userInput)
-        {
-            var userToUpdate = db.TblUsers.FirstOrDefault(u => u.UserId == id);
-
-            if (userToUpdate == null)
-            {
-                return NotFound();
-            }
-
-            // Update the user properties with the new values
-            userToUpdate.Username = userInput.Username;
-            userToUpdate.Password = userInput.Password;
-            userToUpdate.RoleNumber = userInput.RoleNumber;
-            userToUpdate.RoleName = userInput.RoleName;
-
-            db.SaveChanges();
-
-            return Ok("User updated successfully");
-        }
     }
 }

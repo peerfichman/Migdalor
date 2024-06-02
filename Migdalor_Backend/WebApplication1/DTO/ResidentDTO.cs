@@ -17,8 +17,6 @@ namespace WebApplication1.DTO
 
         public string? PreviousAddress { get; set; }
 
-        //public string? CurrentAddress { get; set; }
-
         public byte[]? ResidentImage { get; set; }
 
         public string? Profession { get; set; }
@@ -28,6 +26,7 @@ namespace WebApplication1.DTO
         public string? Username { get; set; }
 
         public string? Password { get; set; }
+        //public string? CurrentAddress { get; set; }
         //public virtual ICollection<TblResidentHasHobby> TblResidentHasHobbies { get; set; } = new List<TblResidentHasHobby>();
 
 

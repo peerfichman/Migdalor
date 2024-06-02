@@ -1,6 +1,6 @@
 ﻿using ClassLibrary1.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DTO;
 
 namespace WebApplication1.Controllers
 {
@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [Route("AddActivity")]
-        public IActionResult AddActivity([FromBody] TblActivity activityInput)
+        public IActionResult AddActivity([FromBody] ActivityDTO activityInput)
         {
             try
             {
@@ -23,15 +23,15 @@ namespace WebApplication1.Controllers
                 }
 
                 int randomActivityNumber = random.Next(0, 10001);
-                // Map the userInput to TblUser
+                
                 var activity = new TblActivity
                 {
-                    ActivityNumber= randomActivityNumber,
-                    Date =activityInput.Date,
-                    ActivityName=activityInput.ActivityName,
-                    Time =activityInput.Time,
-                    MaxParticipants=activityInput.MaxParticipants
-    };
+                    ActivityNumber = randomActivityNumber,
+                    Date = activityInput.Date,
+                    ActivityName = activityInput.ActivityName,
+                    Time = activityInput.Time,
+                    MaxParticipants = activityInput.MaxParticipants
+                };
 
                 // Add the user to the context
                 db.TblActivities.Add(activity);
