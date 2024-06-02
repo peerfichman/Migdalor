@@ -11,7 +11,7 @@ public partial class TblActivity
 
     public string? ActivityName { get; set; }
 
-    public TimeSpan? Time { get; set; }
+    public DateTime? Time { get; set; } //it was TimeSpan?
 
     public int? MaxParticipants { get; set; }
 

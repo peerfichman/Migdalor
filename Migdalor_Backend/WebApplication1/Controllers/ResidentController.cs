@@ -59,28 +59,13 @@ namespace WebApplication1.Controllers
         }
 
 
-        //[HttpGet]
-        //[Route("GetResidentsWithGoodMorningPolicy")]
-        //public IActionResult GetResidentsWithGoodMorningPolicy()
-        //{
-        //    var residents = db.TblResidents
-        //        .Select(resident => new ResidentWithGoodMorningPolicy
-        //        {
-        //            ResidentNumber = resident.ResidentNumber,
-        //            FirstName = resident.FirstName,
-        //            LastName = resident.LastName,
-        //            PhoneNumber = resident.PhoneNumber,
-        //            Id = resident.Id,
-        //            DateOfGoodMorningPolicy = db.TblGoodMorningPolicies
-        //        .Where(gmp => gmp.ResidentNumber == resident.ResidentNumber)
-        //        .Select(gmp => gmp.DateTime)
-        //        .FirstOrDefault(),
-        //            HasGoodMorningPolicy = db.TblGoodMorningPolicies
-        //                .Any(gmp => gmp.ResidentNumber == resident.ResidentNumber)
-        //        })
-        //        .ToList();
 
-        //    return Ok(residents);
-        //}
+        [HttpGet]
+        public ActionResult<IEnumerable<TblResident>> GetResidents()
+        {
+            var residents = db.TblResidents.ToList();
+            return Ok(residents);
+        }
+
     }
 }

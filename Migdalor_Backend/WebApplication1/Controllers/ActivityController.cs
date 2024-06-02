@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
             {
                 if (activityInput == null)
                 {
-                    return BadRequest("activity input is null");
+                    return BadRequest("Activity input is null");
                 }
 
                 int randomActivityNumber = random.Next(0, 10001);
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
                 // Save changes to the database
                 db.SaveChanges();
 
-                return Ok("User added successfully");
+                return Ok("Activity added successfully");
             }
             catch (Exception ex)
             {
