@@ -37,7 +37,7 @@ const AddTenant = () => {
     Email: '',
     Username: '',
     Password: '',
-    TblResidentHasHobbies: [],
+    
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -110,7 +110,7 @@ const AddTenant = () => {
       Email: '',
       Username: '',
       Password: '',
-      TblResidentHasHobbies: [],
+      
     });
     setUserDetails({ username: '', password: '' });
   };
@@ -132,8 +132,8 @@ const AddTenant = () => {
           {/* <input type="text" name="EntryDate" className="add-tenant-input" placeholder="תאריך כניסה לבית" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.EntryDate} onChange={handleChange} /> */}
         </div>
         <div className="add-tenant-form-row">
-          <input type="text" name=" PhoneNumber" className="add-tenant-input" placeholder="טלפון" value={formData. PhoneNumber} onChange={handleChange} />
-          {/* <input type="text" name="AdditionalPhone" className="add-tenant-input" placeholder="טלפון נוסף" value={formData.AdditionalPhone} onChange={handleChange} /> */}
+          <input type="text" name="PhoneNumber" className="add-tenant-input" placeholder="טלפון" value={formData.PhoneNumber} onChange={handleChange} />
+          {/* <input type="text" name="AdditionalPhone" className="add-tenant-input" placeholder="טלפון נוסף" value={formData.AdditionalPhone} onChange={handleChange} />  */}
         </div>
         <div className="add-tenant-form-row">
           <input type="email" name="Email" className="add-tenant-input" placeholder="אימייל" value={formData.Email} onChange={handleChange} />
@@ -160,14 +160,14 @@ const AddTenant = () => {
         <div className="add-tenant-form-row">
           <span className="add-tenant-hobby-note">*ניתן להוסיף עד 10 תחביבים שונים</span>
         </div>
-        <div className="add-tenant-form-row add-tenant-hobbies-container">
+        {/* <div className="add-tenant-form-row add-tenant-hobbies-container">
           {formData.TblResidentHasHobbies.map((hobby, index) => (
             <div key={index} className="add-tenant-hobby-item">
               <input type="checkbox" checked onChange={() => handleHobbyChange({ target: { value: hobby } })} />
               <label>{hobby}</label>
             </div>
           ))}
-        </div>
+        </div> */}
         <button type="submit" className="add-tenant-form-button">הוספה</button>
       </form>
       {userDetails.username && userDetails.password && (
