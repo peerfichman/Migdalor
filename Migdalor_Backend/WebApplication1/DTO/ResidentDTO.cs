@@ -2,7 +2,6 @@
 {
     public class ResidentDTO
     {
-        public int ResidentNumber { get; set; }
 
         public string? FirstName { get; set; }
 
@@ -16,8 +15,6 @@
 
         public string? PreviousAddress { get; set; }
 
-        public int? Seniority { get; set; }
-
         public string? CurrentAddress { get; set; }
 
         public byte[]? ResidentImage { get; set; }
@@ -25,7 +22,6 @@
         public string? Profession { get; set; }
 
         public string? Email { get; set; }
-
 
         public string? Username { get; set; }
 
