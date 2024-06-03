@@ -71,6 +71,41 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpPost]
+        [Route("ResidentLogin")]
+        public IActionResult ResidentLogin([FromBody] UserLogin residentlogin)
+        {
+            //IActionResult = allows you to return various types of responses from your action methods
+            IActionResult response = Unauthorized();
+            TblResident resident = db.TblResidents.FirstOrDefault(u => u.Username == residentlogin.Username && u.Password == residentlogin.Password);;
+            if (resident != null)
+            {
+                var token = GenerateJwtTokenForResident(resident);
+                return Ok(new { Token = token });
+            }
+            return response;
+        }
+
+        private string GenerateJwtTokenForResident(TblResident resident)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var Claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier,resident.ResidentNumber.ToString()),
+                new Claim(ClaimTypes.GivenName,resident.Username)
+            };
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                Claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: credentials
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+
         //for future developing
         //[HttpGet("GNARFJT")]
         //[Authorize]

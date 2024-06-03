@@ -67,5 +67,35 @@ namespace WebApplication1.Controllers
             return Ok(residents);
         }
 
+
+
+        [HttpPut]
+        [Route("UpdateResident")]
+        public IActionResult UpdateResident(int residentNumber, [FromBody] ResidentUpdateDTO updateDto)
+        {
+            var resident = db.TblResidents.FirstOrDefault(r => r.ResidentNumber == residentNumber);
+            if (resident == null)
+            {
+                return NotFound();
+            }
+
+            // Update only the fields that are allowed to be updated
+            if (updateDto.FirstName != null) resident.FirstName = updateDto.FirstName;
+            if (updateDto.LastName != null) resident.LastName = updateDto.LastName;
+            if (updateDto.PhoneNumber != null) resident.PhoneNumber = updateDto.PhoneNumber;
+            if (updateDto.CurrentAddress != null) resident.CurrentAddress = updateDto.CurrentAddress;
+            if (updateDto.ResidentImage != null) resident.ResidentImage = updateDto.ResidentImage;
+            if (updateDto.Profession != null) resident.Profession = updateDto.Profession;
+            if (updateDto.Email != null) resident.Email = updateDto.Email;
+            if (updateDto.AboutMe != null) resident.AboutMe = updateDto.AboutMe;
+            if (updateDto.Username != null) resident.Username = updateDto.Username;
+            if (updateDto.Password != null) resident.Password = updateDto.Password;
+
+            db.SaveChanges();
+
+            return Ok(resident);
+        }
+
+
     }
 }
