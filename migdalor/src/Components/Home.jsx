@@ -6,6 +6,8 @@ import OpeningHours from './OpeningHours';
 import AddTenant from './AddTenant';
 import CreateActivity from './CreateActivity'; // Import the new component
 import './HomeStyle.css';
+import GoodMorningPolicy from './GoodMorningPolicy';
+
 
 const Home = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -50,7 +52,7 @@ const Home = () => {
           {activeComponent === 'hours' && <OpeningHours />}
           {activeComponent === 'addTenant' && <AddTenant />}
           {activeComponent === 'createActivity' && <CreateActivity />} {/* Render the new component */}
-          {activeComponent === 'goodMorningPolicy' && <CreateActivity />}
+          {activeComponent === 'goodMorningPolicy' && <GoodMorningPolicy />}
         </div>
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <div className="close-button" onClick={toggleMenu}>×</div>
