@@ -41,7 +41,7 @@ const Home = () => {
           <button className="button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="button">כתיבת מודעת אבל</button>
-          <button className="button">נוהל בוקר טוב</button>
+          <button className="button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
           <button className="button">ועד דיירים</button>
           <button className="button">עדכון פרטי מחלקה</button>
         </div>
@@ -50,6 +50,7 @@ const Home = () => {
           {activeComponent === 'hours' && <OpeningHours />}
           {activeComponent === 'addTenant' && <AddTenant />}
           {activeComponent === 'createActivity' && <CreateActivity />} {/* Render the new component */}
+          {activeComponent === 'goodMorningPolicy' && <CreateActivity />}
         </div>
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <div className="close-button" onClick={toggleMenu}>×</div>
