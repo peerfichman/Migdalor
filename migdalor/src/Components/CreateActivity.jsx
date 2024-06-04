@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './CreateActivityStyle.css';
 
+// const apiUrl = "https://localhost:7149/api/activity/";
+
 const CreateActivity = () => {
   const [formData, setFormData] = useState({
     activityName: '',
@@ -28,15 +30,15 @@ const CreateActivity = () => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
-      // Simulate file upload success/failure
+   
       setTimeout(() => {
-        const success = Math.random() > 0.5; // Randomly decide if upload is successful
+        const success = Math.random() < 0.5; 
         if (success) {
           setFileStatus({ success: true, message: 'קובץ עלה בהצלחה' });
         } else {
           setFileStatus({ success: false, message: 'שגיאה בהעלאת הקובץ' });
         }
-      }, 1000); // Simulate an upload delay
+      }, 1000); 
     }
   };
 
@@ -46,7 +48,29 @@ const CreateActivity = () => {
     if (file) {
       console.log(file);
     }
+    //שליחת מידע לשרת
+//     fetch((apiUrl + "AddActivity", {) {
+//       method: 'POST',
+//       body: formData
+//     })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         setFileStatus({ success: true, message: 'קובץ עלה בהצלחה' });
+//         console.log('Upload successful:', data);
+//       })
+//       .catch(error => {
+//         setFileStatus({ success: false, message: 'שגיאה בהעלאת הקובץ' });
+//         console.error('Upload error:', error);
+//       });
+//   }
+// };
   };
+
 
   const handleDateFocus = () => {
     setShowDatePlaceholder(false);
@@ -111,7 +135,7 @@ const CreateActivity = () => {
             value={formData.participantLimit}
             onChange={handleChange}
             className="input"
-            min="0"
+            min="1"
           />
           <input
             type="text"

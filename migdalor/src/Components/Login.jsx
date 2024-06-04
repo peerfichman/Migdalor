@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 import myImage from "./Image/logo.png";
 import backgroundImg from "./Image/backgroundImg.jpeg";
 
-const apiUrl = "https://localhost:7149/api/Login/Login"; 
+const apiUrl = "https://localhost:7149/api/Login/"; 
 
 export default function Login(props) {
     const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ export default function Login(props) {
         })
 
     const navigate = useNavigate();
-    const [errors, setErrors] = useState({})
+    
       
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -29,7 +29,7 @@ export default function Login(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        fetch(apiUrl, {
+        fetch(apiUrl+"Login",{
             method: 'POST',
             body: JSON.stringify(formData),
             headers: new Headers({
@@ -38,6 +38,7 @@ export default function Login(props) {
         })
         .then(res => {
             if (!res.ok) {
+                console.log("HTTP error! status: ", res.status);
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
             return res.json()
@@ -75,7 +76,7 @@ export default function Login(props) {
           type="text"
           size="small"
         />
-        {errors.username && <div style={{ color: 'red' }}>{errors.username}</div>}
+        
         <br/>
         <TextField
         name='password'
@@ -85,7 +86,7 @@ export default function Login(props) {
           type="password"
           size="small"
         />
-        {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>} 
+        
         <br/>
 
         <Button type="submit" variant="contained" color="primary"><b>התחברות</b></Button>

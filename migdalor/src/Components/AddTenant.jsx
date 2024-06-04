@@ -3,12 +3,12 @@ import './AddTenantStyle.css';
 
 const apiUrl = "https://localhost:7149/api/Resident/";
 
-const hobbiesList = [
-  "קריאה", "כתיבה", "ציור", "בישול", "אפייה", "טיפוח גינה", "ספורט", "ריצה", "שחייה",
-  "רכיבה על אופניים", "טיולים בטבע", "דיג", "נגרות", "סרגיה", "משחקי קופסה", "שחמט",
-  "פאזלים", "יוגה", "מדיטציה", "צילום", "מוזיקה", "נגינה", "שירה", "איסוף בולים",
-  "איסוף מטבעות", "איסוף כרטיסים", "צפייה בסרטים", "ביקור במוזיאונים", "תיאטרון", "ריקוד"
-];
+// const hobbiesList = [
+//   "קריאה", "כתיבה", "ציור", "בישול", "אפייה", "טיפוח גינה", "ספורט", "ריצה", "שחייה",
+//   "רכיבה על אופניים", "טיולים בטבע", "דיג", "נגרות", "סרגיה", "משחקי קופסה", "שחמט",
+//   "פאזלים", "יוגה", "מדיטציה", "צילום", "מוזיקה", "נגינה", "שירה", "איסוף בולים",
+//   "איסוף מטבעות", "איסוף כרטיסים", "צפייה בסרטים", "ביקור במוזיאונים", "תיאטרון", "ריקוד"
+// ];
 
 const generateRandomPassword = () => {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -43,6 +43,7 @@ const AddTenant = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [userDetails, setUserDetails] = useState({ username: '', password: '' });
 
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prevData) => ({
@@ -50,15 +51,16 @@ const AddTenant = () => {
       [name]: files ? files[0] : value
     }));
   };
+    // פונקציה זו מעדכנת את המצב של formData כאשר המשתמש משנה את ערכים בטופס.
 
-  const handleHobbyChange = (e) => {
-    const hobby = e.target.value;
-    setFormData((prevData) => {
-      const TblResidentHasHobbies = prevData.TblResidentHasHobbies.includes(hobby)
-        ? prevData.TblResidentHasHobbies.filter((h) => h !== hobby)
-        : [...prevData.TblResidentHasHobbies, hobby].slice(0, 10); 
-    });
-  };
+  // const handleHobbyChange = (e) => {
+  //   const hobby = e.target.value;
+  //   setFormData((prevData) => {
+  //     const TblResidentHasHobbies = prevData.TblResidentHasHobbies.includes(hobby)
+  //       ? prevData.TblResidentHasHobbies.filter((h) => h !== hobby)
+  //       : [...prevData.TblResidentHasHobbies, hobby].slice(0, 10); 
+  //   });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -125,31 +127,26 @@ const AddTenant = () => {
         </div>
         <div className="add-tenant-form-row">
           <input type="text" name="Id" className="add-tenant-input" placeholder="תעודת זהות" value={formData.Id} onChange={handleChange} />
-          <input type="text" name="DateOfBirth" className="add-tenant-input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.DateOfBirth} onChange={handleChange} />
+          <input type="text" name="DateOfBirth" className="add-tenant-input" placeholder="תאריך לידה" onFocus={(e) => e.target.type = 'date'}  value={formData.DateOfBirth} onChange={handleChange} />
         </div>
         <div className="add-tenant-form-row">
           <input type="text" name="PreviousAddress" className="add-tenant-input" placeholder="עיר מגורים קודמת" value={formData.PreviousAddress} onChange={handleChange} />
           {/* <input type="text" name="EntryDate" className="add-tenant-input" placeholder="תאריך כניסה לבית" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={formData.EntryDate} onChange={handleChange} /> */}
+          <input type="email" name="Email" className="add-tenant-input" placeholder="אימייל" value={formData.Email} onChange={handleChange} />
         </div>
         <div className="add-tenant-form-row">
           <input type="text" name="PhoneNumber" className="add-tenant-input" placeholder="טלפון" value={formData.PhoneNumber} onChange={handleChange} />
-          {/* <input type="text" name="AdditionalPhone" className="add-tenant-input" placeholder="טלפון נוסף" value={formData.AdditionalPhone} onChange={handleChange} />  */}
-        </div>
-        <div className="add-tenant-form-row">
-          <input type="email" name="Email" className="add-tenant-input" placeholder="אימייל" value={formData.Email} onChange={handleChange} />
           <input type="text" name="Profession" className="add-tenant-input" placeholder="מקצוע" value={formData.Profession} onChange={handleChange} />
+
         </div>
-        <div className="add-tenant-form-row">
-          {/* <input type="text" name="RelativePhone" className="add-tenant-input" placeholder="טלפון קרוב משפחה" value={formData.RelativePhone} onChange={handleChange} />
-          <input type="text" name="RelativeContact" className="add-tenant-input" placeholder="איש קשר קרוב משפחה" value={formData.RelativeContact} onChange={handleChange} /> */}
-        </div>
+       
         <div className="add-tenant-form-row">
           <input type="file" name="ResidentImage" className="add-tenant-input" placeholder="תמונה" onChange={handleChange} />
           <div>
-          <span className="add-tenant-hobby-note">*הוספת תמונת הדייר</span>
+         
           </div>
         </div>
-        <div className="add-tenant-form-row">
+        {/* <div className="add-tenant-form-row">
           <select name="hobbies" className="add-tenant-input add-tenant-hobby-select" onChange={handleHobbyChange}>
             <option value="">בחר תחביב</option>
             {hobbiesList.map((hobby, index) => (
@@ -160,7 +157,7 @@ const AddTenant = () => {
         <div className="add-tenant-form-row">
           <span className="add-tenant-hobby-note">*ניתן להוסיף עד 10 תחביבים שונים</span>
         </div>
-        {/* <div className="add-tenant-form-row add-tenant-hobbies-container">
+        <div className="add-tenant-form-row add-tenant-hobbies-container">
           {formData.TblResidentHasHobbies.map((hobby, index) => (
             <div key={index} className="add-tenant-hobby-item">
               <input type="checkbox" checked onChange={() => handleHobbyChange({ target: { value: hobby } })} />
@@ -170,6 +167,7 @@ const AddTenant = () => {
         </div> */}
         <button type="submit" className="add-tenant-form-button">הוספה</button>
       </form>
+      
       {userDetails.username && userDetails.password && (
         <div className="add-tenant-user-details-modal">
           {successMessage && (

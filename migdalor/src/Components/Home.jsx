@@ -61,7 +61,7 @@ const Home = () => {
           <button className="menu-button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="menu-button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="menu-button">כתיבת מודעת אבל</button>
-          <button className="menu-button">נוהל בוקר טוב</button>
+          <button className="menu-button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
           <button className="menu-button">ועד דיירים</button>
           <button className="menu-button">עדכון פרטי מחלקה</button>
           <button className="logout-button">התנתקות</button>
