@@ -8,7 +8,8 @@ import Link from '@mui/material/Link';
 import myImage from "./Image/logo.png";
 import backgroundImg from "./Image/backgroundImg.jpeg";
 
-const apiUrl = "https://localhost:7149/api/Login/"; 
+const apiUrl = "http://proj.ruppin.ac.il//bgroup32/test2/tar1/api/Login/"; 
+
 
 export default function Login(props) {
     const [formData, setFormData] = useState({

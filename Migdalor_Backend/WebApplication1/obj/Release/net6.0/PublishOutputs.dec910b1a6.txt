@@ -16,9 +16,15 @@ C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Relea
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Configuration.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Configuration.Json.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Logging.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Options.dll
@@ -45,6 +51,8 @@ C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Relea
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\System.Runtime.Caching.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\System.Text.Encodings.Web.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\System.Text.Json.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
@@ -57,6 +65,7 @@ C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Relea
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\ClassLibrary1.dll
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\obj\Release\net6.0\PubTmp\Out\ClassLibrary1.pdb
