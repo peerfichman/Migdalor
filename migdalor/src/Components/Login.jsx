@@ -45,7 +45,7 @@ export default function Login(props) {
         })
         .then(
             (result) => {
-                console.log("Successfully logged in!", result);
+                console.log("Successfully logged in!", result);//save the user
                 navigate('/home'); // navigate to the home page
             },
             (error) => {

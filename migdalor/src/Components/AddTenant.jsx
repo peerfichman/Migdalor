@@ -21,7 +21,7 @@ const generateRandomPassword = () => {
     password += numbers.charAt(Math.floor(Math.random() * numbers.length));
   }
   return password;
-};
+};//guid
 
 const AddTenant = () => {
   const [formData, setFormData] = useState({

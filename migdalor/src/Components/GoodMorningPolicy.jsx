@@ -14,7 +14,7 @@ const columns = [
   { id: 'lastName', label: 'שם משפחה', minWidth: 100, align: 'right' },
   { id: 'phone', label: 'טלפון', minWidth: 100, align: 'right' },
   { id: 'ID', label: 'תעודת זהות', minWidth: 100, align: 'right' },
-  { id: 'timeOfPolicy', label: 'שעת ביצוע הנוהל', minWidth: 100, align: 'right', //format: (value) => value.toFixed(2),
+  { id: 'timeOfPolicy', label: 'שעת ביצוע הנוהל', minWidth: 100, align: 'right', 
   },
 ];
 
@@ -70,9 +70,7 @@ export default function StickyHeadTable() {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                          {value}
                         </TableCell>
                       );
                     })}
