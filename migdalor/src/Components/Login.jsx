@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-import myImage from "./Image/logo.png";
-import backgroundImg from "./Image/backgroundImg.jpeg";
+// import myImage from "./Image/logo.png";
+import myImage from "/public/Image/logo.png";
+import backgroundImg from "/public/Image/backgroundImg.jpeg";
 
-const apiUrl = "http://proj.ruppin.ac.il//bgroup32/test2/tar1/api/Login/"; 
+const apiUrl = "http://proj.ruppin.ac.il/bgroup32/test2/tar1/api/Login/"; 
 
 
 export default function Login(props) {
@@ -27,6 +28,7 @@ export default function Login(props) {
         })
     }
 
+     
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -92,7 +94,7 @@ export default function Login(props) {
 
         <Button type="submit" variant="contained" color="primary"><b>התחברות</b></Button>
         <br/>
-        <Link>שכחתי סיסמה</Link>
+        <Link onClick={()=>navigate('home')}>שכחתי סיסמה</Link>
         </Box>
     
     </div>

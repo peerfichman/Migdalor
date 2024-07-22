@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Icons from './Image/Logo1.png';
+import Icons from '/public/Image/Logo1.png';
 import SendMeassge from './SendMeassge';
 import OpeningHours from './OpeningHours';
 import AddTenant from './AddTenant';

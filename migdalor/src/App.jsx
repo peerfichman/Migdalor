@@ -6,7 +6,7 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0)
