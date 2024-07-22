@@ -10,18 +10,28 @@ const apiUrl = "https://localhost:7149/api/Resident/";
 //   "איסוף מטבעות", "איסוף כרטיסים", "צפייה בסרטים", "ביקור במוזיאונים", "תיאטרון", "ריקוד"
 // ];
 
-const generateRandomPassword = () => {
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  const numbers = '0123456789';
-  let password = '';
-  for (let i = 0; i < 3; i++) {
-    password += letters.charAt(Math.floor(Math.random() * letters.length));
-  }
-  for (let i = 0; i < 3; i++) {
-    password += numbers.charAt(Math.floor(Math.random() * numbers.length));
-  }
-  return password;
-};//guid
+const generateUUID = () => {
+  return 'xxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0,
+          v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+console.log(generateUUID());
+
+// const generateRandomPassword = () => {
+//   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+//   const numbers = '0123456789';
+//   let password = '';
+//   for (let i = 0; i < 3; i++) {
+//     password += letters.charAt(Math.floor(Math.random() * letters.length));
+//   }
+//   for (let i = 0; i < 3; i++) {
+//     password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+//   }
+//   return password;
+// };//guid
 
 const AddTenant = () => {
   const [formData, setFormData] = useState({
@@ -64,7 +74,7 @@ const AddTenant = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const password = generateRandomPassword();
+    const password = generateUUID();
     const username = formData.Id;
     setUserDetails({ username, password });
     setSuccessMessage(`הדייר ${formData.FirstName} ${formData.LastName} נוסף בהצלחה`);
