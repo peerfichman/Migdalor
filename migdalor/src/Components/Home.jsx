@@ -41,7 +41,7 @@ const Home = () => {
         
         <div className="button-row">
           <button className="button" onClick={() => handleClick('form')}>שליחת הודעה</button>
-          <button className="button" onClick={() => handleClick('hours')}>שעות פתיחה</button>
+          <button className="button" onClick={() => handleClick('hours')}>שעות פעילות</button>
           <button className="button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
@@ -61,7 +61,7 @@ const Home = () => {
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <div className="close-button" onClick={toggleMenu}>×</div>
           <button className="menu-button" onClick={() => handleClick('form')}>שליחת הודעה</button>
-          <button className="menu-button" onClick={() => handleClick('hours')}>שעות פתיחה</button>
+          <button className="menu-button" onClick={() => handleClick('hours')}>שעות פעילות</button>
           <button className="menu-button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="menu-button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="menu-button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
