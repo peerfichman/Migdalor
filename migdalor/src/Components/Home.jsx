@@ -7,6 +7,8 @@ import AddTenant from './AddTenant';
 import CreateActivity from './CreateActivity'; // Import the new component
 import './HomeStyle.css';
 import GoodMorningPolicy from './GoodMorningPolicy';
+import UpdateDepartmentDetails from './UpdateDepartmentDetails';
+import AddObituaryNotice from './AddObituaryNotice';
 
 
 const Home = () => {
@@ -42,10 +44,10 @@ const Home = () => {
           <button className="button" onClick={() => handleClick('hours')}>שעות פתיחה</button>
           <button className="button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
-          <button className="button">כתיבת מודעת אבל</button>
+          <button className="button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
           <button className="button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
           <button className="button">ועד דיירים</button>
-          <button className="button">עדכון פרטי מחלקה</button>
+          <button className="button" onClick={() => handleClick('updateDepartmentDetails')}>עדכון פרטי מחלקה</button>
         </div>
         <div className="content-container" ref={contentRef}>
           {activeComponent === 'form' && <SendMeassge />}
@@ -53,6 +55,8 @@ const Home = () => {
           {activeComponent === 'addTenant' && <AddTenant />}
           {activeComponent === 'createActivity' && <CreateActivity />} {/* Render the new component */}
           {activeComponent === 'goodMorningPolicy' && <GoodMorningPolicy />}
+          {activeComponent === 'updateDepartmentDetails' && <UpdateDepartmentDetails />}
+          {activeComponent === 'addObituaryNotice' && <AddObituaryNotice />}
         </div>
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <div className="close-button" onClick={toggleMenu}>×</div>
@@ -60,10 +64,10 @@ const Home = () => {
           <button className="menu-button" onClick={() => handleClick('hours')}>שעות פתיחה</button>
           <button className="menu-button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="menu-button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
-          <button className="menu-button">כתיבת מודעת אבל</button>
+          <button className="menu-button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
           <button className="menu-button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
           <button className="menu-button">ועד דיירים</button>
-          <button className="menu-button">עדכון פרטי מחלקה</button>
+          <button className="menu-button" onClick={() => handleClick('updateDepartmentDetails')}>עדכון פרטי מחלקה</button>
           <button className="logout-button">התנתקות</button>
         </div>
       </div>
