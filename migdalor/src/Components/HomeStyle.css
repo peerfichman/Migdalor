@@ -77,6 +77,11 @@ body {
     padding: 0.5rem;
     width: 100%;
     margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 35px;
+    font-family: 'sans-serif';
+    text-shadow: 2px 2px 4px rgba(48, 48, 48, 0.5);
+    border-radius: 5px;
   }
   
   .styled-icon {
@@ -104,6 +109,7 @@ body {
     color: #333;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'sans-serif';
   }
   
   .button:hover {

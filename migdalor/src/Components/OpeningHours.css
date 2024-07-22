@@ -1,0 +1,23 @@
+.openingHours{
+    font-family: 'sans-serif';
+    border-radius: 5px;
+    font-weight: bold;
+
+}
+
+.openingHours {
+    font-family: 'Arial, sans-serif'; /* סגנון כתב */
+    color: #333; /* צבע כתב */
+    background-color: #F6F2E4;
+    padding: 20px; /* ריווח פנימי */
+    border: 1px solid #ddd; /* גבול */
+    border-radius: 10px; /* פינות מעוגלות */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל */
+    max-width: 400px; /* רוחב מקסימלי */
+    margin: 20px auto; /* מרכז את התיבה */
+  }
+
+  h1{
+    color: #38588e;
+    text-shadow: 2px 2px 4px rgba(48, 48, 48, 0.5);
+  }
