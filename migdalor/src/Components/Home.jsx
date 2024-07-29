@@ -9,7 +9,7 @@ import './HomeStyle.css';
 import GoodMorningPolicy from './GoodMorningPolicy';
 import UpdateDepartmentDetails from './UpdateDepartmentDetails';
 import AddObituaryNotice from './AddObituaryNotice';
-
+import TenantCommittee from './TenantCommittee';
 
 const Home = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -46,7 +46,7 @@ const Home = () => {
           <button className="button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
           <button className="button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
-          <button className="button">ועד דיירים</button>
+          <button className="button" onClick={() => handleClick('tenantCommittee')}>ועד דיירים</button>
           <button className="button" onClick={() => handleClick('updateDepartmentDetails')}>עדכון פרטי מחלקה</button>
         </div>
         <div className="content-container" ref={contentRef}>
@@ -57,6 +57,8 @@ const Home = () => {
           {activeComponent === 'goodMorningPolicy' && <GoodMorningPolicy />}
           {activeComponent === 'updateDepartmentDetails' && <UpdateDepartmentDetails />}
           {activeComponent === 'addObituaryNotice' && <AddObituaryNotice />}
+          {activeComponent === 'tenantCommittee' && <TenantCommittee />}
+
         </div>
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <div className="close-button" onClick={toggleMenu}>×</div>
@@ -66,7 +68,7 @@ const Home = () => {
           <button className="menu-button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
           <button className="menu-button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
           <button className="menu-button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
-          <button className="menu-button">ועד דיירים</button>
+          <button className="button" onClick={() => handleClick('tenantCommittee')}>ועד דיירים</button>
           <button className="menu-button" onClick={() => handleClick('updateDepartmentDetails')}>עדכון פרטי מחלקה</button>
           <button className="logout-button">התנתקות</button>
         </div>
