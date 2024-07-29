@@ -9,7 +9,7 @@ const MainMenu = () => {
   return (
     <div className="menu-container">
       <header className="menu-header">
-        <img src="https://via.placeholder.com/100" alt="Logo" className="menu-logo" />
+        <img src={Logo} alt="Logo" className="menu-logo" />
         <h2 className="welcom-header">שלום שושנה</h2>
       </header>
       <div className="menu-grid">
