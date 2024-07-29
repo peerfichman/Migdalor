@@ -1,0 +1,111 @@
+body, html {
+  background-color: #f6f2e4; /* Ensure background color is applied globally */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+/* Ensures the container takes up the full viewport height and width */
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw; /* Full viewport width */
+  background: #f6f2e4;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  min-height: 100vh;
+}
+
+/* Header styling */
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  max-width: 100%;
+}
+.welcom-header{
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #38588e;
+  background-color: white; 
+  border: none;
+  border-radius: 4px;
+  cursor: default; /* No pointer events */
+  user-select: none; /* Prevent text selection */
+  transition: background-color 0.3s;
+}
+
+/* Logo styling */
+.menu-logo {
+  width: 100px; /* Adjust as needed */
+  max-width: 150px;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure it is treated as a block element */
+  margin: 0 auto; /* Center the logo */
+}
+
+/* Grid container styling */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid layout */
+  gap: 10px; /* Space between grid items */
+  width: 100%; /* Full width of the container */
+  max-width: 600px; /* Maximum width for better layout control */
+}
+
+/* Button styling */
+.menu-button {
+  width: 100%; /* Full width of grid cell */
+  padding: 15px; /* Increased padding for better usability */
+  background-color: white;
+  color: #38588e;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px; /* Increase font size for readability */
+}
+
+/* Responsive adjustments */
+
+/* For tablets and smaller laptops */
+@media (max-width: 1024px) {
+  .menu-logo {
+    width: 80px; /* Adjust logo size */
+  }
+  
+  .menu-grid {
+    max-width: 90%; /* Adjust grid width */
+  }
+
+  .menu-button {
+    padding: 12px; /* Adjust button padding */
+    font-size: 14px; /* Adjust font size */
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .menu-logo {
+    width: 60px; /* Adjust logo size */
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr; /* Single column layout for mobile */
+    gap: 8px; /* Adjust gap between items */
+  }
+
+  .menu-button {
+    padding: 10px; /* Adjust button padding */
+    font-size: 14px; /* Adjust font size */
+  }
+}

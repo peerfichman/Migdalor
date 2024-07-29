@@ -1,0 +1,128 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+/* Ensures the container takes up the full viewport height */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw; /* Full viewport width */
+  background: #f6f2e4;
+  position: relative;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  min-height: 100vh;
+}
+
+/* Logo styling */
+.login-logo img {
+  width: 250px; /* Adjust as needed */
+  margin-bottom: 5px; /* Spacing below the logo */
+}
+
+/* Form container styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white; /* White background for the form */
+  padding: 40px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  margin: 40px; /* Margin around the form */
+}
+
+/* Input field styling */
+.login-input {
+  width: 300px; /* Input width */
+  padding: 15px; /* Padding inside the input */
+  margin-bottom: 15px; /* Spacing between inputs */
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Rounded corners for inputs */
+}
+
+/* Button styling */
+.login-button {
+  padding: 15px 30px; /* Button padding */
+  background-color: #38588e; /* Button color */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Rounded corners for button */
+  cursor: pointer;
+  font-size: 16px; /* Font size for button text */
+  margin: 15px; /* Spacing above and below the button */
+}
+
+/* Forgot password link styling */
+.forgot-password {
+  margin-top: 15px; /* Spacing above the link */
+  color: #38588e; /* Link color */
+  text-decoration: none;
+  cursor: pointer;
+  text-decoration: underline; /* Add underline */
+  text-decoration-color: #38588e; /* Match the underline color to the text color */
+}
+
+
+/* Background image styling */
+.login-background img {
+  position:absolute;
+  bottom: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Adjust height as needed */
+    object-fit: cover; 
+}
+
+/* Responsive adjustments */
+
+/* For tablets and smaller laptops */
+@media (max-width: 1024px) {
+  .login-logo img {
+    width: 260px; /* Adjust logo size for tablets */
+    margin-bottom: 20px; /* Adjust spacing below the logo */
+  }
+  
+  .login-form {
+    padding: 30px; /* Adjust form padding */
+    width: 70%; /* Adjust form width */
+  }
+
+  .login-input {
+    width: 250px; /* Adjust input width */
+    padding: 12px; /* Adjust input padding */
+  }
+
+  .login-button {
+    padding: 12px 25px; /* Adjust button padding */
+    font-size: 14px; /* Adjust font size */
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .login-logo img {
+    width: 250px; /* Adjust logo size for mobile */
+    margin-bottom: 15px; /* Adjust spacing below the logo */
+  }
+  
+  .login-form {
+    padding: 20px; /* Adjust form padding */
+    width: 75%; /* Adjust form width */
+  }
+
+  .login-input {
+    width: 100%; /* Full width for mobile inputs */
+    padding: 10px; /* Adjust input padding */
+  }
+
+  .login-button {
+    padding: 10px 20px; /* Adjust button padding */
+    font-size: 14px; /* Adjust font size */
+  }
+}
