@@ -29,11 +29,10 @@
   border-radius: 15px;
   font-size: 16px;
   width: 100%;
-  max-width: 350px;
   text-align: right;
 }
 
-.personal-area .upload-button {
+.upload-label {
   background-color: #38588e;
   color: white;
   border: none;
@@ -42,11 +41,15 @@
   cursor: pointer;
   padding: 10px;
   width: 100%;
-  max-width: 350px;
+  text-align: center;
 }
 
-.personal-area .upload-button:hover {
+.upload-label:hover {
   background-color: #2d4771;
+}
+
+.upload-button {
+  display: none;
 }
 
 .personal-area .submit-button {
@@ -58,21 +61,30 @@
   font-size: 16px;
   cursor: pointer;
   width: auto;
+  margin: 10px;
+  
 }
 
 .personal-area .submit-button:hover {
   background-color: #0056b3;
+  margin: 10px;
+
 }
 
-/* CSS ל-CARD */
-.activities {
-  margin-top: 20px;
-}
+@media (max-width: 600px) {
+  .personal-area {
+    padding: 10px;
+  }
 
-.activity-card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #fff;
+  .personal-area input,
+  .personal-area textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .upload-label,
+  .submit-button {
+    font-size: 14px;
+    padding: 8px;
+  }
 }
