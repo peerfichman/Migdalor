@@ -1,5 +1,6 @@
 // src/components/IconGrid.js
 import React from 'react';
+import '../CSS/Home.css';
 import { Grid, Paper, Typography } from '@mui/material';
 import { 
   Person as PersonIcon,
@@ -15,16 +16,16 @@ import {
 } from '@mui/icons-material';
 
 const items = [
-  { icon: <PersonIcon />, text: 'אזור', subtext: 'אישי' },
-  { icon: <WbSunnyIcon />, text: 'נוהל', subtext: 'בוקר טוב' },
-  { icon: <NotificationsIcon />, text: 'הודעות', subtext: 'שוטפות' },
-  { icon: <LocalActivityIcon  />, text: 'רישום', subtext: 'לפעילויות' },
-  { icon: <EventIcon />, text: 'צור', subtext: 'אירוע' },
-  { icon: <ContactPhoneIcon />, text: 'אנשי', subtext: 'קשר' },
-  { icon: <AccessTimeIcon />, text: 'שעות', subtext: 'פתיחה' },
-  { icon: <GroupIcon />, text: 'ועד', subtext: 'דיירים' },
-  { icon: <AnnouncementIcon />, text: 'הודעות', subtext: 'אבל' },
-  { icon: <MapIcon />, text: 'מפת', subtext: 'הבית' }
+  { icon: <PersonIcon style={{ fontSize: 40 }} />, text: 'אזור', subtext: 'אישי' },
+  { icon: <WbSunnyIcon style={{ fontSize: 40 }} />, text: 'נוהל', subtext: 'בוקר טוב' },
+  { icon: <NotificationsIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'שוטפות' },
+  { icon: <LocalActivityIcon style={{ fontSize: 40 }} />, text: 'רישום', subtext: 'לפעילויות' },
+  { icon: <EventIcon style={{ fontSize: 40 }} />, text: 'צור', subtext: 'אירוע' },
+  { icon: <ContactPhoneIcon style={{ fontSize: 40 }} />, text: 'אנשי', subtext: 'קשר' },
+  { icon: <AccessTimeIcon style={{ fontSize: 40 }} />, text: 'שעות', subtext: 'פתיחה' },
+  { icon: <GroupIcon style={{ fontSize: 40 }} />, text: 'ועד', subtext: 'דיירים' },
+  { icon: <AnnouncementIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'אבל' },
+  { icon: <MapIcon style={{ fontSize: 40 }} />, text: 'מפת', subtext: 'הבית' }
 ];
 
 const IconGrid = () => {
@@ -38,14 +39,15 @@ const IconGrid = () => {
               display: 'flex', 
               flexDirection: 'column', 
               alignItems: 'center', 
-              padding: 16 
+              padding: 16 ,
+              color:'#38588e'
             }}
           >
             {item.icon}
-            <Typography variant="h6" style={{ marginTop: 8 }}>
+            <Typography variant="h6" className="welcom-header" style={{ marginTop: 8,color:'#000',fontWeight: 'bold',fontSize: 22, fontFamily: 'Arial'}}>
               {item.text}
             </Typography>
-            <Typography variant="h6">
+            <Typography variant="h6" style={{ color: '#000' ,fontWeight: 'bold',fontSize: 22}}>
               {item.subtext}
             </Typography>
           </Paper>
