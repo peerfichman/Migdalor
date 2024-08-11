@@ -1,0 +1,10 @@
+.GMP-button {
+    padding: 15px 30px; /* Button padding */
+    background-color: #38588e; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer;
+    font-size: 16px; /* Font size for button text */
+    margin: 15px; /* Spacing above and below the button */
+  }

@@ -14,10 +14,12 @@ import {
   LocalActivity as LocalActivityIcon,
   WbSunny as WbSunnyIcon 
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+
 
 const items = [
   { icon: <PersonIcon style={{ fontSize: 40 }} />, text: 'אזור', subtext: 'אישי' },
-  { icon: <WbSunnyIcon style={{ fontSize: 40 }} />, text: 'נוהל', subtext: 'בוקר טוב' },
+  { icon: <WbSunnyIcon style={{ fontSize: 40 }} />, text: 'נוהל', subtext: 'בוקר טוב', link: <Link to="/good-morning-protocol">לך לנוהל בוקר טוב</Link> },
   { icon: <NotificationsIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'שוטפות' },
   { icon: <LocalActivityIcon style={{ fontSize: 40 }} />, text: 'רישום', subtext: 'לפעילויות' },
   { icon: <EventIcon style={{ fontSize: 40 }} />, text: 'צור', subtext: 'אירוע' },
@@ -28,9 +30,10 @@ const items = [
   { icon: <MapIcon style={{ fontSize: 40 }} />, text: 'מפת', subtext: 'הבית' }
 ];
 
-const IconGrid = () => {
+const IconGrid = () => {    
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <div>
+      <Grid container spacing={2} justifyContent="center">
       {items.map((item, index) => (
         <Grid item xs={4} key={index}>
           <Paper 
@@ -52,8 +55,12 @@ const IconGrid = () => {
             </Typography>
           </Paper>
         </Grid>
-      ))}
+      ))} 
+      
+
     </Grid>
+    </div>
+    
   );
 }
 
