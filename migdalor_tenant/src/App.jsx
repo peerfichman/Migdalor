@@ -10,6 +10,7 @@ import Home from './Components/Home';
 import Profile from './Components/Profile';
 import GoodMorningProtocol from './Components/GoodMorningProtocol';
 import ActivitiesRegistration from './Components/ActivitiesRegistration';
+import ContactList from './Components/ContactList';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +29,7 @@ function App() {
           <Route path="/Profile" element={<Profile/>}  />
           <Route path="/good-morning-protocol" element={<GoodMorningProtocol/>} />
           <Route path="/activities-registration" element={<ActivitiesRegistration/>}/>
+          <Route path="/Contacts" element={<ContactList/>} />
         </Routes>
         
       </div>
