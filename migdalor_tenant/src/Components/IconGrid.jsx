@@ -14,6 +14,8 @@ import {
   LocalActivity as LocalActivityIcon,
   WbSunny as WbSunnyIcon 
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+
 
 const items = [
   { icon: <PersonIcon style={{ fontSize: 40 }} />, text: 'אזור', subtext: 'אישי', route: '/profile' },
@@ -38,7 +40,8 @@ const IconGrid = () => {
   }
 
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <div>
+      <Grid container spacing={2} justifyContent="center">
       {items.map((item, index) => (
         <Grid item xs={4} key={index}>
           <Paper 
@@ -62,8 +65,12 @@ const IconGrid = () => {
             </Typography>
           </Paper>
         </Grid>
-      ))}
+      ))} 
+      
+
     </Grid>
+    </div>
+    
   );
 }
 
