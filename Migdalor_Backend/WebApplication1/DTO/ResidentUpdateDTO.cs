@@ -6,7 +6,7 @@
         public string? LastName { get; set; }
         public string? PhoneNumber { get; set; }
         public string? CurrentAddress { get; set; }
-        public byte[]? ResidentImage { get; set; }
+        //public byte[]? ResidentImage { get; set; }
         public string? Profession { get; set; }
         public string? Email { get; set; }
         public string? AboutMe { get; set; }

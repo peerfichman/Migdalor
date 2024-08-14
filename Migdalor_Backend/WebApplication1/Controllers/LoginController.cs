@@ -107,38 +107,38 @@ namespace WebApplication1.Controllers
 
 
         //for future developing
-        //[HttpGet("GNARFJT")]
-        //[Authorize]
-        //public IActionResult GetNameAndRoleFromJwtToken()
+        //[httpget("gnarfjt")]
+        //[authorize]
+        //public iactionresult getnameandrolefromjwttoken()
         //{
-        //    TblUser user = GetCurrntUser();
-        //    return Ok($"Hi {user.Username},you are in role {user.RoleName}");
+        //    tbluser user = getcurrntuser();
+        //    return ok($"hi {user.username},you are in role {user.rolename}");
         //}
 
 
 
         //for future developing
-        //private TblUser GetCurrntUser()
-        //{
-        //    var identity = HttpContext.User.Identity as ClaimsIdentity;
-        //    if (identity == null)
-        //    {
-        //        return null;
-        //    }
-        //    IEnumerable<Claim> claims = identity.Claims;
+        private TblUser GetCurrntUser()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity == null)
+            {
+                return null;
+            }
+            IEnumerable<Claim> claims = identity.Claims;
 
-        //    int id = int.Parse(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-        //    string name = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value;
-        //    string role = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+            int id = int.Parse(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            string name = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value;
+            string role = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
 
-        //    TblUser user = new TblUser()
-        //    {
-        //        UserId = id,
-        //        Username = name,
-        //        RoleName = role
-        //    };
-        //    return user;
-        //}
+            TblUser user = new TblUser()
+            {
+                UserId = id,
+                Username = name,
+                RoleName = role
+            };
+            return user;
+        }
 
 
 
