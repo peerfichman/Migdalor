@@ -10,6 +10,8 @@ import GoodMorningPolicy from './GoodMorningPolicy';
 import UpdateDepartmentDetails from './UpdateDepartmentDetails';
 import AddObituaryNotice from './AddObituaryNotice';
 import TenantCommittee from './TenantCommittee';
+import Activities from "./Activiteis.jsx";
+import Entities from "./EntityPage/Entities.jsx";
 
 const Home = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -43,7 +45,7 @@ const Home = () => {
           <button className="button" onClick={() => handleClick('form')}>שליחת הודעה</button>
           <button className="button" onClick={() => handleClick('hours')}>שעות פעילות</button>
           <button className="button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
-          <button className="button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
+          <button className="button" onClick={() => handleClick('activities')}>פעילויות</button>
           <button className="button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
           <button className="button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
           <button className="button" onClick={() => handleClick('tenantCommittee')}>ועד דיירים</button>
@@ -53,7 +55,7 @@ const Home = () => {
           {activeComponent === 'form' && <SendMeassge />}
           {activeComponent === 'hours' && <OpeningHours />}
           {activeComponent === 'addTenant' && <AddTenant />}
-          {activeComponent === 'createActivity' && <CreateActivity />} {/* Render the new component */}
+          {activeComponent === 'activities' && <Entities EntityName={'Activity'}/>} {/* Render the new component */}
           {activeComponent === 'goodMorningPolicy' && <GoodMorningPolicy />}
           {activeComponent === 'updateDepartmentDetails' && <UpdateDepartmentDetails />}
           {activeComponent === 'addObituaryNotice' && <AddObituaryNotice />}

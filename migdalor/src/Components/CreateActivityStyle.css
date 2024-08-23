@@ -38,8 +38,16 @@
     box-sizing: border-box;
     text-align: right;
     color: black;
+    background-color: white;
     font-family: 'sans-serif';
+    font-weight: bold;
   }
+.input[type="time"]::-webkit-calendar-picker-indicator{
+  filter: invert(100%) ;
+}
+.input[type="date"]::-webkit-calendar-picker-indicator{
+  filter: invert(100%) ;
+}
   
   .textarea-container {
     width: 90%;
