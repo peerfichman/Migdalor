@@ -11,7 +11,5 @@ public partial class TblResidentHasHobby
 
     public bool? IsActive { get; set; }
 
-    public virtual TblHobby HobbyNumberNavigation { get; set; } = null!;
 
-    public virtual TblResident ResidentNumberNavigation { get; set; } = null!;
 }

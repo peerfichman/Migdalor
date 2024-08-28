@@ -92,7 +92,7 @@ namespace WebApplication1.Controllers
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var Claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,resident.ResidentNumber.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,resident.ResidentID.ToString()),
                 new Claim(ClaimTypes.GivenName,resident.Username)
             };
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],

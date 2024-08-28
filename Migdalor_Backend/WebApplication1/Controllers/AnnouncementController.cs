@@ -26,10 +26,10 @@ namespace WebApplication1.Controllers
             {
                 Content = input.Content,
                 Date = DateTime.UtcNow,
-                AnnouncementId = _random.Next(1, int.MaxValue)
+                Id = _random.Next(1, int.MaxValue)
             };
 
-            
+
             db.TblAnnouncements.Add(announcement);
             db.SaveChanges();
 
@@ -38,16 +38,78 @@ namespace WebApplication1.Controllers
 
 
         [HttpGet]
-        [Route("GetAnnouncements")]
+        [Route("GetAllAnnouncements")]
         public IActionResult GetAnnouncements()
         {
             var announcements = db.TblAnnouncements.ToList();
-            if (announcements == null || !announcements.Any())
+            if (announcements == null)
             {
                 return NotFound("No announcements found.");
             }
 
             return Ok(announcements);
+        }
+        [HttpGet]
+        [Route("GetAnnouncementById/{id}")]
+        public ActionResult<TblAnnouncement> GetActivityById(int id)
+        {
+
+            var announcement = db.TblAnnouncements.Find(id);
+            return Ok(announcement);
+        }
+
+
+        [HttpPut]
+        [Route("EditAnnouncement")]
+        public IActionResult EditAnnouncement([FromBody] AnnouncementDTO announcementInput)
+        {
+            try
+            {
+                if (announcementInput == null)
+                {
+                    return BadRequest("Announcement input is null");
+                }
+
+                var announcement = new TblAnnouncement
+                {
+                    Id = announcementInput.Id,
+                    Content = announcementInput.Content,
+                    Date = DateTime.UtcNow
+
+                };
+
+                // Add the user to the context
+                db.TblAnnouncements.Update(announcement);
+
+                // Save changes to the database
+                db.SaveChanges();
+
+                return Ok("Announcement Edited successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteAnnouncement/{id}")]
+        public IActionResult DeleteActivity(int id)
+        {
+            try
+            {
+
+                var entityToDelete = new TblAnnouncement { Id = id };
+                db.TblAnnouncements.Attach(entityToDelete);
+                db.TblAnnouncements.Remove(entityToDelete);
+                db.SaveChanges();
+
+
+                return Ok("Announcement Deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

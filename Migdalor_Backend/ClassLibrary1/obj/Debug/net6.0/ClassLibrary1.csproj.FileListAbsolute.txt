@@ -12,3 +12,17 @@ C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\n
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.pdb
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.genruntimeconfig.cache
 C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ref\ClassLibrary1.dll
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\bin\Debug\net6.0\ClassLibrary1.deps.json
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\bin\Debug\net6.0\ClassLibrary1.runtimeconfig.json
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\bin\Debug\net6.0\ClassLibrary1.dll
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\bin\Debug\net6.0\ref\ClassLibrary1.dll
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\bin\Debug\net6.0\ClassLibrary1.pdb
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.csproj.AssemblyReference.cache
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.AssemblyInfoInputs.cache
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.AssemblyInfo.cs
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.csproj.CoreCompileInputs.cache
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.dll
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ref\ClassLibrary1.dll
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.pdb
+C:\Users\peerf\Source\Repos\Migdalor_Final_Project\Migdalor_Backend\ClassLibrary1\obj\Debug\net6.0\ClassLibrary1.genruntimeconfig.cache

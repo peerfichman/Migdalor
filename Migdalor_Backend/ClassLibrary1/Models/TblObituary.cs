@@ -11,11 +11,16 @@ public partial class TblObituary
 
     public string? Description { get; set; }
 
-    public int? ResidentNumber { get; set; }
+    public String? ResidentId { get; set; }
+
+    public String? CemeteryName { get; set; }
+
+    public String? DeceasedName { get; set; }
+
+    public String? ShivaAddress { get; set; }
 
     public int? DepartmentId { get; set; }
 
     public virtual TblDepartment? Department { get; set; }
 
-    public virtual TblResident? ResidentNumberNavigation { get; set; }
 }

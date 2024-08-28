@@ -6,7 +6,6 @@ const index = {
     delete: activityRequests.deleteActivity,
     getAll:activityRequests.getAllActivities,
     getById: activityRequests.getActivityById
-
 }
 
 export default index;

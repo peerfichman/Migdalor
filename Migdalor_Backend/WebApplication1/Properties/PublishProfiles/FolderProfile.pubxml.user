@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\anita\Migdalor_Final_Project\Migdalor_Backend\WebApplication1\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <_PublishTargetUrl>bin\Release\net6.0\publish\</_PublishTargetUrl>
     <History>True|2024-07-22T06:12:37.0297606Z;</History>
   </PropertyGroup>
 </Project>

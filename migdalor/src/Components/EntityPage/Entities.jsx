@@ -18,11 +18,10 @@ const Entities = ({EntityName}) =>{
         <div style={{display:'flex', flexDirection:'column', width:'75%'}}>
             <IconButton size='medium' sx={{alignSelf: 'start' ,borderRadius: 3,border:3, borderColor:'white', marginBottom:'3%'}}  onClick={ (e)=> setOpenCreate(true)}>
                 <AddIcon fontSize='large' sx={{color:'white'}} />
-                <Typography color='white' fontSize='Large'>צור פעילות</Typography>
+                <Typography color='white' fontSize='Large'>{EntitiesMap[EntityName].createLabel}</Typography>
             </IconButton>
             <EntitiesTable entities={entities} entityName={EntityName}></EntitiesTable>
-            {/*<ActivityTable activities={activities}/>*/}
-            {/*{openCreate && <CreateActivity isEdit={false} activityNumber={null} setModalOpen={setOpenCreate}/>}*/}
+            {openCreate && EntitiesMap[EntityName].createPage(setOpenCreate)}
         </div>
     )
 

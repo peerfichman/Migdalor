@@ -1,16 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Icons from '/public/Image/Logo1.png';
-import SendMeassge from './SendMeassge';
+import SendMeassge from './CreatePages/SendMeassge.jsx';
 import OpeningHours from './OpeningHours';
-import AddTenant from './AddTenant';
-import CreateActivity from './CreateActivity'; // Import the new component
+import AddTenant from './CreatePages/AddTenant.jsx';
 import './HomeStyle.css';
 import GoodMorningPolicy from './GoodMorningPolicy';
-import UpdateDepartmentDetails from './UpdateDepartmentDetails';
-import AddObituaryNotice from './AddObituaryNotice';
+import AddObituaryNotice from './CreatePages/AddObituaryNotice.jsx';
 import TenantCommittee from './TenantCommittee';
-import Activities from "./Activiteis.jsx";
 import Entities from "./EntityPage/Entities.jsx";
 
 const Home = () => {
@@ -42,23 +39,23 @@ const Home = () => {
         <nav className="nav-bar">ברוכים הבאים למערכת ניהול הדיור המוגן</nav>
         
         <div className="button-row">
-          <button className="button" onClick={() => handleClick('form')}>שליחת הודעה</button>
+          <button className="button" onClick={() => handleClick('form')}>הודעות</button>
           <button className="button" onClick={() => handleClick('hours')}>שעות פעילות</button>
           <button className="button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
           <button className="button" onClick={() => handleClick('activities')}>פעילויות</button>
-          <button className="button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
+          <button className="button" onClick={() => handleClick('addObituaryNotice')}>מודעות אבל</button>
           <button className="button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
           <button className="button" onClick={() => handleClick('tenantCommittee')}>ועד דיירים</button>
-          <button className="button" onClick={() => handleClick('updateDepartmentDetails')}>עדכון פרטי מחלקה</button>
+          <button className="button" onClick={() => handleClick('updateDepartmentDetails')}>מחלקות</button>
         </div>
         <div className="content-container" ref={contentRef}>
-          {activeComponent === 'form' && <SendMeassge />}
+          {activeComponent === 'form' && <Entities EntityName={'Message'}/>}
           {activeComponent === 'hours' && <OpeningHours />}
-          {activeComponent === 'addTenant' && <AddTenant />}
+          {activeComponent === 'addTenant' && <Entities EntityName={'Tenant'}/>}
           {activeComponent === 'activities' && <Entities EntityName={'Activity'}/>} {/* Render the new component */}
           {activeComponent === 'goodMorningPolicy' && <GoodMorningPolicy />}
-          {activeComponent === 'updateDepartmentDetails' && <UpdateDepartmentDetails />}
-          {activeComponent === 'addObituaryNotice' && <AddObituaryNotice />}
+          {activeComponent === 'updateDepartmentDetails' && <Entities EntityName={'Department'}/>}
+          {activeComponent === 'addObituaryNotice' && <Entities  EntityName={"Obituary"}/>}
           {activeComponent === 'tenantCommittee' && <TenantCommittee />}
 
         </div>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ClassLibrary1.Models;
 
+
 public partial class MigdalorContext : DbContext
 {
     public MigdalorContext()
@@ -28,7 +29,6 @@ public partial class MigdalorContext : DbContext
 
     public virtual DbSet<TblHobby> TblHobbies { get; set; }
 
-    public virtual DbSet<TblInitiative> TblInitiatives { get; set; }
 
     public virtual DbSet<TblObituary> TblObituaries { get; set; }
 
@@ -37,6 +37,7 @@ public partial class MigdalorContext : DbContext
     public virtual DbSet<TblResidentCommittee> TblResidentCommittees { get; set; }
 
     public virtual DbSet<TblResidentHasHobby> TblResidentHasHobbies { get; set; }
+    public virtual DbSet<TblInitiative> TblInitiatives { get; set; }
 
     public virtual DbSet<TblResidentPartOfResidentCommittee> TblResidentPartOfResidentCommittees { get; set; }
 
@@ -58,66 +59,67 @@ public partial class MigdalorContext : DbContext
         optionsBuilder.UseSqlServer(connStr);
     }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblActivity>(entity =>
         {
-            entity.HasKey(e => e.ActivityNumber).HasName("PK__tblActiv__CA8A5612C45EF4AB");
+            entity.HasKey(e => e.Id).HasName("PK__tblActiv__CA8A5612C45EF4AB");
 
             entity.ToTable("tblActivity");
 
-            entity.Property(e => e.ActivityNumber).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.ActivityName)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.Date).HasColumnType("date");
+            entity.Property(e => e.Date)
+                .HasColumnType("date");
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+            entity.Property(e => e.Description).HasColumnType("text");
 
-            entity.HasOne(d => d.Department).WithMany(p => p.TblActivities)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblActivi__Depar__2F10007B");
         });
 
         modelBuilder.Entity<TblAnnouncement>(entity =>
         {
-            entity.HasKey(e => e.AnnouncementId).HasName("PK__tblAnnou__9DE4455462081A7C");
+            entity.HasKey(e => e.Id).HasName("PK__tblAnnou__9DE4455462081A7C");
 
             entity.ToTable("tblAnnouncement");
 
-            entity.Property(e => e.AnnouncementId)
+            entity.Property(e => e.Id)
                 .ValueGeneratedNever()
-                .HasColumnName("AnnouncementID");
+                .HasColumnName("Id");
             entity.Property(e => e.Content).HasColumnType("text");
             entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
-
-            entity.HasOne(d => d.Department).WithMany(p => p.TblAnnouncements)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblAnnoun__Depar__35BCFE0A");
         });
 
         modelBuilder.Entity<TblDepartment>(entity =>
         {
-            entity.HasKey(e => e.DepartmentId).HasName("PK__tblDepar__B2079BCD9D4792DD");
+            entity.HasKey(e => e.Id).HasName("PK__tblDepar__B2079BCD9D4792DD");
 
             entity.ToTable("tblDepartment");
 
-            entity.Property(e => e.DepartmentId)
+            entity.Property(e => e.Id)
                 .ValueGeneratedNever()
-                .HasColumnName("DepartmentID");
+                .HasColumnName("Id");
             entity.Property(e => e.DepartmentName)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.PhoneNumber)
+            entity.Property(e => e.ManagerPhoneNumber)
                 .HasMaxLength(20)
-                .IsUnicode(false);
-            entity.Property(e => e.Username)
+                .IsUnicode(false);            
+            entity.Property(e => e.DepartmentManager)
+                .HasMaxLength(20)
+                .IsUnicode(false);         
+            entity.Property(e => e.DepartmentDays)
                 .HasMaxLength(50)
+                .IsUnicode(false);            
+            entity.Property(e => e.DepartmentHours)
+                .HasMaxLength(50)
+                .IsUnicode(false);           
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
                 .IsUnicode(false);
+
         });
 
         modelBuilder.Entity<TblFacility>(entity =>
@@ -140,9 +142,7 @@ public partial class MigdalorContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.Department).WithMany(p => p.TblFacilities)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblFacili__Depar__45F365D3");
+
         });
 
         modelBuilder.Entity<TblGoodMorningPolicy>(entity =>
@@ -155,10 +155,6 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.DateTime).HasColumnType("datetime");
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
 
-
-            entity.HasOne(d => d.Department).WithMany(p => p.TblGoodMorningPolicies)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblGoodMo__Depar__4CA06362");
         });
 
         modelBuilder.Entity<TblHobby>(entity =>
@@ -191,10 +187,6 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.Location)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-
-            entity.HasOne(d => d.ResidentNumberNavigation).WithMany(p => p.TblInitiatives)
-                .HasForeignKey(d => d.ResidentNumber)
-                .HasConstraintName("FK__tblInitia__Resid__38996AB5");
         });
 
         modelBuilder.Entity<TblObituary>(entity =>
@@ -207,23 +199,16 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.Description).HasColumnType("text");
-
-            entity.HasOne(d => d.Department).WithMany(p => p.TblObituaries)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblObitua__Depar__49C3F6B7");
-
-            entity.HasOne(d => d.ResidentNumberNavigation).WithMany(p => p.TblObituaries)
-                .HasForeignKey(d => d.ResidentNumber)
-                .HasConstraintName("FK__tblObitua__Resid__48CFD27E");
+            
         });
 
         modelBuilder.Entity<TblResident>(entity =>
         {
-            entity.HasKey(e => e.ResidentNumber).HasName("PK__tblResid__46C9AFCA188A5876");
+            entity.HasKey(e => e.Id).HasName("PK__tblResid__46C9AFCA188A5876");
 
             entity.ToTable("tblResident");
 
-            entity.Property(e => e.ResidentNumber).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.AboutMe).HasColumnType("text");
             entity.Property(e => e.CurrentAddress)
                 .HasMaxLength(255)
@@ -236,10 +221,10 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Id)
+            entity.Property(e => e.ResidentID)
                 .HasMaxLength(20)
                 .IsUnicode(false)
-                .HasColumnName("ID");
+                .HasColumnName("ResidentID");
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -258,10 +243,6 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-
-            entity.HasOne(d => d.Department).WithMany(p => p.TblResidents)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblReside__Depar__267ABA7A");
         });
 
         modelBuilder.Entity<TblResidentCommittee>(entity =>
@@ -279,9 +260,7 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.MeetingSummery).HasColumnType("text");
 
-            entity.HasOne(d => d.Department).WithMany(p => p.TblResidentCommittees)
-                .HasForeignKey(d => d.DepartmentId)
-                .HasConstraintName("FK__tblReside__Depar__3F466844");
+          
         });
 
         modelBuilder.Entity<TblResidentHasHobby>(entity =>
@@ -293,16 +272,8 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.IsActive)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("isActive");
+        
 
-            entity.HasOne(d => d.HobbyNumberNavigation).WithMany(p => p.TblResidentHasHobbies)
-                .HasForeignKey(d => d.HobbyNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Hobby__2B3F6F97");
-
-            entity.HasOne(d => d.ResidentNumberNavigation).WithMany(p => p.TblResidentHasHobbies)
-                .HasForeignKey(d => d.ResidentNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Resid__2C3393D0");
         });
 
         modelBuilder.Entity<TblResidentPartOfResidentCommittee>(entity =>
@@ -316,36 +287,24 @@ public partial class MigdalorContext : DbContext
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("isActive");
 
-            entity.HasOne(d => d.Committee).WithMany(p => p.TblResidentPartOfResidentCommittees)
-                .HasForeignKey(d => d.CommitteeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Commi__4222D4EF");
-
-            entity.HasOne(d => d.ResidentNumberNavigation).WithMany(p => p.TblResidentPartOfResidentCommittees)
-                .HasForeignKey(d => d.ResidentNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Resid__4316F928");
         });
 
         modelBuilder.Entity<TblResidentParticipatingInActivity>(entity =>
         {
-            entity.HasKey(e => new { e.ActivityNumber, e.ResidentNumber }).HasName("PK__tblResid__7EE6CCEEE256A807");
+            entity.HasKey(e => new { e.ActivityNumber, e.ResidentNumber });
+            entity.Property(e => e.ActivityNumber)
+                        .HasColumnName("ActivityNumber");
+
+            entity.Property(e => e.ResidentNumber)
+                        .HasColumnName("ResidentNumber");
+
+
+
 
             entity.ToTable("tblResidentParticipatingInActivity");
 
-            entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("((0))")
-                .HasColumnName("isActive");
 
-            entity.HasOne(d => d.ActivityNumberNavigation).WithMany(p => p.TblResidentParticipatingInActivities)
-                .HasForeignKey(d => d.ActivityNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Activ__31EC6D26");
-
-            entity.HasOne(d => d.ResidentNumberNavigation).WithMany(p => p.TblResidentParticipatingInActivities)
-                .HasForeignKey(d => d.ResidentNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Resid__32E0915F");
+           
         });
 
         modelBuilder.Entity<TblResidentParticipatingInInitiative>(entity =>
@@ -354,19 +313,6 @@ public partial class MigdalorContext : DbContext
 
             entity.ToTable("tblResidentParticipatingInInitiative");
 
-            entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("((0))")
-                .HasColumnName("isActive");
-
-            entity.HasOne(d => d.InitiativeNumberNavigation).WithMany(p => p.TblResidentParticipatingInInitiatives)
-                .HasForeignKey(d => d.InitiativeNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Initi__3B75D760");
-
-            entity.HasOne(d => d.ResidentNumberNavigation).WithMany(p => p.TblResidentParticipatingInInitiatives)
-                .HasForeignKey(d => d.ResidentNumber)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tblReside__Resid__3C69FB99");
         });
 
         modelBuilder.Entity<TblUser>(entity =>
@@ -389,8 +335,12 @@ public partial class MigdalorContext : DbContext
                 .IsUnicode(false);
         });
 
+
+       
+
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
 }

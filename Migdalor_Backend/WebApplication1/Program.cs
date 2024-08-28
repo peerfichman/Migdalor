@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 // Add services to the container, including controllers for handling HTTP requests
-builder.Services.AddControllers();
+builder.Services.AddControllers(); 
 
 // Configure Swagger/OpenAPI to generate API documentation
 builder.Services.AddEndpointsApiExplorer();

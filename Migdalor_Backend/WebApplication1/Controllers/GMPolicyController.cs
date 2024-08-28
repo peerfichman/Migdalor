@@ -17,17 +17,17 @@ namespace WebApplication1.Controllers
             var residents = db.TblResidents
                 .Select(resident => new ResidentWithGoodMorningPolicy
                 {
-                    ResidentNumber = resident.ResidentNumber,
+                    ResidentNumber = resident.Id,
                     FirstName = resident.FirstName,
                     LastName = resident.LastName,
                     PhoneNumber = resident.PhoneNumber,
-                    Id = resident.Id,
+                    Id = resident.ResidentID,
                     DateOfGoodMorningPolicy = db.TblGoodMorningPolicies
-                .Where(gmp => gmp.ResidentNumber == resident.ResidentNumber)
+                .Where(gmp => gmp.ResidentNumber == resident.Id)
                 .Select(gmp => gmp.DateTime)
                 .FirstOrDefault(),
                     HasGoodMorningPolicy = db.TblGoodMorningPolicies
-                        .Any(gmp => gmp.ResidentNumber == resident.ResidentNumber)
+                        .Any(gmp => gmp.ResidentNumber == resident.Id)
                 })
                 .ToList();
 
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
         public IActionResult UpdateGoodMorningPolicy(int id, [FromBody] bool hasGoodMorningPolicy)
         {
             // 1. Retrieve the resident from the database based on the provided id
-            var resident = db.TblResidents.FirstOrDefault(r => r.ResidentNumber == id);
+            var resident = db.TblResidents.FirstOrDefault(r => r.Id == id);
             if (resident == null)
             {
                 // 2. If the resident does not exist, return a 404 Not Found response

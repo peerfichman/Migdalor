@@ -9,9 +9,4 @@ public partial class TblResidentParticipatingInInitiative
 
     public int ResidentNumber { get; set; }
 
-    public bool? IsActive { get; set; }
-
-    public virtual TblInitiative InitiativeNumberNavigation { get; set; } = null!;
-
-    public virtual TblResident ResidentNumberNavigation { get; set; } = null!;
 }

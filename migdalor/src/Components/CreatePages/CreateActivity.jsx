@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import * as activityRequests from '../Requests/Activity/activitiesRequests.jsx'
+import * as activityRequests from '../../Requests/Activity/activitiesRequests.jsx'
 import Modal from '@mui/material/Modal';
 import './CreateActivityStyle.css';
 import Button from "@mui/material/Button";
@@ -25,8 +25,7 @@ const CreateActivity = ({isEdit, activityNumber, setModalOpen}) => {
 
     useEffect(() => {
         if (isEdit) {
-            console.log(activityRequests)
-            activityRequests.getActivityByNumber(activityNumber)
+            activityRequests.getActivityById(activityNumber)
                 .then((activity) => {
                     setFormData({
                         ActivityName: activity.activityName,
@@ -58,7 +57,7 @@ const CreateActivity = ({isEdit, activityNumber, setModalOpen}) => {
         e.preventDefault();
 
         if (isEdit) {
-            await activityRequests.editActivity({activityNumber, ...formData});
+            await activityRequests.editActivity({id: activityNumber, ...formData});
         } else {
             activityRequests.createActivity(formData).then( (response) => {
                 if (!(response.status === 200)) {

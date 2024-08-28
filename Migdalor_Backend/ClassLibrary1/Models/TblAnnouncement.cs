@@ -5,7 +5,7 @@ namespace ClassLibrary1.Models;
 
 public partial class TblAnnouncement
 {
-    public int AnnouncementId { get; set; }
+    public int? Id { get; set; }
 
     public DateTime? Date { get; set; }
 

@@ -11,7 +11,5 @@ public partial class TblResidentPartOfResidentCommittee
 
     public bool? IsActive { get; set; }
 
-    public virtual TblResidentCommittee Committee { get; set; } = null!;
 
-    public virtual TblResident ResidentNumberNavigation { get; set; } = null!;
 }

@@ -19,11 +19,11 @@ public partial class TblInitiative
 
     public string? InitiativeType { get; set; }
 
+    public int? MaxParticipants { get; set; }
+
+
     public string? InvitationDescription { get; set; }
 
     public int? ResidentNumber { get; set; }
 
-    public virtual TblResident? ResidentNumberNavigation { get; set; }
-
-    public virtual ICollection<TblResidentParticipatingInInitiative> TblResidentParticipatingInInitiatives { get; set; } = new List<TblResidentParticipatingInInitiative>();
 }
