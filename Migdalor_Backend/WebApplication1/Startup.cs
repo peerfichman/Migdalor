@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebApplication1.MailService;
 
 namespace WebApplication1
 {
@@ -13,8 +14,11 @@ namespace WebApplication1
             Configuration = configuration;
         }
         public IConfiguration Configuration { get; }
+
+
         public void ConfigureServices(IServiceCollection services)
         {
+
             // Add JWT authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

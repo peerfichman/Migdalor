@@ -1,6 +1,7 @@
 // Import necessary namespaces for JWT authentication and token validation
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using WebApplication1.MailService;
 using System.Text;
 
 // Create a builder for the web application, which sets up configuration and services
@@ -14,6 +15,8 @@ string JwtIssure = configuration["Jwt:Issuer"];
 string JwtAudience = configuration["Jwt:Audience"];
 string JwtKey = configuration["Jwt:Secret"];
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddTransient<IMailService, MailService>();
 // Add authentication services to the container and configure JWT Bearer authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
