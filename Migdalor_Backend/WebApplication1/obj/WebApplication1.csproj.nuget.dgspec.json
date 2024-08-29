@@ -156,6 +156,18 @@
               "target": "Package",
               "version": "[4.7.1, )"
             },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "Quartz.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "Quartz.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

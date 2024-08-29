@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication1.MailService;
+using WebApplication1.SchedualerService;
 using System.Text;
+using Quartz;
 
 // Create a builder for the web application, which sets up configuration and services
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +17,24 @@ string JwtIssure = configuration["Jwt:Issuer"];
 string JwtAudience = configuration["Jwt:Audience"];
 string JwtKey = configuration["Jwt:Secret"];
 
+
+//Configure Mail Service
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<IMailService, MailService>();
+
+
+//Configure Schedual Service
+
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    // Register the job and trigger
+    //q.AddJob<EmailJob>(opts => opts.WithIdentity("EmailJob"));
+});
+
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
 // Add authentication services to the container and configure JWT Bearer authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

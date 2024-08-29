@@ -4,14 +4,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApplication1.MailService;
+using Quartz;
+using Quartz.Spi;
+using WebApplication1.SchedualerService;
 
 namespace WebApplication1
 {
+    
     public class Startup
     {
+        private IScheduler _scheduler;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _scheduler = SchedualerConfigurations.ConfigureSchedualer();
         }
         public IConfiguration Configuration { get; }
 
@@ -54,8 +60,20 @@ namespace WebApplication1
                 });
             });
 
+            services.AddSingleton(provider => _scheduler);
+
             // Add other services...
+
+            //services.AddQuartz(q =>
+            //{
+            //    q.UseMicrosoftDependencyInjectionJobFactory();
+
+            //    Register the EmailJob with the scheduler
+            //    q.AddJob<EmailJob>(opts => opts.WithIdentity("EmailJob"));
+            //});
+            //services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         }
+
 
         public void Configure(IApplicationBuilder app)
         {
@@ -69,5 +87,7 @@ namespace WebApplication1
                 endpoints.MapControllers();
             });
         }
+
+
     }
 }

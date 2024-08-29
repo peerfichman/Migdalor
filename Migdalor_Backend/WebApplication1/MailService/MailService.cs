@@ -12,8 +12,8 @@ public class MailService : IMailService
     }
     public bool SendMail(MailData Mail_Data)
     {
-        //try
-        //{
+        try
+        {
             //MimeMessage - a class from Mimekit
             MimeMessage email_Message = new MimeMessage();
             MailboxAddress email_From = new MailboxAddress(Mail_Settings.Name, Mail_Settings.EmailId);
@@ -32,11 +32,11 @@ public class MailService : IMailService
             MailClient.Disconnect(true);
             MailClient.Dispose();
             return true;
-        //}
-        //catch (Exception ex)
-        //{
-        //    // Exception Details
-        //    return false;
-        //}
+        }
+        catch (Exception ex)
+        {
+            // Exception Details
+            return false;
+        }
     }
 }
