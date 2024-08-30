@@ -147,13 +147,12 @@ public partial class MigdalorContext : DbContext
 
         modelBuilder.Entity<TblGoodMorningPolicy>(entity =>
         {
-            entity.HasKey(e => e.IdentificationNumber).HasName("PK__tblGoodM__9CD146950D8B2485");
 
             entity.ToTable("tblGoodMorningPolicy");
 
-            entity.Property(e => e.IdentificationNumber).ValueGeneratedNever();
-            entity.Property(e => e.DateTime).HasColumnType("datetime");
-            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+      
+            entity.Property(e => e.Date).HasColumnType("date");
+            entity.Property(e => e.ResidentNumber).HasColumnType("int");
 
         });
 

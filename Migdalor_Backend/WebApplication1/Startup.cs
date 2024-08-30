@@ -64,14 +64,7 @@ namespace WebApplication1
 
             // Add other services...
 
-            //services.AddQuartz(q =>
-            //{
-            //    q.UseMicrosoftDependencyInjectionJobFactory();
-
-            //    Register the EmailJob with the scheduler
-            //    q.AddJob<EmailJob>(opts => opts.WithIdentity("EmailJob"));
-            //});
-            //services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+   
         }
 
 

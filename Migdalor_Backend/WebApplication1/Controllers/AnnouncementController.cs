@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
+using WebApplication1.Socket;
 
 namespace WebApplication1.Controllers
 {
@@ -15,7 +16,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [Route("CreateAnnouncement")]
-        public IActionResult CreateAnnouncement([FromBody] AnnouncementDTO input)
+        public async Task<IActionResult> CreateAnnouncement([FromBody] AnnouncementDTO input)
         {
             if (input == null || string.IsNullOrEmpty(input.Content))
             {
@@ -25,6 +26,7 @@ namespace WebApplication1.Controllers
             var announcement = new TblAnnouncement
             {
                 Content = input.Content,
+                Subject = input.Subject,
                 Date = DateTime.UtcNow,
                 Id = _random.Next(1, int.MaxValue)
             };
@@ -32,6 +34,8 @@ namespace WebApplication1.Controllers
 
             db.TblAnnouncements.Add(announcement);
             db.SaveChanges();
+
+             await WebSocketHandler.BroadcastMessageAsync("New Message");
 
             return Ok(announcement);
         }
@@ -73,6 +77,7 @@ namespace WebApplication1.Controllers
                 var announcement = new TblAnnouncement
                 {
                     Id = announcementInput.Id,
+                    Subject = announcementInput.Subject,
                     Content = announcementInput.Content,
                     Date = DateTime.UtcNow
 

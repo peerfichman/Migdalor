@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1.Models;
-using Microsoft.AspNetCore.Http;
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
 
@@ -7,66 +8,97 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GMPolicyController : ControllerBase
+    public class
+        GMPolicyController : ControllerBase
     {
         MigdalorContext db = new MigdalorContext();
 
-        [HttpGet]
+        [HttpGet("ReportedResidents")]
         public IActionResult GetResidentsWithGoodMorningPolicy()
         {
-            var residents = db.TblResidents
-                .Select(resident => new ResidentWithGoodMorningPolicy
-                {
-                    ResidentNumber = resident.Id,
-                    FirstName = resident.FirstName,
-                    LastName = resident.LastName,
-                    PhoneNumber = resident.PhoneNumber,
-                    Id = resident.ResidentID,
-                    DateOfGoodMorningPolicy = db.TblGoodMorningPolicies
-                .Where(gmp => gmp.ResidentNumber == resident.Id)
-                .Select(gmp => gmp.DateTime)
-                .FirstOrDefault(),
-                    HasGoodMorningPolicy = db.TblGoodMorningPolicies
-                        .Any(gmp => gmp.ResidentNumber == resident.Id)
-                })
-                .ToList();
+            try
+            {
+                var reportedResidents = (
+                from GMPolicy in db.TblGoodMorningPolicies
+                join resident in db.TblResidents
+                on GMPolicy.ResidentNumber equals resident.Id
+                where GMPolicy.Date == DateTime.Today
+                select resident).ToList();
 
-            return Ok(residents);
+                return Ok(reportedResidents);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+
+            }
+
         }
-
-
-        [HttpPut("{id}")]
-        public IActionResult UpdateGoodMorningPolicy(int id, [FromBody] bool hasGoodMorningPolicy)
+        [HttpGet("ResidentsNotReported")]
+        public IActionResult GetResidentsNotRepoortedWithGoodMorningPolicy()
         {
-            // 1. Retrieve the resident from the database based on the provided id
-            var resident = db.TblResidents.FirstOrDefault(r => r.Id == id);
-            if (resident == null)
+            try
             {
-                // 2. If the resident does not exist, return a 404 Not Found response
-                return NotFound();
+                var residentsNotReported = (
+                  from resident in db.TblResidents
+                  join reports in db.TblGoodMorningPolicies
+                  on resident.Id equals reports.ResidentNumber into rr
+                  from r in rr.DefaultIfEmpty()
+                  where r == null || r.Date != DateTime.Today
+                  select resident).ToList();
+
+                return Ok(residentsNotReported);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+
             }
 
-            // 3. Retrieve any existing policy for the resident from the database
-            var existingPolicy = db.TblGoodMorningPolicies.FirstOrDefault(gmp => gmp.ResidentNumber == id);
-
-            // 4. If the new status is true (indicating the resident has a good morning policy)
-            if (hasGoodMorningPolicy)
+        }
+        [HttpGet("CheckResidnent/{id}")]
+        public IActionResult CheckIfResidentHasReportedGMP(int id)
+        {
+            try
             {
-                // 5. If no existing policy is found, add a new policy for the resident
-                if (existingPolicy == null)
-                {
-                    db.TblGoodMorningPolicies.Add(new TblGoodMorningPolicy
-                    {
-                        ResidentNumber = id,
-                        DateTime = DateTime.Now // Set the current date and time for the new policy
-                    });
-                }
+                var checkedIn = db.TblGoodMorningPolicies.Any(report =>
+                                                                report.ResidentNumber == id &&
+                                                                   report.Date == DateTime.Today);
+
+                return Ok(checkedIn);
+
             }
-            
-            db.SaveChanges();
-            //Return a 204 No Content response to indicate successful completion of the operation
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
+
+
+
+
+
+        [HttpPost]
+        public IActionResult UpdateGoodMorningPolicy([FromBody] GoodMorningPolicyDTO input)
+        {
+            try
+            {
+                var reportResident = new TblGoodMorningPolicy
+                {
+                    ResidentNumber = input.ResidentNumber,
+                    Date = input.Date,
+                };
+
+                db.TblGoodMorningPolicies.Add(reportResident);
+                db.SaveChanges();
+                return Ok("Resident successfully registerd for GMP");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }
+

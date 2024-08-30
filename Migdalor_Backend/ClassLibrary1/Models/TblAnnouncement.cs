@@ -10,8 +10,8 @@ public partial class TblAnnouncement
     public DateTime? Date { get; set; }
 
     public string? Content { get; set; }
+    public string? Subject { get; set; }
 
     public int? DepartmentId { get; set; }
 
-    public virtual TblDepartment? Department { get; set; }
 }

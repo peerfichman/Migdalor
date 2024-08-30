@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useContext, useState} from 'react';
+import { useNavigate} from 'react-router-dom';
 import '../CSS/LoginPage.css'; // Uncomment this line after creating the CSS file
 import LogoAndText from '../Images/LogoAndText.png';
 import TextField from '@mui/material/TextField';
+import {UserContext} from "../Auth/Auth.jsx";
 
-const apiUrl = "https://localhost:7149/api/Login/";
+const Login = () => {
+    const{user, login} = useContext(UserContext);
 
-const Login = ({ onLogin }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: '', password: '' });
 
@@ -23,33 +24,10 @@ const Login = ({ onLogin }) => {
         }));
     }
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
-        
-        fetch(apiUrl + "ResidentLogin", {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: new Headers({
-                'Content-type': 'application/json; charset=UTF-8'
-            })
-        })
-        .then(res => {
-            if (!res.ok) {
-                console.log("HTTP error! status: ", res.status);
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-        })
-        .then(
-            (result) => {
-                console.log("Successfully logged in!", result); // Save the user data if needed
-                onLogin(); // Call the onLogin callback if needed
-                navigate('/home'); // Navigate to the home page
-            },
-            (error) => {
-                console.log("Error during POST:", error);
-            }
-        );
+        await login(formData.username, formData.password);
+        navigate("/");
     }
 
     return (

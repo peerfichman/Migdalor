@@ -17,6 +17,7 @@
     "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.15.18",
+    "@mui/x-data-grid": "^7.15.0",
     "axios": "^1.7.4",
     "date-fns": "^3.6.0",
     "moment": "^2.30.1",

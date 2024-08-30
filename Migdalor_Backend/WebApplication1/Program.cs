@@ -1,5 +1,7 @@
 // Import necessary namespaces for JWT authentication and token validation
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Net.WebSockets;
+using WebApplication1.Socket;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication1.MailService;
 using WebApplication1.SchedualerService;
@@ -29,8 +31,14 @@ builder.Services.AddQuartz(q =>
 {
     q.UseMicrosoftDependencyInjectionJobFactory();
 
-    // Register the job and trigger
-    //q.AddJob<EmailJob>(opts => opts.WithIdentity("EmailJob"));
+    // Register the DailyReportJob
+    q.AddJob<GMPCheck>(opts => opts.WithIdentity("DailyReportJob"));
+
+    // Create a trigger to run every day at 9:00 AM
+    q.AddTrigger(opts => opts
+        .ForJob("DailyReportJob")
+        .WithIdentity("DailyReportJobTrigger")
+        .WithCronSchedule("0 18 18 ? * * *")); // Cron expression for 9:00 AM every day
 });
 
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
@@ -86,7 +94,35 @@ app.UseCors("corspolicy");
 app.UseAuthorization();
 
 // Map controller routes to endpoints, allowing the app to respond to controller actions
+
+app.UseWebSockets(new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2),
+});
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/ws")
+    {
+        if (context.WebSockets.IsWebSocketRequest)
+        {
+            WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+            await WebSocketHandler.HandleWebSocketAsync(webSocket);
+        }
+        else
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        }
+    }
+    else
+    {
+        await next();
+    }
+});
+
 app.MapControllers();
+
+
 
 // Run the application, starting the web server
 app.Run();

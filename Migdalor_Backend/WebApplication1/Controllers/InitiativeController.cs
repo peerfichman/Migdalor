@@ -111,7 +111,7 @@ namespace WebApplication1.Controllers
             }
         }
         [HttpDelete]
-        [Route("Delete Initiative/{id}")]
+        [Route("DeleteInitiative/{id}")]
         public IActionResult DeleteInitiative(int id)
         {
             try

@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Migdalor_Backend",
+    "\\Migdalor_Backend\\ClassLibrary1",
+    "\\Migdalor_Backend\\ClassLibrary1\\Models",
+    "\\Migdalor_Backend\\WebApplication1",
+    "\\Migdalor_Backend\\WebApplication1\\Controllers"
   ],
-  "SelectedNode": "\\Migdalor_Backend.sln",
+  "SelectedNode": "\\Migdalor_Backend\\WebApplication1\\WebApplication1.csproj",
   "PreviewInSolutionExplorer": false
 }

@@ -5,13 +5,11 @@ namespace ClassLibrary1.Models;
 
 public partial class TblGoodMorningPolicy
 {
-    public int IdentificationNumber { get; set; }
+    public int? Id { get; set; }
 
-    public DateTime? DateTime { get; set; }
+    public DateTime? Date { get; set; }
 
-    public int? DepartmentId { get; set; }
 
     public int? ResidentNumber { get; set; }
 
-    public virtual TblDepartment? Department { get; set; }
 }

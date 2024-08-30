@@ -1,40 +1,66 @@
-import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate
-} from 'react-router-dom';
-import Login from './Components/Login';
-import Home from './Components/Home';
-import Profile from './Components/Profile';
-import GoodMorningProtocol from './Components/GoodMorningProtocol';
-import ActivitiesRegistration from './Components/ActivitiesRegistration';
-/*import ContactList from './Components/Contacts';*/
+import React, {useContext} from 'react';
+import {BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter, useRoutes} from 'react-router-dom';
+import {UserContext, UserProvider} from './Auth/Auth.jsx';
+import theme from './Theme/Theme.jsx'
+import Login from './Components/Login.jsx';
+import Home from './Components/Home.jsx';
+import ProtectedRoute from './Components/ProtectedRoute.jsx';
+import GoodMorningProtocol from "./Components/GoodMorningProtocol.jsx";
+import {ThemeProvider} from '@mui/material/styles';
+import Messages from "./Components/Messages.jsx";
+import CacheRTL from "./Cache/CacheRTL.jsx";
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const App = () => {
 
-  const handleLogin = () => {
-    console.log("User logged in");
-    setIsLoggedIn(true);
-  };
+    return (
+        <CacheRTL>
+            <ThemeProvider theme={theme}>
+                <UserProvider>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route
+                                path="/*"
+                                element={
+                                    <ProtectedRoute>
+                                        <AppRoutes/>
+                                    </ProtectedRoute>
+                                }
+                            />
+                        </Routes>
+                    </BrowserRouter>
+                </UserProvider>
+            </ThemeProvider>
+        </CacheRTL>
+    );
+}
 
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/home" element={isLoggedIn ? <Home /> : <Navigate to="/" />} />
-          <Route path="/" element={<Login onLogin={handleLogin} />} />
-          <Route path="/Profile" element={<Profile/>}  />
-          <Route path="/good-morning-protocol" element={<GoodMorningProtocol/>} />
-          <Route path="/activities-registration" element={<ActivitiesRegistration/>}/>
-        {/*  <Route path="/Contacts" element={<ContactList/>} />*/}
-        </Routes>
-        
-      </div>
-    </Router>
-  );
+const AppRoutes = () => {
+    const routes = [
+        {
+            path: '/',
+            element: <Home/>
+        },
+        {
+            path: '/home',
+            element: <Home/>
+        },
+        {
+            path: '/gmp',
+            element: <GoodMorningProtocol/>
+        },
+        {
+            path: '/goodMorningProtocol',
+            element: <GoodMorningProtocol/>
+        },
+        {
+            path: '/messages',
+            element: <Messages/>
+        }
+    ];
+
+    return useRoutes(routes);
 }
 
 export default App;
+
