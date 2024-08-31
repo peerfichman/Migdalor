@@ -13,7 +13,7 @@ import ActivitiesTable from "./ActivitiesTable.jsx";
 import InitiativesTable from "./InitiativesTable.jsx";
 import ActivityModal from "./ActivityModal.jsx";
 import {UserContext} from "../../Auth/Auth.jsx";
-import InitiativeModal from "./initiativeModal.js";
+import InitiativeModal from "./initiativeModal.jsx";
 
 moment.locale("he");
 const localizer = momentLocalizer(moment);
@@ -66,7 +66,8 @@ const ReactBigCalendar = () => {
 
         ActivitiesRequests.GetAllActivities().then(acts => setActivities(acts));
         InitativesRequests.GetAllInitiatives().then(inits => setInitiatives(inits));
-        ActivitiesRequests.GetActivitiesResidentParticipating(user.id).then(acts => setParticipatedInitiatives(acts));
+        ActivitiesRequests.GetActivitiesResidentParticipating(user.id).then(acts => setParticipatedActivities(acts));
+        InitativesRequests.GetInitiativeResidentParticipating(user.id).then(inits => setParticipatedInitiatives(inits));
 
     }, []);
 
@@ -124,10 +125,9 @@ const ReactBigCalendar = () => {
     }
 
     const handleSelectEvent = (e) => {
-        e.type === 'activity'?
-        setSelectedActivity(e.id)
-        :setSelectedInitiative(e.id);
-        // handleOpenCloseModal()
+        console.log(e)
+       if(e.type === 'activity') setSelectedActivity(e.id);
+       else if(e.type === 'initiative') setSelectedInitiative(e.id);
     }
     const handleSelect = ({start, end}) => {
         const title = window.prompt("New Event name");
@@ -143,7 +143,7 @@ const ReactBigCalendar = () => {
     };
 
     const handelActivityJoin = async () => {
-        await ActivitiesRequests.GetActivitiesResidentParticipating(user.id).then(acts => setParticipatedInitiatives(acts));
+        await ActivitiesRequests.GetActivitiesResidentParticipating(user.id).then(acts => setParticipatedActivities(acts));
     }
     const handelInitiativeJoin = async () => {
         await InitativesRequests.GetInitiativeResidentParticipating(user.id).then(inits => setParticipatedInitiatives(inits));
@@ -202,19 +202,19 @@ const ReactBigCalendar = () => {
 
             >
                 <Typography variant={"h2"} sx={{alignSelf: "start"}}>הפעילויות שלי</Typography>
-                <ActivitiesTable activities={participatedInitiatives} handleSelectEvent={handleSelectEvent}/>
+                <ActivitiesTable activities={participatedActivities} handleSelectEvent={handleSelectEvent}/>
                 <Typography variant={"h2"} sx={{alignSelf: "start"}}>היוזמות שלי</Typography>
-                <InitiativesTable/>
+                <InitiativesTable initiatives={participatedInitiatives} handelSelctedEvent={handleSelectEvent} />
             </Box>
-            <ActivityModal isParticipating={participatedInitiatives.some((a)=> {
+            <ActivityModal isParticipating={participatedActivities.some((a)=> {
                 return a.id === selectedActivity
             })}
                            initiativeNumber={selectedActivity} open={selectedActivity !== 0} onClose={handleOpenCloseModal}
                            onActivityJoined={handelActivityJoin}/>
             <InitiativeModal isParticipating={participatedInitiatives.some((i)=> {
-                return i.id === selectedInitiative
+                return i.initiativeNumber === selectedInitiative
             })}
-                           initiativeNumber={selectedInitiative} open={selectedInitiative !== 0} onClose={handleOpenCloseModal}
+                           initiativeNumber={selectedInitiative} open={selectedInitiative !== 0 } onClose={handleOpenCloseModal}
                            onInitiativeJoined={handelInitiativeJoin}/>
         </Box>
     );

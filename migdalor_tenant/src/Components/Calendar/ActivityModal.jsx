@@ -55,7 +55,6 @@ const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActi
                 setActivity(act)
             })
     }, [initiativeNumber])
-    console.log("isAvailable?", isAvailable)
     return (
         <Modal
             open={open}

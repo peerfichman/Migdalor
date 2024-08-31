@@ -29,33 +29,33 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
     const [isAvailable , setIsAvailable] = useState(true)
     // const handleClose = () => setOpen();
 
-    const handelJoinActivity = async () => {
-        await ActivitiesRequests.JoinActivity(initiativeNumber, user.id);
-        await onActivityJoined();
-        setMessage('הצטרפת בהצלחה לפעילות')
+    const handelJoinInitiative = async () => {
+        await InitiativeRequests.JoinInitiative(initiativeNumber, user.id);
+        await onInitiativeJoined();
+        setMessage('הצטרפת בהצלחה ליוזמה')
     }
-    const handelRemoveFromActivity = async () => {
-        await ActivitiesRequests.RemoveFromActivity(initiativeNumber, user.id);
-        await onActivityJoined();
-        setMessage('הוסרת בהצלחה מהפעילות')
+    const handelRemoveFromInitiative = async () => {
+        await InitiativeRequests.RemoveFromInitiative(initiativeNumber, user.id);
+        await onInitiativeJoined();
+        setMessage('הוסרת בהצלחה מהיוזמה')
     }
     const handleOpenCloseModal = () => {
         setMessage('')
     }
 
     useEffect(() => {
-        ActivitiesRequests.GetParticiapntsInActivity(initiativeNumber)
+        InitiativeRequests.GetInitiativeResidentParticipating(initiativeNumber)
             .then(particapnts => setIsAvailable( particapnts.length < initiative.maxParticipants))
+        console.log(initiative)
     }, [initiative]);
 
 
     useEffect(() => {
-        ActivitiesRequests.GetActivityById(initiativeNumber)
-            .then(act => {
-                setInitiative(act)
+        InitiativeRequests.GetInitiativeById(initiativeNumber)
+            .then(init => {
+                setInitiative(init)
             })
     }, [initiativeNumber])
-    console.log("isAvailable?", isAvailable)
     return (
         <Modal
             open={open}
@@ -83,7 +83,7 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                     <CloseIcon
                         onClick={onClose}/>
                 </Button>
-                <Typography variant={"h2"} sx={{color: 'black', alignSelf: 'center'}}>פרטי הפעילות</Typography>
+                <Typography variant={"h2"} sx={{color: 'black', alignSelf: 'center'}}>פרטי היוזמה</Typography>
                 <Box
                     sx={{
                         marginRight: '10%',
@@ -91,8 +91,8 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                     }}>
 
                     <Row>
-                        <Typography variant={"h5"}>שם הפעילות:</Typography>
-                        <Typography>{initiative?.activityName}</Typography>
+                        <Typography variant={"h5"}>שם היוזמה:</Typography>
+                        <Typography>{initiative?.initiativeName}</Typography>
                     </Row>
                     <Row>
 
@@ -103,7 +103,12 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                     <Row>
 
                         <Typography variant={"h5"}>שעת התחלה:</Typography>
-                        <Typography>{moment(initiative?.time, "HH:mm:ss").format("HH:mm")}</Typography>
+                        <Typography>{moment(initiative?.startHour, "HH:mm:ss").format("HH:mm")}</Typography>
+                    </Row>
+                    <Row>
+
+                        <Typography variant={"h5"}>שעת סיום:</Typography>
+                        <Typography>{moment(initiative?.endHour, "HH:mm:ss").format("HH:mm")}</Typography>
                     </Row>
 
                     <Row>
@@ -112,19 +117,14 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                         <Typography>{initiative?.maxParticipants}</Typography>
                     </Row>
 
-                    <Row>
-
-                        <Typography variant={"h5"}>תיאור נוסף:</Typography>
-                        <Typography>{initiative?.description}</Typography>
-                    </Row>
                 </Box>
 
                 {isParticipating ?
                     <Button sx={{alignSelf: 'center',width:'50%'}}
-                            color="error"  variant="contained" size="medium" onClick={handelRemoveFromActivity}> בטל השתתפות </Button>
+                            color="error"  variant="contained" size="medium" onClick={handelRemoveFromInitiative}> בטל השתתפות </Button>
                     :
                     <Button disabled ={!isAvailable}
-                            sx={{alignSelf: 'center',width:'50%'}} variant="contained" size="medium" onClick={handelJoinActivity}> הצטרף לפעילות</Button>}
+                            sx={{alignSelf: 'center',width:'50%'}} variant="contained" size="medium" onClick={handelJoinInitiative}> הצטרף ליוזמה</Button>}
                 <MessageModal message={message} open={message !== ''} handleClose={handleOpenCloseModal}></MessageModal>
             </Box>
         </Modal>

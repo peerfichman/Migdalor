@@ -29,7 +29,6 @@ import {UserContext} from "../../Auth/Auth.jsx";
 
 const Row = ({row, onClick}) => {
     const [open, setOpen] = React.useState(false);
-    console.log(row)
     return (
         <React.Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
@@ -44,7 +43,7 @@ const Row = ({row, onClick}) => {
                 </TableCell>
                 <TableCell align="right" sx={{direction: 'rtl'}}>{moment(row.date).format('DD/MM/YYYY')}</TableCell>
                 <TableCell align="right">{moment(row.time, "HH:mm:ss").format('HH:mm')}</TableCell>
-                <TableCell><Button variant="contained" onClick={(e)=> onClick(row)}>
+                <TableCell><Button variant="contained" onClick={(e)=> onClick({...row, type:'activity'})}>
                         צפה בפעילות
                 </Button></TableCell>
             </TableRow>

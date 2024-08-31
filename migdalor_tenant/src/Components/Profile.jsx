@@ -54,7 +54,6 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // כאן תוסיף את הקוד לשמירת הנתונים על השרת
-    console.log(details);
   };
 
   return (

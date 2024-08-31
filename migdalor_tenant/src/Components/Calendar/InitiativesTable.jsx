@@ -14,7 +14,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import {Container, TableHead, Typography} from "@mui/material";
+import {Button, Container, TableHead, Typography} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Collapse from '@mui/material/Collapse';
@@ -27,7 +27,7 @@ import theme from "../../Theme/Theme.jsx";
 import BackButton from "../BackButton.jsx";
 import {UserContext} from "../../Auth/Auth.jsx";
 
-const Row = ({row}) => {
+const Row = ({row, onClick}) => {
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -46,6 +46,9 @@ const Row = ({row}) => {
                 <TableCell align="right">{moment(row.startHour, "HH:mm:ss").format('HH:mm')}</TableCell>
                 <TableCell align="right">{moment(row.endHour, "HH:mm:ss").format('HH:mm')}</TableCell>
                 <TableCell align="right">{row.location}</TableCell>
+                <TableCell><Button variant="contained" onClick={(e)=> onClick({...row,id: row.initiativeNumber, type: 'initiative'})}>
+                    צפה ביוזמה
+                </Button></TableCell>
             </TableRow>
             <TableRow>
                 <TableCell align="right" style={{paddingBottom: 0, paddingTop: 0}} colSpan={3}>
@@ -122,7 +125,7 @@ function TablePaginationActions(props) {
 }
 
 
-export default function InitiativesTable() {
+const InitiativesTable = ({initiatives, handelSelctedEvent}) =>{
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [rows, setRows] = useState([]);
@@ -157,10 +160,6 @@ export default function InitiativesTable() {
         setPage(0);
     };
 
-    useEffect(() => {
-        InitiativesRequests.GetInitiativeResidentParticipating(user.id)
-            .then(activities => setRows(activities))
-    }, []);
 
     return (
         <ThemeProvider theme={theme}>
@@ -174,14 +173,15 @@ export default function InitiativesTable() {
                                 <TableCell align="right" sx={{width:'20%'}}>שעת התחלה</TableCell>
                                 <TableCell align="right">שעת סיום</TableCell>
                                 <TableCell align="right">מיקום</TableCell>
+                                <TableCell/>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {(rowsPerPage > 0
-                                    ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    : rows
+                                    ? initiatives.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    : initiatives
                             ).map((row, i) => (
-                                <Row key={i} row={row}></Row>
+                                <Row onClick={handelSelctedEvent} key={i} row={row}></Row>
                             ))}
                             {emptyRows > 0 && (
                                 <TableRow style={{height: 53 * emptyRows}}>
@@ -216,3 +216,4 @@ export default function InitiativesTable() {
         </ThemeProvider>
     );
 }
+export default  InitiativesTable;

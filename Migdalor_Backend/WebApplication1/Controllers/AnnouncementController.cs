@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
             db.TblAnnouncements.Add(announcement);
             db.SaveChanges();
 
-             await WebSocketHandler.BroadcastMessageAsync("New Message");
+             await WebSocketHandler.BroadcastMessageAsync("הודעה חדשה");
 
             return Ok(announcement);
         }

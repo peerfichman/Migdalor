@@ -37,3 +37,13 @@ export const RemoveFromInitiative = async (initiativeNumber, residentNumber) => 
     )
     return data;
 }
+
+export const JoinInitiative = async (initiativeNumber, residentNumber) => {
+
+    const {data} = await axios.post(`${BASE_URL}api/Initiative/AddParticipantToInitiative/`,
+        {
+            initiativeNumber,
+            residentNumber
+        })
+    return data;
+}

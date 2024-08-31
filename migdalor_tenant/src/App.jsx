@@ -10,6 +10,7 @@ import {ThemeProvider} from '@mui/material/styles';
 import Messages from "./Components/Messages.jsx";
 import CacheRTL from "./Cache/CacheRTL.jsx";
 import FullCalendar from "./Components/Calendar/FullCalendar.jsx";
+import NotificationProvider from "./NotificationsProvider/NotificationsProvider.jsx";
 
 const App = () => {
 
@@ -17,19 +18,21 @@ const App = () => {
         <CacheRTL>
             <ThemeProvider theme={theme}>
                 <UserProvider>
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path="/login" element={<Login/>}/>
-                            <Route
-                                path="/*"
-                                element={
-                                    <ProtectedRoute>
-                                        <AppRoutes/>
-                                    </ProtectedRoute>
-                                }
-                            />
-                        </Routes>
-                    </BrowserRouter>
+                    <NotificationProvider>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="/login" element={<Login/>}/>
+                                <Route
+                                    path="/*"
+                                    element={
+                                        <ProtectedRoute>
+                                            <AppRoutes/>
+                                        </ProtectedRoute>
+                                    }
+                                />
+                            </Routes>
+                        </BrowserRouter>
+                    </NotificationProvider>
                 </UserProvider>
             </ThemeProvider>
         </CacheRTL>

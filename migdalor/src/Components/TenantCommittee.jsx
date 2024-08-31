@@ -39,7 +39,6 @@ const TenantCommittee = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     if (file) {
       console.log(file);
     }

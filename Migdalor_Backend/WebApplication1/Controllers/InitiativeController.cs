@@ -153,13 +153,13 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
 
                 return Ok("Participant added successfully to initiative");
-            }
+        }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+    }
 
-        }
+}
 
         [HttpDelete]
         [Route("RemoveParticipantFromInitiative")]
