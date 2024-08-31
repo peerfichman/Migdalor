@@ -196,6 +196,25 @@ namespace WebApplication1.Controllers
 
             }
         }
+        [HttpGet]
+        [Route("GetActivitiesResidentParticipating/{id}")]
+        public IActionResult GetActivitiesResidentParticipating(int id)
+        {
+            try
+            {
+                var activities = (from activity in db.TblActivities
+                                    join residentActivity in db.TblResidentParticipatingInActivities
+                                    on activity.Id equals residentActivity.ActivityNumber
+                                    where residentActivity.ResidentNumber == id
+                                    select activity).ToList();
+                return Ok(activities);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+
+            }
+        }
 
     }
 }

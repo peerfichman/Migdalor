@@ -17,8 +17,8 @@ const BackButton = () => {
             position: 'absolute',
             height: 50,
             width: 50,
-            top: "5%",
-            left:"5%",
+            top: "3%",
+            left:"3%",
             backgroundColor: theme.palette.secondary.main,
             border: '3px solid white',
         }} onClick={onClick}>

@@ -9,6 +9,7 @@ import GoodMorningProtocol from "./Components/GoodMorningProtocol.jsx";
 import {ThemeProvider} from '@mui/material/styles';
 import Messages from "./Components/Messages.jsx";
 import CacheRTL from "./Cache/CacheRTL.jsx";
+import FullCalendar from "./Components/Calendar/FullCalendar.jsx";
 
 const App = () => {
 
@@ -56,6 +57,11 @@ const AppRoutes = () => {
         {
             path: '/messages',
             element: <Messages/>
+        }
+        ,
+        {
+            path: '/activitiesRegistration',
+            element: <FullCalendar/>
         }
     ];
 

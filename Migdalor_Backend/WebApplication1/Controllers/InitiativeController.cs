@@ -205,5 +205,25 @@ namespace WebApplication1.Controllers
 
             }
         }
+
+        [HttpGet]
+        [Route("GetInitiativeResidentParticipating/{id}")]
+        public IActionResult GetInitiativeResidentParticipating(int id)
+        {
+            try
+            {
+                var initatives = (from initative in db.TblInitiatives
+                                  join residentInitiative in db.TblResidentParticipatingInInitiatives
+                                  on initative.InitiativeNumber equals residentInitiative.InitiativeNumber
+                                  where residentInitiative.ResidentNumber == id
+                                  select initative).ToList();
+                return Ok(initatives);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+
+            }
+        }
     }
 }

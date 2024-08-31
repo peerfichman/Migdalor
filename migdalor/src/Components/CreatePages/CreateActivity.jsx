@@ -147,7 +147,7 @@ const CreateActivity = ({isEdit, activityNumber, setModalOpen}) => {
                                 value={formData.MaxParticipants}
                                 onChange={handleChange}
                                 className="input"
-                                min="1"
+                                min="0"
                             />
                             <input
                                 type="text"
