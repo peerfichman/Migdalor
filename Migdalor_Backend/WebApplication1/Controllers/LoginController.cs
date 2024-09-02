@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
             //IActionResult = allows you to return various types of responses from your action methods
             IActionResult response = Unauthorized();
             TblUser user = Authenticate(userlogin);
-            if(user != null)
+            if (user != null)
             {
                 var token = GenerateJwtToken(user);
                 return Ok(new { Token = token });
@@ -75,15 +75,21 @@ namespace WebApplication1.Controllers
         [Route("ResidentLogin")]
         public IActionResult ResidentLogin([FromBody] UserLogin residentlogin)
         {
-            //IActionResult = allows you to return various types of responses from your action methods
-            IActionResult response = Unauthorized();
-            TblResident resident = db.TblResidents.FirstOrDefault(u => u.Username == residentlogin.Username && u.Password == residentlogin.Password);;
-            if (resident != null)
+            try
             {
-                var token = GenerateJwtTokenForResident(resident);
-                return Ok(new { Token = token });
+                //IActionResult = allows you to return various types of responses from your action methods
+                IActionResult response = Unauthorized();
+                TblResident resident = db.TblResidents.FirstOrDefault(u => u.Username == residentlogin.Username && u.Password == residentlogin.Password); ;
+                if (resident != null)
+                {
+                    var token = GenerateJwtTokenForResident(resident);
+                    return Ok(new { Token = token, resident = resident });
+                }
+                return response;
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
-            return response;
         }
 
         private string GenerateJwtTokenForResident(TblResident resident)
