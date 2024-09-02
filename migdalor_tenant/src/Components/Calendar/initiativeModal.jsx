@@ -27,6 +27,7 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
     const [initiative, setInitiative] = useState({});
     const [message, setMessage] = useState('');
     const [isAvailable , setIsAvailable] = useState(true)
+    const [availablePlaces , setAvailablePlaces] = useState(0)
     // const handleClose = () => setOpen();
 
     const handelJoinInitiative = async () => {
@@ -45,7 +46,11 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
 
     useEffect(() => {
         InitiativeRequests.GetInitiativeResidentParticipating(initiativeNumber)
-            .then(particapnts => setIsAvailable( particapnts.length < initiative.maxParticipants))
+            .then(particapnts => {
+
+                setIsAvailable(particapnts.length < initiative.maxParticipants)
+                setAvailablePlaces(initiative.maxParticipants - particapnts.length)
+            })
         console.log(initiative)
     }, [initiative]);
 
@@ -113,8 +118,8 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
 
                     <Row>
 
-                        <Typography variant={"h5"}>מס' משתתפים מקסימלי:</Typography>
-                        <Typography>{initiative?.maxParticipants}</Typography>
+                        <Typography variant={"h5"}>מס' מקמות נותר:</Typography>
+                        <Typography>{availablePlaces}</Typography>
                     </Row>
 
                 </Box>

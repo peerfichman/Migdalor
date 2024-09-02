@@ -27,6 +27,16 @@ import theme from "../../Theme/Theme.jsx";
 import BackButton from "../BackButton.jsx";
 import {UserContext} from "../../Auth/Auth.jsx";
 
+
+const Status = styled('Box')({
+    display: "flex",
+    width: "75%",
+    height: "25%",
+    justifyContent: "center",
+    opacity: "70%",
+    borderRadius: 20
+
+})
 const Row = ({row, onClick}) => {
     const [open, setOpen] = React.useState(false);
     return (
@@ -41,10 +51,19 @@ const Row = ({row, onClick}) => {
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>
                 </TableCell>
+                <TableCell align="right" sx={{direction: 'rtl'}}>
+                <Status sx={{
+                    backgroundColor: row.type === 'initiative' ? "#f44336" : "#3f51b5"
+                }}> <Typography sx={{fontWeight:"bold"}}>
+                    {row.type === 'activity' ? "פעילות" : "יוזמה"}
+                </Typography>
+                </Status>
+                </TableCell>
                 <TableCell align="right" sx={{direction: 'rtl'}}>{moment(row.date).format('DD/MM/YYYY')}</TableCell>
                 <TableCell align="right">{moment(row.time, "HH:mm:ss").format('HH:mm')}</TableCell>
-                <TableCell><Button variant="contained" onClick={(e)=> onClick({...row, type:'activity'})}>
-                        צפה בפעילות
+                <TableCell align="right">{row.name}</TableCell>
+                <TableCell><Button variant="contained" onClick={(e)=> onClick(row)}>
+                    {row.type === 'activity' ?  "צפה בפעילות" : "צפה ביוזמה"}
                 </Button></TableCell>
             </TableRow>
             <TableRow>
@@ -52,7 +71,8 @@ const Row = ({row, onClick}) => {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Typography variant="h6" gutterBottom component="div">
-תיאור הפעילות                            </Typography>
+                                {row.type === 'activity' ?  "תיאור הפעילות" : "תיאור היוזמה"}
+                            </Typography>
                             <Typography>
                                 {row.description}
                             </Typography>
@@ -122,7 +142,7 @@ function TablePaginationActions(props) {
 }
 
 
-export default function ActivitiesTable({activities, handleSelectEvent}) {
+export default function EventsTable({ events, handleSelectEvent}) {
     const [page, setPage] =  React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -160,20 +180,22 @@ export default function ActivitiesTable({activities, handleSelectEvent}) {
     return (
         <ThemeProvider theme={theme}>
             <BackButton/>
-                <TableContainer component={Paper} sx={{width:'90%'}}>
-                    <Table sx={{minWidth: 500}} aria-label="custom pagination table">
+                <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
+                    <Table  stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>
+                                <TableCell align="right" style={{width:"20%"}}>יוזמה / פעילות</TableCell>
                                 <TableCell align="right" sx={{width: '20%'}}>תאריך</TableCell>
                                 <TableCell align="right"  sx={{width: '20%'}}>שעה</TableCell>
+                                <TableCell align="right"  sx={{width: '20%'}}>שם</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {(rowsPerPage > 0
-                                    ? activities.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    : activities
+                                    ? events.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    : events
                             ).map((row, i) => (
                                 <Row onClick={handleSelectEvent} key={i} row={row}></Row>
                             ))}
@@ -183,11 +205,11 @@ export default function ActivitiesTable({activities, handleSelectEvent}) {
                                 </TableRow>
                             )}
                         </TableBody>
-                        <TableFooter>
+                        <TableFooter >
                             <TableRow>
                                 <TablePagination
                                     rowsPerPageOptions={[5, 10, 25, {label: 'All', value: -1}]}
-                                    count={activities.length}
+                                    count={events.length}
                                     rowsPerPage={rowsPerPage}
                                     page={page}
                                     colSpan={999}

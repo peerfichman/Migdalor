@@ -27,6 +27,7 @@ const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActi
     const [activity, setActivity] = useState({});
     const [message, setMessage] = useState('');
     const [isAvailable , setIsAvailable] = useState(true)
+    const [availablePlaces , setAvailablePlaces] = useState(true)
     // const handleClose = () => setOpen();
 
     const handelJoinActivity = async () => {
@@ -45,7 +46,12 @@ const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActi
 
     useEffect(() => {
         ActivitiesRequests.GetParticiapntsInActivity(initiativeNumber)
-            .then(particapnts => setIsAvailable( particapnts.length < activity.maxParticipants))
+            .then(particapnts => {
+                    setIsAvailable(particapnts.length < activity.maxParticipants)
+                    setAvailablePlaces(activity.maxParticipants  - particapnts.length)
+                }
+            )
+
     }, [activity]);
 
 
@@ -107,8 +113,8 @@ const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActi
 
                     <Row>
 
-                        <Typography variant={"h5"}>מס' משתתפים מקסימלי:</Typography>
-                        <Typography>{activity?.maxParticipants}</Typography>
+                        <Typography variant={"h5"}>מס' מקומות נותר:</Typography>
+                        <Typography>{availablePlaces}</Typography>
                     </Row>
 
                     <Row>

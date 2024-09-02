@@ -8,10 +8,15 @@ const theme = createTheme({
         secondary:
             {
                 main: '#BEA029'
-            }
-
-
+            },
+        ochre: {
+            main: '#E3D026',
+            light: '#E9DB5D',
+            dark: '#A29415',
+            contrastText: '#242105',
+        },
     },
+
     typography: {
         h1: {
             color:'#F6F2E2',

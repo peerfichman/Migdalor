@@ -47,3 +47,20 @@ export const JoinInitiative = async (initiativeNumber, residentNumber) => {
         })
     return data;
 }
+
+export const CreatInitiative = async (initiative) => {
+    const {data} =  await axios.post(BASE_URL + 'api/Initiative/AddInitiative', initiative)
+    return data;
+}
+
+export const EditInitiative = async (initative) => {
+
+    const response = await axios.put(BASE_URL +'api/Initiative/EditInitiative', initative)
+    return response;
+
+}
+
+export const DeleteInitiative = async (initiativeNumber) => {
+    const response = await axios.delete(BASE_URL + 'api/Initiative/DeleteInitiative/' + initiativeNumber);
+    return response;
+}

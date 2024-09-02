@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Home.css';
 import { Grid, Paper, Typography } from '@mui/material';
-import { 
+import {
   Person as PersonIcon,
   Notifications as NotificationsIcon,
   Event as EventIcon,
@@ -12,22 +12,23 @@ import {
   Announcement as AnnouncementIcon,
   Map as MapIcon,
   LocalActivity as LocalActivityIcon,
-  WbSunny as WbSunnyIcon 
+  WbSunny as WbSunnyIcon
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 const items = [
   { icon: <PersonIcon style={{ fontSize: 40 }} />, text: 'אזור', subtext: 'אישי', route: '/profile' },
   { icon: <WbSunnyIcon style={{ fontSize: 40 }} />, text: 'נוהל', subtext: 'בוקר טוב', route: '/goodMorningProtocol' },
   { icon: <NotificationsIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'שוטפות', route: '/messages' },
-  { icon: <LocalActivityIcon style={{ fontSize: 40 }} />, text: 'רישום', subtext: 'לפעילויות', route: '/activitiesRegistration' },
-  { icon: <EventIcon style={{ fontSize: 40 }} />, text: 'צור', subtext: 'אירוע', route: '/creatingInitiative' },
+  { icon: <EventIcon style={{ fontSize: 40 }} />, text: 'יומן', subtext: 'אירועים', route: '/activitiesRegistration' },
+  { icon: <AddBoxIcon style={{ fontSize: 40 }} />, text: 'צור', subtext: 'יוזמה', route: '/creatingInitiative' },
   { icon: <ContactPhoneIcon style={{ fontSize: 40 }} />, text: 'אנשי', subtext: 'קשר', route: '/contacts' },
   { icon: <AccessTimeIcon style={{ fontSize: 40 }} />, text: 'שעות', subtext: 'פתיחה', route: '/openingHours' },
   { icon: <GroupIcon style={{ fontSize: 40 }} />, text: 'ועד', subtext: 'דיירים', route: '/tenantCommittee' },
   { icon: <AnnouncementIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'אבל', route: '/obituaries' },
-  { icon: <MapIcon style={{ fontSize: 40 }} />, text: 'מפת', subtext: 'הבית', route: '/' }
+  // { icon: <MapIcon style={{ fontSize: 40 }} />, text: 'מפת', subtext: 'הבית', route: '/' }
 ];
 
 const IconGrid = () => {

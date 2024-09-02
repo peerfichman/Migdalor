@@ -9,11 +9,9 @@ public partial class TblResidentCommittee
 
     public string? CommitteeName { get; set; }
 
-    public string? MeetingSummery { get; set; }
+    public int   ResidentManager { get; set; }
 
-    public int? DepartmentId { get; set; }
+    public string? ResponsibilityDescription { get; set; }
 
-    public virtual TblDepartment? Department { get; set; }
 
-    public virtual ICollection<TblResidentPartOfResidentCommittee> TblResidentPartOfResidentCommittees { get; set; } = new List<TblResidentPartOfResidentCommittee>();
 }

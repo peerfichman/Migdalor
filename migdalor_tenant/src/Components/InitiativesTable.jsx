@@ -19,13 +19,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Collapse from '@mui/material/Collapse';
 import {useContext, useEffect, useState} from "react";
-import * as InitiativesRequests from '../../Requests/Initatives/InitativesRequests.jsx';
+import * as InitiativesRequests from '../Requests/Initatives/InitativesRequests.jsx';
 import {heIL} from "@mui/material/locale";
 import moment from "moment";
 import {styled} from "@mui/system";
-import theme from "../../Theme/Theme.jsx";
-import BackButton from "../BackButton.jsx";
-import {UserContext} from "../../Auth/Auth.jsx";
+import theme from "../Theme/Theme.jsx";
+import BackButton from "./BackButton.jsx";
+import {UserContext} from "../Auth/Auth.jsx";
 
 const Row = ({row, onClick}) => {
     const [open, setOpen] = React.useState(false);
@@ -42,12 +42,12 @@ const Row = ({row, onClick}) => {
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>
                 </TableCell>
-                <TableCell align="right" sx={{direction: 'rtl'}}>{moment(row.date).format('DD/MM/YYYY')}</TableCell>
+                <TableCell align="right" sx={{direction: 'rtl'}}>{moment(row.date,"YYYY-MM-DDT00:00:00").format('DD/MM/YYYY')}</TableCell>
                 <TableCell align="right">{moment(row.startHour, "HH:mm:ss").format('HH:mm')}</TableCell>
                 <TableCell align="right">{moment(row.endHour, "HH:mm:ss").format('HH:mm')}</TableCell>
                 <TableCell align="right">{row.location}</TableCell>
-                <TableCell><Button variant="contained" onClick={(e)=> onClick({...row,id: row.initiativeNumber, type: 'initiative'})}>
-                    צפה ביוזמה
+                <TableCell><Button variant="contained" onClick={(e)=> onClick(row.initiativeNumber)}>
+                    ערוך יוזמה
                 </Button></TableCell>
             </TableRow>
             <TableRow>
@@ -55,7 +55,7 @@ const Row = ({row, onClick}) => {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Typography variant="h6" gutterBottom component="div">
-תיאור הפעילות                            </Typography>
+תיאור היוזמה                            </Typography>
                             <Typography>
                                 {row.invitationDescription}
                             </Typography>
@@ -125,7 +125,7 @@ function TablePaginationActions(props) {
 }
 
 
-const InitiativesTable = ({initiatives, handelSelctedEvent}) =>{
+const InitiativesTable = ({initiatives, openEdit}) =>{
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [rows, setRows] = useState([]);
@@ -163,9 +163,8 @@ const InitiativesTable = ({initiatives, handelSelctedEvent}) =>{
 
     return (
         <ThemeProvider theme={theme}>
-            <BackButton/>
-                <TableContainer component={Paper} sx={{width:'90%'}}>
-                    <Table sx={{minWidth: 500}} aria-label="custom pagination table">
+            <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
+                <Table  stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>
@@ -181,7 +180,7 @@ const InitiativesTable = ({initiatives, handelSelctedEvent}) =>{
                                     ? initiatives.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     : initiatives
                             ).map((row, i) => (
-                                <Row onClick={handelSelctedEvent} key={i} row={row}></Row>
+                                <Row onClick={openEdit} key={i} row={row}></Row>
                             ))}
                             {emptyRows > 0 && (
                                 <TableRow style={{height: 53 * emptyRows}}>

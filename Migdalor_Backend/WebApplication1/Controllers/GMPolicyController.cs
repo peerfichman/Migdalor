@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
                   join reports in db.TblGoodMorningPolicies
                   on resident.Id equals reports.ResidentNumber into rr
                   from r in rr.DefaultIfEmpty()
-                  where r == null || r.Date != DateTime.Today
+                  where r == null 
                   select resident).ToList();
 
                 return Ok(residentsNotReported);

@@ -57,13 +57,15 @@ namespace WebApplication1.Controllers
                     ResidentNumber = initiativeInput.ResidentNumber,
                    };
 
+
+
                 // Add the user to the context
                 db.TblInitiatives.Add(initiative);
 
                 // Save changes to the database
                 db.SaveChanges();
 
-                return Ok("Initiative added successfully");
+                return Ok(initiative);
             }
             catch (Exception ex)
             {

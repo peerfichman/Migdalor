@@ -11,6 +11,10 @@ import Messages from "./Components/Messages.jsx";
 import CacheRTL from "./Cache/CacheRTL.jsx";
 import FullCalendar from "./Components/Calendar/FullCalendar.jsx";
 import NotificationProvider from "./NotificationsProvider/NotificationsProvider.jsx";
+import Profile from "./Components/Profile.jsx";
+import Obituaries from "./Components/Obituaries.jsx";
+import CreateInitiative from "./Components/CreatingInitiative.jsx";
+import Initiatives from "./Components/Initiatives.jsx";
 
 const App = () => {
 
@@ -65,6 +69,18 @@ const AppRoutes = () => {
         {
             path: '/activitiesRegistration',
             element: <FullCalendar/>
+        },
+        {
+            path: '/profile',
+            element: <Profile/>
+        },
+        {
+            path: '/obituaries',
+            element: <Obituaries/>
+        }  ,
+        {
+            path: '/creatingInitiative',
+            element: <Initiatives/>
         }
     ];
 

@@ -34,7 +34,7 @@ public partial class MigdalorContext : DbContext
 
     public virtual DbSet<TblResident> TblResidents { get; set; }
 
-    public virtual DbSet<TblResidentCommittee> TblResidentCommittees { get; set; }
+    public virtual DbSet<TblResidentCommittee> TblResidentCommittee { get; set; }
 
     public virtual DbSet<TblResidentHasHobby> TblResidentHasHobbies { get; set; }
     public virtual DbSet<TblInitiative> TblInitiatives { get; set; }
@@ -256,8 +256,7 @@ public partial class MigdalorContext : DbContext
             entity.Property(e => e.CommitteeName)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
-            entity.Property(e => e.MeetingSummery).HasColumnType("text");
+
 
           
         });

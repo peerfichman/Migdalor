@@ -176,8 +176,9 @@ export default function Messages() {
         <ThemeProvider theme={theme}>
             <BackButton/>
             <StyledBox>
-                <TableContainer component={Paper} sx={{width:'90%'}}>
-                    <Table sx={{minWidth: 500}} aria-label="custom pagination table">
+                <Typography variant={"h2"}> לוח הודעות</Typography>
+                <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
+                    <Table stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>

@@ -7,32 +7,37 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import {useEffect, useState} from "react";
+import * as GMPRequests from '../Requests/GMP/GMPRequests.jsx'
+import {styled} from "@mui/material";
 
 const columns = [
-{ id: 'residentNumber', label: 'שם הדייר', minWidth: 100, align: 'right' },
   { id: 'firstName', label: 'שם פרטי', minWidth: 100, align: 'right' },
   { id: 'lastName', label: 'שם משפחה', minWidth: 100, align: 'right' },
-  { id: 'phone', label: 'טלפון', minWidth: 100, align: 'right' },
-  { id: 'ID', label: 'תעודת זהות', minWidth: 100, align: 'right' },
-  { id: 'timeOfPolicy', label: 'שעת ביצוע הנוהל', minWidth: 100, align: 'right', 
+  { id: 'phoneNumber', label: 'טלפון', minWidth: 100, align: 'right' },
+  { id: 'residentID', label: 'תעודת זהות', minWidth: 100, align: 'right' },
+  { id: 'confirm', label: 'דיווח נוהל', minWidth: 100, align: 'right',
   },
 ];
 
-function createData(residentNumber, firstName, lastName, phone, ID, timeOfPolicy) {
-  
-  return { residentNumber, firstName, lastName, phone, ID, timeOfPolicy};
-}
 
-const rows = [
-  createData(1, 'טל ', 'כהן', "0527532227", "12345"),
-  createData(2, 'אניטה ', 'סטבליאנקו', "0526928001", "23456"),
-  createData(3, 'ענר ', 'עוזר', "0507192225", "34567"),
-  createData(4, 'ניר ', 'חן', "0507192226", "45678")
-];
 
+const Status = styled('Box')({
+  display: "flex",
+  width: "75%",
+  height: "25%",
+  justifyContent: "center",
+  opacity: "70%",
+  borderRadius: 20,
+  fontWeight:'bold'
+
+})
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [confirmedResident, setConfirmedResident] =useState([])
+  const [notconfirmedResident, setNotConfirmedResident] =useState([])
+  const [rows, setRows] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -42,6 +47,19 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    GMPRequests.GetNotReportedResidents()
+        .then(residents => residents.map( r =>  {return {...r , confirm: false}}))
+        .then(residents => setNotConfirmedResident(residents))
+    GMPRequests.GetReportedResidents()
+        .then(residents => residents.map( r =>  {return {...r , confirm: true}}))
+        .then(residents => setConfirmedResident(residents))
+
+  }, []);
+  useEffect(()=>{
+    setRows([...confirmedResident,...notconfirmedResident])
+  },[confirmedResident,notconfirmedResident])
 
   return (
     <Paper sx={{ width: '90%', overflow: 'hidden', direction: 'rtl' }}>
@@ -67,7 +85,18 @@ export default function StickyHeadTable() {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      let value = row[column.id];
+                      if(column.id ==='confirm') {
+                        value = value ?
+                            (<Status sx={{backgroundColor:"#8bc34a"}}>
+                            דווח בהצלחה
+                            </Status>) :
+                            (
+                                <Status sx={{backgroundColor:"#f44336"}}>
+                                  טרם דווח
+                                </Status>
+                            )
+                      }
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {value}
