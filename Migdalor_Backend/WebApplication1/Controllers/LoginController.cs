@@ -81,7 +81,7 @@ namespace WebApplication1.Controllers
             if (resident != null)
             {
                 var token = GenerateJwtTokenForResident(resident);
-                return Ok(new { resident = resident, Token = token });
+                return Ok(new { Token = token });
             }
             return response;
         }

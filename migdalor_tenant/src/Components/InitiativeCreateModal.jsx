@@ -11,6 +11,7 @@ import {Button, Typography} from "@mui/material";
 import {UserContext} from "../Auth/Auth.jsx";
 import moment from "moment";
 import * as InitiativeRequests from '../Requests/Initatives/InitativesRequests.jsx'
+import Box from "@mui/material/Box";
 
 const StyledLabel = styled('Typography')({
     color: 'white',
@@ -157,13 +158,11 @@ const InitiativeCreateModal = ({open, onClose}) => {
                         </Row>
                         <Row>
                             <StyledLabel>תאריך</StyledLabel>
-                            {console.log("showPlaceHolde", showDatePlaceholder)}
-                            {console.log("detail.date", details.date)}
                             <input
                                 type="text"
                                 name="date"
-                                placeholder={showDatePlaceholder ? "תאריך" : ''}
-                                value={details.date === '' ? '': moment(details.date, 'YYYY-MM-DDT00:00:00').format('YYYY-MM-DD')}
+                                placeholder={showDatePlaceholder ? "תאריך" : ""}
+                                value={moment(details.date, 'YYYY-MM-DDT00:00:00').format('YYYY-MM-DD')}
                                 onChange={handleChange}
                                 onFocus={() => handleDateFocus("date")}
                                 onBlur={() => handleDateBlur("date")}
@@ -218,6 +217,7 @@ const InitiativeCreateModal = ({open, onClose}) => {
                                 onChange={handleChange}
                                 className="input"
                                 min="0"
+                                disabled
                                 style={{
                                     width: '50%'
                                 }}
@@ -227,18 +227,24 @@ const InitiativeCreateModal = ({open, onClose}) => {
                             <StyledLabel>תיאור נוסף</StyledLabel>
 
                             <textarea
+                                style={{resize: 'none', width: '43%'}}
                                 name="invitationDescription"
                                 placeholder="תיאור נוסף"
                                 value={details.invitationDescription}
                                 onChange={handleChange}
                                 style={{
-                                    height: 75,
-                                    resize: 'none', width: '50%'
+                                    width: '50%',
+                                    height: 75
                                 }}
                             ></textarea>
                         </Row>
+                        <Box sx={{display: 'flex', justifyContent:'space-evenly', height:100, alignItems:'center'}}>
+                            {/*<Button sx={{height:35}} type={"submit"} color="ochre" variant="contained">שמור שינויים</Button>*/}
+                            {/*<Button sx={{height:35}} onClick={handleDelete} color="error" variant="contained">מחק יוזמה</Button>*/}
+                            <Button  sx={{height:35}} type={"submit"} color="ochre" variant="contained">שמירת היוזמה</Button>
 
-                        <Button type={"submit"} color="ochre" variant="contained">שמירת היוזמה</Button>
+                        </Box>
+
                     </form>
                     {/* כאן תוסיף את ה-CARD של הפעילויות */}
                 </StyledBox>

@@ -129,8 +129,8 @@ const StyledBox = styled('Box')({
     alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
-    width: '75%',
-    height: '75%',
+    width: '80%',
+    height: '80%',
     borderRadius: 20
 
 });
@@ -176,7 +176,7 @@ export default function Messages() {
         <ThemeProvider theme={theme}>
             <BackButton/>
             <StyledBox>
-                <Typography variant={"h2"}> לוח הודעות</Typography>
+                <Typography variant={"h2"} sx={{marginBottom: 2}}> לוח הודעות</Typography>
                 <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
                     <Table stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
                         <TableHead>

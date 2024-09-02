@@ -13,7 +13,7 @@ const Login = () => {
 
     const handleForgotPassword = (event) => {
         event.preventDefault();
-        navigate('/home');
+        navigate('/forgotpassword');
     }
 
     const handleInputChange = (e) => {

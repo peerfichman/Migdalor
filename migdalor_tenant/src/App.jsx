@@ -16,6 +16,7 @@ import Obituaries from "./Components/Obituaries.jsx";
 import Initiatives from "./Components/Initiatives.jsx";
 import OpeningHours from "./Components/OpeningHours.jsx";
 import TennantComitte from "./Components/TennantCommittee.jsx"
+import ForgotPassword from "./Components/ForgotPassword.jsx";
 const App = () => {
 
     return (
@@ -26,6 +27,7 @@ const App = () => {
                         <BrowserRouter>
                             <Routes>
                                 <Route path="/login" element={<Login/>}/>
+                                <Route path="/forgotpassword" element={<ForgotPassword/>}/>
                                 <Route
                                     path="/*"
                                     element={

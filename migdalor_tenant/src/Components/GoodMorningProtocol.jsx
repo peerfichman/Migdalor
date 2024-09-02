@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 const StyledBox = styled('Box')({
     display: 'flex',
     alignItems: 'center',
+    justifyContent:'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
     width: '75%',
@@ -84,14 +85,14 @@ const CheckInPage = () => {
                     {isCheckedIn ? (
 
                         <StyledBox>
-                            <Typography variant="h2" sx={{marginTop: 5}}> הי {user.firstName}, </Typography>
+                            <Typography variant="h2" sx={{marginTop: -5}}> היי {user.firstName}, </Typography>
                             <Typography variant="h2" sx={{marginTop: 5}}> נוהל בוקר טוב דווח בהצלחה</Typography>
-                            <Typography variant="h2" sx={{marginTop: 5}}>המשך יום טוב</Typography>
+                            <Typography variant="h2" sx={{marginTop: 5}}>המשך יום טוב!</Typography>
                         </StyledBox>
                     ) : (
                         <StyledBox>
-                            <Typography variant="h2" sx={{marginTop: 5}}> הי {user.firstName}, </Typography>
-                            <Typography variant="h2" sx={{marginTop: 5}}> טרם דיווחת נוהל בוקר טוב להיום </Typography>
+                            <Typography variant="h2" sx={{marginTop: 5}}> בוקר טוב {user.firstName}, </Typography>
+                            <Typography variant="h2" sx={{marginTop: 5}}> אנא דווח על נוהל בוקר טוב </Typography>
                             <IconButton
                                 onClick={handleCheckIn}
                                 sx={{

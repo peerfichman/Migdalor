@@ -185,10 +185,10 @@ export default function EventsTable({ events, handleSelectEvent}) {
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>
-                                <TableCell align="right" style={{width:"20%"}}>יוזמה / פעילות</TableCell>
-                                <TableCell align="right" sx={{width: '20%'}}>תאריך</TableCell>
-                                <TableCell align="right"  sx={{width: '20%'}}>שעה</TableCell>
-                                <TableCell align="right"  sx={{width: '20%'}}>שם</TableCell>
+                                <TableCell align="right" style={{width:"20%", fontWeight:'bold', fontSize:16}}>יוזמה / פעילות</TableCell>
+                                <TableCell align="right" sx={{width:"20%", fontWeight:'bold', fontSize:16}}>תאריך</TableCell>
+                                <TableCell align="right"  sx={{width:"20%", fontWeight:'bold', fontSize:16}}>שעה</TableCell>
+                                <TableCell align="right"  sx={{width:"20%", fontWeight:'bold', fontSize:16}}>שם</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>

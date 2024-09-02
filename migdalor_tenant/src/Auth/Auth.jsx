@@ -4,7 +4,8 @@ import axios from 'axios';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({
+    const [user, setUser] = useState(
+        {
         "id": 886119921,
         "firstName": "פאר",
         "lastName": "פיכמן",
@@ -20,7 +21,8 @@ export const UserProvider = ({ children }) => {
         "username": "204683650",
         "password": "02cf8e28",
         "departmentId": null
-    });
+    }
+    );
     const login = async (username, password) => {
         try {
             const response = await axios.post('https://localhost:7149/api/login/ResidentLogin', {

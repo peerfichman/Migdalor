@@ -178,7 +178,7 @@ export default function TennantCommittee() {
         <ThemeProvider theme={theme}>
             <BackButton/>
             <StyledBox>
-                <Typography variant={"h2"}> וועדי עובדים </Typography>
+                <Typography variant={"h2"}> וועדי דיירים </Typography>
                 <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
                     <Table stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
                         <TableHead>

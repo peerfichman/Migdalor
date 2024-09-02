@@ -177,7 +177,7 @@ const ReactBigCalendar = () => {
             <BackButton/>
 
             <StyledBox>
-                <Typography variant={"h2"}
+                <Typography variant={"h2"} sx={{marginTop:0}}
                 >יומן אירועים</Typography>
                 {loading ?
                     <CircularProgress color="secondary"/> :
@@ -192,7 +192,7 @@ const ReactBigCalendar = () => {
                             style={{
                                 backgroundColor: "white", width: "95%",
                                 height: "90%",
-                                border: ' 2rem solid #38588E'
+                                border: ' 1rem solid #38588E'
                             }}
                             onSelectEvent={(event) => handleSelectEvent(event)}
                             // onSelectSlot={handleSelect}
@@ -227,7 +227,7 @@ const ReactBigCalendar = () => {
 
             >
                 <Typography variant={"h2"} sx={{
-                    alignSelf: "start",
+                    alignSelf: "center",
                     marginTop: '1rem',
                     marginRight: '2.5rem',
                     marginBottom: '1rem'

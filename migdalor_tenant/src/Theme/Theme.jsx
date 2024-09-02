@@ -27,6 +27,8 @@ const theme = createTheme({
             color:'#F6F2E2',
             fontSize: "1.75rem",
             fontWeight: 600,
+            fontFamily: "sans-serif"
+
         },
         h3: {
             color:'#F6F2E2',

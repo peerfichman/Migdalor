@@ -26,8 +26,8 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
 
     const [initiative, setInitiative] = useState({});
     const [message, setMessage] = useState('');
-    const [isAvailable , setIsAvailable] = useState(true)
-    const [availablePlaces , setAvailablePlaces] = useState(0)
+    const [isAvailable, setIsAvailable] = useState(true)
+    const [availablePlaces, setAvailablePlaces] = useState(0)
     // const handleClose = () => setOpen();
 
     const handelJoinInitiative = async () => {
@@ -81,18 +81,26 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                <Button sx={{
-                    alignSelf: 'start',
-                    marginTop: '3%', marginRight: "3%"
+                <Box sx={{
+                    display: 'flex', marginTop: 2, width: "100%",
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+
                 }}>
-                    <CloseIcon
-                        onClick={onClose}/>
-                </Button>
-                <Typography variant={"h2"} sx={{color: 'black', alignSelf: 'center'}}>פרטי היוזמה</Typography>
+                    <Button sx={{
+                        alignSelf: 'start',
+                        // marginTop: '1%',
+                        marginRight: "3%"
+                    }}>
+                        <CloseIcon
+                            onClick={onClose}/>
+                    </Button>
+                    <Typography variant={"h2"} sx={{color: 'black', alignSelf: 'center'}}>פרטי היוזמה</Typography>
+                </Box>
                 <Box
                     sx={{
                         marginRight: '10%',
-                        marginTop: '5%'
+                        marginTop: '2%'
                     }}>
 
                     <Row>
@@ -123,13 +131,17 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                     </Row>
 
                 </Box>
+                <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height:"20%"}}>
+                    {isParticipating ?
+                        <Button sx={{alignSelf: 'center', width: '50%'}}
+                                color="error" variant="contained" size="medium"
+                                onClick={handelRemoveFromInitiative}> בטל השתתפות </Button>
+                        :
+                        <Button disabled={!isAvailable}
+                                sx={{alignSelf: 'center', width: '50%'}} variant="contained" size="medium"
+                                onClick={handelJoinInitiative}> הצטרף ליוזמה</Button>}
 
-                {isParticipating ?
-                    <Button sx={{alignSelf: 'center',width:'50%'}}
-                            color="error"  variant="contained" size="medium" onClick={handelRemoveFromInitiative}> בטל השתתפות </Button>
-                    :
-                    <Button disabled ={!isAvailable}
-                            sx={{alignSelf: 'center',width:'50%'}} variant="contained" size="medium" onClick={handelJoinInitiative}> הצטרף ליוזמה</Button>}
+                </Box>
                 <MessageModal message={message} open={message !== ''} handleClose={handleOpenCloseModal}></MessageModal>
             </Box>
         </Modal>

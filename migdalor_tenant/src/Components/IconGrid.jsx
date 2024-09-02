@@ -19,7 +19,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 const items = [
-  { icon: <PersonIcon style={{ fontSize: 40 }} />, text: 'אזור', subtext: 'אישי', route: '/profile' },
+  { icon: <PersonIcon style={{  fontSize: 40 }} />, text: 'אזור', subtext: 'אישי', route: '/profile' },
   { icon: <WbSunnyIcon style={{ fontSize: 40 }} />, text: 'נוהל', subtext: 'בוקר טוב', route: '/goodMorningProtocol' },
   { icon: <NotificationsIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'שוטפות', route: '/messages' },
   { icon: <EventIcon style={{ fontSize: 40 }} />, text: 'יומן', subtext: 'אירועים', route: '/activitiesRegistration' },

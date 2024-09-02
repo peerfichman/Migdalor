@@ -62,8 +62,9 @@ const Initiatives = () => {
             <StyledBox>
                 <Typography variant={"h2"}
                 >היוזמות שלי</Typography>
-                <Button color="success" variant="contained" onClick={toggleModal}> יצירת יוזמה </Button>
                 <InitiativesTable initiatives={myInitiatives} openEdit={openEdit}/>
+                <Button color="success" variant="contained" onClick={toggleModal}> יצירת יוזמה </Button>
+
             </StyledBox>
             <InitiativeCreateModal open={open}  onClose={toggleModal}/>
             <InitiativeEditModal open={edit!==0} edit={edit}  onClose={closeEdit}/>

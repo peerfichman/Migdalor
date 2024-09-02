@@ -11,6 +11,7 @@ import {Button, Typography} from "@mui/material";
 import {UserContext} from "../Auth/Auth.jsx";
 import moment from "moment";
 import * as InitiativeRequests from '../Requests/Initatives/InitativesRequests.jsx'
+import Box from "@mui/material/Box";
 
 const StyledLabel = styled('Typography')({
     color: 'white',
@@ -26,7 +27,7 @@ const StyledBox = styled('Box')({
     marginTop: '3rem',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'start',
+    alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
     width: '50%',
@@ -48,7 +49,7 @@ const InitiativeEditModal = ({open, onClose, edit}) => {
 
         initiativeName: '',
         location: '',
-        date: ' ',
+        date: '',
         startHour: '',
         endHour: '',
         initiativeType: '',
@@ -133,8 +134,13 @@ const InitiativeEditModal = ({open, onClose, edit}) => {
             >
                 {/*<MessageModal message={message} open={openModal} handleClose={handleModalClose}/>*/}
                 <StyledBox>
-                    <Typography variant={"h2"}>עריכת יוזמה</Typography>
-                    <form onSubmit={handleSubmit}>
+                    <Typography variant={"h2"} style={{marginTop:20, alignSelf:'center'}}>עריכת יוזמה</Typography>
+                    <form onSubmit={handleSubmit} style={{
+                        marginLeft:20,
+                        marginTop:20,
+                        width:"90%",
+                        height:"100%"
+                    }}>
 
                         <Row>
                             <StyledLabel>שם היוזמה</StyledLabel>
@@ -246,9 +252,10 @@ const InitiativeEditModal = ({open, onClose, edit}) => {
                                 }}
                             ></textarea>
                         </Row>
-
-                        <Button type={"submit"} color="ochre" variant="contained">שמור שינויים</Button>
-                        <Button onClick={handleDelete} color="error" variant="contained">מחק יוזמה</Button>
+                        <Box sx={{display: 'flex', justifyContent:'space-evenly', height:100, alignItems:'center'}}>
+                        <Button sx={{height:35}} type={"submit"} color="ochre" variant="contained">שמור שינויים</Button>
+                        <Button sx={{height:35}} onClick={handleDelete} color="error" variant="contained">מחק יוזמה</Button>
+                        </Box>
 
                     </form>
                     {/* כאן תוסיף את ה-CARD של הפעילויות */}

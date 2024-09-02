@@ -136,6 +136,7 @@ const Profile = () => {
                     <Row>
                         <StyledLabel>שם פרטי</StyledLabel>
                         <input
+                            style={{width: 400, height:25}}
                             type="text"
                             name="firstName"
                             placeholder="שם פרטי"
@@ -259,7 +260,7 @@ const Profile = () => {
                         ></textarea>
                     </Row>
 
-                    <Button type={"submit"} color="ochre" variant="contained">עדכון פרטים</Button>
+                    <Button type={"submit"} color="ochre" sx={{fontWeight:'bold'}} variant="contained">עדכון פרטים</Button>
                 </form>
                 {/* כאן תוסיף את ה-CARD של הפעילויות */}
             </StyledBox>
