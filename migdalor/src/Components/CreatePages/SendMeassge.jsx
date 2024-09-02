@@ -29,11 +29,15 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
         e.preventDefault();
 
         if (isEdit) {
-            await announcementsRequests.editAnnouncement({id: messageNumber, content: message, subject:subject});
+            await announcementsRequests.editAnnouncement({id: messageNumber, content: message, subject: subject});
         } else {
-            const date =  new Date;
-            console.log("msg:", {content: message,  subject:subject ,date: date.toISOString()})
-            announcementsRequests.createAnnouncement({content: message,  subject:subject ,date: date.toISOString()}).then((response) => {
+            const date = new Date;
+            console.log("msg:", {content: message, subject: subject, date: date.toISOString()})
+            announcementsRequests.createAnnouncement({
+                content: message,
+                subject: subject,
+                date: date.toISOString()
+            }).then((response) => {
                 if (!(response.status === 200)) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -48,7 +52,7 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
             <Modal
                 open={true}
                 sx={{
-                    top: '20%',
+                    top: '5%',
                     right: '20%'
                 }}
                 aria-labelledby="modal-modal-title"
@@ -60,32 +64,58 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
                             onClick={handleClose}/>
                     </Button>
                     <h1 className="form-title">שליחת הודעה</h1>
-                    <form onSubmit={handleSubmit} className="form-layout">
+                    <form onSubmit={handleSubmit} className="form-layout" style={{
 
-                        <div className="textarea-wrapper">
-                            <label htmlFor="message" className="textarea-label" style={{color:"black"}}>נושא:</label>
+                        width: '75%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap:20,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <div style={{
+                            width: '100%',
+                            height: '20%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'start',
+                            justifyContent: 'start',
+                            gap: 5
+                        }}>
+                            <label htmlFor="message" className="textarea-label" style={{color: "black"}}>נושא:</label>
                             <input
                                 id="text"
                                 type="text"
-                                style={{display:"block", backgroundColor:"white", color:"black"}}
-                                placeholder="ההודעה תשלח לדיירים..."
+                                className="send-message-subject"
+                                style={{display: "block", backgroundColor: "white", color: "black", width: '100%' , height:'2rem', resize:'none'}}
+                                placeholder="נושא"
                                 value={subject}
                                 onChange={(e) => setSubject(e.target.value)}
                             />
-                            <label htmlFor="message" className="textarea-label" style={{color:"black"}}>כתיבת הודעה לדיירים:</label>
+                        </div>
+                        <div style={{
+                            width: '100%',
+                            height: '20%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'start',
+                            justifyContent: 'start',
+                            gap: 5
+                        }}>
+
+                            <label htmlFor="message" className="textarea-label" style={{color: "black"}}>כתיבת הודעה
+                                לדיירים:</label>
+
                             <textarea
                                 id="message"
                                 className="textarea-container"
                                 placeholder="ההודעה תשלח לדיירים..."
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
+                                style={{width: '100%'}}
                             />
                         </div>
-                        <div className="button-container">
-                            <input id="file-upload" type="file" className="file-input"/>
-
-                            <button type="submit" className="form-button">שלח</button>
-                        </div>
+                            <button style={{marginTop:0, width:"60%", fontWeight:'bold'}} type="submit" className="form-button">שלח</button>
                     </form>
                     {showSuccessMessage && (
                         <div className="success-message">ההודעה נשלחה בהצלחה</div>

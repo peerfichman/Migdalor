@@ -5,7 +5,6 @@ import './OpeningHours.css';
 const OpeningHours = () => (
   <div calss="container">
   <div class="openingHours"><h1>שעות פתיחה</h1></div>
-  
   <div class="clinic">
   <h2>מרפאה</h2>
   <p> ראשון - חמישי: 6:00 - 11:00, 13:00 - 17:00</p>
