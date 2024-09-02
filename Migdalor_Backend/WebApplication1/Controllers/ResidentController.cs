@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApplication1.DTO;
+using WebApplication1.MailService;
 
 namespace WebApplication1.Controllers
 {
@@ -10,7 +11,16 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ResidentController : ControllerBase
     {
+
+        IMailService Mail_Service = null;
+
         MigdalorContext db = new MigdalorContext();
+
+        public ResidentController(IMailService _MailService)
+        {
+            Mail_Service = _MailService;
+
+        }
 
 
         [HttpPost]
@@ -49,6 +59,22 @@ namespace WebApplication1.Controllers
 
                 db.TblResidents.Add(resident);
                 db.SaveChanges();
+
+                var mailData = new MailData
+                {
+                    EmailToId = resident.Email,
+                    EmailSubject = "ברוך הבא למגדול",
+                    EmailBody = $"הי, {resident.FirstName +" " + resident.LastName} \n" +
+                    $"ברוך הבא למגדלור\n" +
+                    $"פרטי ההזדהות במערכת\n" +
+                    $"שם משתמש: {resident.Username}\n" +
+                    $"סיסמה: {resident.Password}\n" +
+                    $"בברכה, צוות מגדלור",
+                    EmailToName = resident.FirstName + " " +resident.LastName
+                };
+
+
+                Mail_Service.SendMail(mailData);
 
                 return Ok("User added successfully");
             }

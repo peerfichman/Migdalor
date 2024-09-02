@@ -1,5 +1,6 @@
 import React from "react";
 import ActivityRequestsIndex from '../../Requests/Activity/index.jsx'
+import CommitteeRequestsIndex from '../../Requests/Committes/index.jsx'
 import DepartmentRequestsIndex from '../../Requests/Department/index.jsx'
 import TenantRequests from '../../Requests/Tenant/index.jsx'
 import AnnouncementsRequests from '../../Requests/Announcements/index.jsx'
@@ -8,6 +9,7 @@ import CreateActivity from "../CreatePages/CreateActivity.jsx";
 import CreateDepartment from "../CreatePages/CreateDepartment.jsx";
 import AddTenant from "../CreatePages/AddTenant.jsx";
 import SendMessage from "../CreatePages/SendMeassge.jsx";
+import TennantCommittee from "../CreatePages/TenantCommittee.jsx";
 import AddObituaryNotice from "../CreatePages/AddObituaryNotice.jsx";
 
 const EntitiesMap = {
@@ -80,7 +82,8 @@ const EntitiesMap = {
             ...AnnouncementsRequests
         }
         , columns: new Map([
-                ['date', "תאריך"]
+                ['date', "תאריך"],
+                ['subject', "נושא"]
             ]
         ),
         createLabel: "שלח הודעה לדיירים",
@@ -111,6 +114,25 @@ const EntitiesMap = {
         },
         editPage: (obituaryNumber, setOpenEdit) => {
             return <AddObituaryNotice isEdit={true} obituaryNumber={obituaryNumber} setModalOpen={setOpenEdit}/>
+        }
+    } ,
+    Committee: {
+        primaryKey: "committeeId",
+        requests: {
+            ...CommitteeRequestsIndex
+        }
+        , columns: new Map([
+                ['committeeName', 'שם הוועד'],
+                ['residentManager', 'מנהל אחראי'],
+
+            ]
+        ),
+        createLabel: "צור וועד חדש",
+        createPage: (setOpenCreate) => {
+            return <TennantCommittee isEdit={false} obituaryNumber={null} setModalOpen={setOpenCreate}/>
+        },
+        editPage: (obituaryNumber, setOpenEdit) => {
+            return <TennantCommittee isEdit={true} obituaryNumber={obituaryNumber} setModalOpen={setOpenEdit}/>
         }
     }
 }

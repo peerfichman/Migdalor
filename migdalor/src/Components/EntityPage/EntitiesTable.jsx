@@ -26,10 +26,16 @@ const  EntityRow = ({entity, entityName})=> {
         await EntitiesMap[entityName].requests.delete(entity[entityPK]);
     }
 
+    const descriptionTitle = (entity) => {
+        if (entity.description) return "תיאור"
+        else if(entity.content) return  "תוכן ההודעה"
+        else if( entity.responsibilityDescription) return "תיאור האחריות"
+    }
+
     return (
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                {(entity.description || entity.content)  && <TableCell>
+                {(entity.description || entity.content || entity.responsibilityDescription)  && <TableCell>
                     <IconButton
                         aria-label="expand row"
                         size="small"
@@ -43,6 +49,7 @@ const  EntityRow = ({entity, entityName})=> {
                     if(col==='time') val =  moment(val, 'HH:mm:ss').format('HH:mm');
                     if(col==='date') val = moment(val, 'yyyy-MM-DDT00:00:00').format('DD/MM/yyyy')
                     if(col==='dateOfBirth') val = moment(val, 'yyyy-MM-DDT00:00:00').format('DD/MM/yyyy')
+                    if(col === 'residentManager') val = val.firstName + " " + val.lastName;
                     return <TableCell key={col} >{val}</TableCell>
                 })
                 }
@@ -59,14 +66,14 @@ const  EntityRow = ({entity, entityName})=> {
             </TableRow>
             <TableRow>
                 {
-                    (entity.description || entity.content) && <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                    (entity.description || entity.content || entity.responsibilityDescription) && <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Typography align="right" variant="h6" gutterBottom component="div">
-                                {entity.description ? "תיאור" : "תוכן ההודעה"}
+                                {descriptionTitle(entity)}
                             </Typography>
                             <Typography textAlign="right" variant="sapn" gutterBottom component="div">
-                                {entity.description || entity.content}
+                                {entity.description || entity.content || entity.responsibilityDescription}
                             </Typography>
                         </Box>
                     </Collapse>
@@ -88,7 +95,7 @@ const  EntityTable = ({entityName, entities})=> {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow >
-                        {(entities[0]?.description || entities[0]?.content) && <TableCell sx={{width: '1%'}}/>}
+                        {(entities[0]?.description || entities[0]?.content || entities[0]?.responsibilityDescription) && <TableCell sx={{width: '1%'}}/>}
                         {Array.from(EntitiesMap[entityName].columns.values()).map((colName) => {
                             return <TableCell key={colName} align="right">{colName}</TableCell>
                         })}

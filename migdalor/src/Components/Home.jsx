@@ -7,7 +7,7 @@ import AddTenant from './CreatePages/AddTenant.jsx';
 import './HomeStyle.css';
 import GoodMorningPolicy from './GoodMorningPolicy';
 import AddObituaryNotice from './CreatePages/AddObituaryNotice.jsx';
-import TenantCommittee from './TenantCommittee';
+import TenantCommittee from './CreatePages/TenantCommittee.jsx';
 import Entities from "./EntityPage/Entities.jsx";
 
 const Home = () => {
@@ -56,7 +56,7 @@ const Home = () => {
           {activeComponent === 'goodMorningPolicy' && <GoodMorningPolicy />}
           {activeComponent === 'updateDepartmentDetails' && <Entities EntityName={'Department'}/>}
           {activeComponent === 'addObituaryNotice' && <Entities  EntityName={"Obituary"}/>}
-          {activeComponent === 'tenantCommittee' && <TenantCommittee />}
+          {activeComponent === 'tenantCommittee' && <Entities EntityName={"Committee"}/>}
 
         </div>
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>

@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
 
     const [message, setMessage] = useState('');
-    const [scheduledTime, setScheduledTime] = useState('');
+    const [subject, setSubject] = useState('');
     const [showScheduleModal, setShowScheduleModal] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
@@ -18,6 +18,7 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
             announcementsRequests.getAnnouncementById(messageNumber)
                 .then((message) => {
                     setMessage(message.content);
+                    setSubject(message.subject);
                 })
 
         }
@@ -28,9 +29,11 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
         e.preventDefault();
 
         if (isEdit) {
-            await announcementsRequests.editAnnouncement({id: messageNumber, content: message});
+            await announcementsRequests.editAnnouncement({id: messageNumber, content: message, subject:subject});
         } else {
-            announcementsRequests.createAnnouncement({content: message}).then((response) => {
+            const date =  new Date;
+            console.log("msg:", {content: message,  subject:subject ,date: date.toISOString()})
+            announcementsRequests.createAnnouncement({content: message,  subject:subject ,date: date.toISOString()}).then((response) => {
                 if (!(response.status === 200)) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -58,16 +61,18 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
                     </Button>
                     <h1 className="form-title">שליחת הודעה</h1>
                     <form onSubmit={handleSubmit} className="form-layout">
-                        <div className="button-container">
-                            <label htmlFor="file-upload" className="form-button">הוספת קובץ</label>
-                            <input id="file-upload" type="file" className="file-input"/>
-                            <button type="button" className="form-button"
-                                    onClick={() => setShowScheduleModal(true)}>תזמון
-                            </button>
-                            <button type="submit" className="form-button">שלח</button>
-                        </div>
+
                         <div className="textarea-wrapper">
-                            <label htmlFor="message" className="textarea-label">כתיבת הודעה לדיירים:</label>
+                            <label htmlFor="message" className="textarea-label" style={{color:"black"}}>נושא:</label>
+                            <input
+                                id="text"
+                                type="text"
+                                style={{display:"block", backgroundColor:"white", color:"black"}}
+                                placeholder="ההודעה תשלח לדיירים..."
+                                value={subject}
+                                onChange={(e) => setSubject(e.target.value)}
+                            />
+                            <label htmlFor="message" className="textarea-label" style={{color:"black"}}>כתיבת הודעה לדיירים:</label>
                             <textarea
                                 id="message"
                                 className="textarea-container"
@@ -76,23 +81,12 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
                                 onChange={(e) => setMessage(e.target.value)}
                             />
                         </div>
-                    </form>
-                    {showScheduleModal && (
-                        <div className="modal">
-                            <div className="modal-content">
-                                <span className="modal-close" onClick={() => setShowScheduleModal(false)}>&times;</span>
-                                <label htmlFor="schedule">בחר שעה ותאריך:</label>
-                                <input
-                                    id="schedule"
-                                    type="datetime-local"
-                                    className="form-input"
-                                    value={scheduledTime}
-                                    onChange={(e) => setScheduledTime(e.target.value)}
-                                />
-                                <button type="submit" className="form-button" onClick={handleSubmit}>שלח</button>
-                            </div>
+                        <div className="button-container">
+                            <input id="file-upload" type="file" className="file-input"/>
+
+                            <button type="submit" className="form-button">שלח</button>
                         </div>
-                    )}
+                    </form>
                     {showSuccessMessage && (
                         <div className="success-message">ההודעה נשלחה בהצלחה</div>
                     )}

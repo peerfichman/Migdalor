@@ -13,9 +13,9 @@ import FullCalendar from "./Components/Calendar/FullCalendar.jsx";
 import NotificationProvider from "./NotificationsProvider/NotificationsProvider.jsx";
 import Profile from "./Components/Profile.jsx";
 import Obituaries from "./Components/Obituaries.jsx";
-import CreateInitiative from "./Components/CreatingInitiative.jsx";
 import Initiatives from "./Components/Initiatives.jsx";
-
+import OpeningHours from "./Components/OpeningHours.jsx";
+import TennantComitte from "./Components/TennantCommittee.jsx"
 const App = () => {
 
     return (
@@ -81,6 +81,14 @@ const AppRoutes = () => {
         {
             path: '/creatingInitiative',
             element: <Initiatives/>
+        }   ,
+        {
+            path: '/openingHours',
+            element: <OpeningHours/>
+        } ,
+        {
+            path: '/tenantCommittee',
+            element: <TennantComitte/>
         }
     ];
 
