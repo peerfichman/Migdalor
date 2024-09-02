@@ -35,8 +35,12 @@ namespace WebApplication1.SchedualerService
                 {
                     EmailToId = resident.Email, // Assuming you have an Email field
                     EmailToName = resident.FirstName + " " + resident.LastName,
-                    EmailSubject = "Daily Report Reminder",
-                    EmailBody = $"Dear {resident.FirstName}, please report your status for today."
+                    EmailSubject = "דיווח נוהל בוקר טוב",
+                    EmailBody = $"היי {resident.FirstName + " " + resident.LastName},\n" +
+                    $"טרם דיווחת נוהל בוקר טוב להיום.\n" +
+                    $"\nנא לדווח במערכת הדיירים" +
+                    $"\nתודה והמשך יום טוב" +
+                    $"צוות מגדלור\n"
                 };
                 try
                 {

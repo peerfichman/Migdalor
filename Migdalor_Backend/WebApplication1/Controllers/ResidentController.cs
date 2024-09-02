@@ -63,13 +63,16 @@ namespace WebApplication1.Controllers
                 var mailData = new MailData
                 {
                     EmailToId = resident.Email,
-                    EmailSubject = "ברוך הבא למגדול",
+                    EmailSubject = "ברוך הבא למגדולר",
                     EmailBody = $"הי, {resident.FirstName +" " + resident.LastName} \n" +
                     $"ברוך הבא למגדלור\n" +
                     $"פרטי ההזדהות במערכת\n" +
-                    $"שם משתמש: {resident.Username}\n" +
-                    $"סיסמה: {resident.Password}\n" +
-                    $"בברכה, צוות מגדלור",
+                    $"שם משתמש:\n" +
+                    $" {resident.Username}\n" +
+                    $"סיסמה: \n " +
+                    $"{resident.Password}\n" +
+                    $"בברכה,\n" +
+                    $" צוות מגדלור",
                     EmailToName = resident.FirstName + " " +resident.LastName
                 };
 
