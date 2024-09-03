@@ -58,7 +58,7 @@ const IconGrid = () => {
             onClick={() => handleItemClick(item.route)}
           >
             {item.icon}
-            <Typography variant="h6" className="welcom-header" style={{ marginTop: 8, color: '#000', fontWeight: 'bold', fontSize: 22, fontFamily: 'Arial' }}>
+            <Typography variant="h6" className="welcom-header" style={{ marginTop: 8, color: '#000', fontWeight: 'bold', fontSize: 22 }}>
               {item.text}
             </Typography>
             <Typography variant="h6" style={{ color: '#000', fontWeight: 'bold', fontSize: 22 }}>

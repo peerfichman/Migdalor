@@ -27,7 +27,7 @@ const StyledBox = styled('Box')({
     marginTop: '3rem',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'start',
+    alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
     width: '50%',
@@ -97,7 +97,6 @@ const InitiativeCreateModal = ({open, onClose}) => {
             ...details,
             residentNumber: user.id
         })
-        console.log(initiativeNumber)
         await InitiativeRequests.JoinInitiative(initiativeNumber, user.id);
         setMessage("יוזמה פורסמה בהצלחה")
         setOpenModal(true);
@@ -126,7 +125,13 @@ const InitiativeCreateModal = ({open, onClose}) => {
             >
                 <StyledBox>
                     <Typography variant={"h2"}>יצירת יוזמה</Typography>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}
+                          style={{
+                              marginLeft:20,
+                              marginTop:20,
+                              width:"90%",
+                              height:"100%"}}
+                    >
 
                         <Row>
                             <StyledLabel>שם היוזמה</StyledLabel>
@@ -217,7 +222,7 @@ const InitiativeCreateModal = ({open, onClose}) => {
                                 onChange={handleChange}
                                 className="input"
                                 min="0"
-                                disabled
+
                                 style={{
                                     width: '50%'
                                 }}
@@ -239,8 +244,7 @@ const InitiativeCreateModal = ({open, onClose}) => {
                             ></textarea>
                         </Row>
                         <Box sx={{display: 'flex', justifyContent:'space-evenly', height:100, alignItems:'center'}}>
-                            {/*<Button sx={{height:35}} type={"submit"} color="ochre" variant="contained">שמור שינויים</Button>*/}
-                            {/*<Button sx={{height:35}} onClick={handleDelete} color="error" variant="contained">מחק יוזמה</Button>*/}
+
                             <Button  sx={{height:35}} type={"submit"} color="ochre" variant="contained">שמירת היוזמה</Button>
 
                         </Box>

@@ -75,6 +75,7 @@ namespace WebApplication1.Controllers
         [Route("ResidentLogin")]
         public IActionResult ResidentLogin([FromBody] UserLogin residentlogin)
         {
+          
             try
             {
                 //IActionResult = allows you to return various types of responses from your action methods
@@ -94,6 +95,7 @@ namespace WebApplication1.Controllers
 
         private string GenerateJwtTokenForResident(TblResident resident)
         {
+            
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var Claims = new[]

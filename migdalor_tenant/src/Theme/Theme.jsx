@@ -18,25 +18,29 @@ const theme = createTheme({
     },
 
     typography: {
+        fontFamily:"\"Open Sans\", sans-serif",
         h1: {
             color:'#F6F2E2',
             fontSize: "3rem",
             fontWeight: 600,
+            fontFamily: "\"Open Sans\", sans-serif",
         },
         h2: {
             color:'#F6F2E2',
             fontSize: "1.75rem",
             fontWeight: 600,
-            fontFamily: "sans-serif"
+            fontFamily: "\"Open Sans\", sans-serif",
+
 
         },
         h3: {
             color:'#F6F2E2',
             fontSize: "1.5rem",
             fontWeight: 600,
-            fontFamily: "Alkatra",
         },
-    }
+    },
+
+
 });
 
 export default theme;

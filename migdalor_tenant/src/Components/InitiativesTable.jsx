@@ -168,10 +168,10 @@ const InitiativesTable = ({initiatives, openEdit}) =>{
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>
-                                <TableCell align="right" sx={{width: '20%'}}>תאריך</TableCell>
-                                <TableCell align="right" sx={{width:'20%'}}>שעת התחלה</TableCell>
-                                <TableCell align="right">שעת סיום</TableCell>
-                                <TableCell align="right">מיקום</TableCell>
+                                <TableCell align="right" sx={{width: '20%', fontWeight:'bold', fontSize:16}}>תאריך</TableCell>
+                                <TableCell align="right" sx={{width:'20%', fontWeight:'bold', fontSize:16}}>שעת התחלה</TableCell>
+                                <TableCell align="right" sx={{ fontWeight:'bold', fontSize:16}}>שעת סיום</TableCell>
+                                <TableCell align="right" sx={{ fontWeight:'bold', fontSize:16}} >מיקום</TableCell>
                                 <TableCell/>
                             </TableRow>
                         </TableHead>

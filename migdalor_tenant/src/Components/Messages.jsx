@@ -120,18 +120,15 @@ function TablePaginationActions(props) {
 }
 
 const StyledBox = styled('Box')({
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
     display: 'flex',
-    justifyContent:'center',
     alignItems: 'center',
+    justifyContent:'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
-    width: '80%',
-    height: '80%',
-    borderRadius: 20
+    width: '75%',
+    height: '85vh',
+    borderRadius: 20,
+    overflow:'auto'
 
 });
 
@@ -175,15 +172,16 @@ export default function Messages() {
     return (
         <ThemeProvider theme={theme}>
             <BackButton/>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
             <StyledBox>
                 <Typography variant={"h2"} sx={{marginBottom: 2}}> לוח הודעות</Typography>
                 <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
-                    <Table stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
+                    <Table stickyHeader  sx={{minWidth: 500 }} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{width: 5}}/>
-                                <TableCell align="right" sx={{width: '20%'}}>תאריך</TableCell>
-                                <TableCell align="right">נושא</TableCell>
+                                <TableCell sx={{width: 5   }}/>
+                                <TableCell align="right" sx={{width: '20%', fontWeight:'bold', fontSize:16 }}>תאריך</TableCell>
+                                <TableCell align="right" sx={{fontWeight:'bold', fontSize:16}}>נושא</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -224,6 +222,7 @@ export default function Messages() {
                     </Table>
                 </TableContainer>
             </StyledBox>
+            </div>
         </ThemeProvider>
     );
 }

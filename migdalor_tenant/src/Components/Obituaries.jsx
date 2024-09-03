@@ -122,18 +122,16 @@ function TablePaginationActions(props) {
 }
 
 const StyledBox = styled('Box')({
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
     display: 'flex',
-    justifyContent:'center',
     alignItems: 'center',
+    justifyContent:'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
     width: '75%',
-    height: '75%',
-    borderRadius: 20
+    height: '85vh',
+    borderRadius: 20,
+    overflow:'auto',
+    gap: 20
 
 });
 
@@ -177,6 +175,8 @@ export default function Obituaries() {
     return (
         <ThemeProvider theme={theme}>
             <BackButton/>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+
             <StyledBox>
                 <Typography variant={"h2"}> מודעות אבל </Typography>
                 <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
@@ -184,10 +184,10 @@ export default function Obituaries() {
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>
-                                <TableCell align="right" sx={{width: '20%'}}>תאריך</TableCell>
-                                <TableCell align="right" sx={{width: '20%'}}>שם המנוח</TableCell>
-                                <TableCell align="right">בית עלמין</TableCell>
-                                <TableCell align="right">מקום השבעה </TableCell>
+                                <TableCell align="right" sx={{width: '20%', fontWeight:'bold', fontSize:16}}>תאריך</TableCell>
+                                <TableCell align="right" sx={{width: '20%', fontWeight:'bold', fontSize:16}}>שם המנוח</TableCell>
+                                <TableCell align="right" sx={{ fontWeight:'bold', fontSize:16}}>בית עלמין</TableCell>
+                                <TableCell align="right" sx={{ fontWeight:'bold', fontSize:16}}>מקום השבעה </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -228,6 +228,7 @@ export default function Obituaries() {
                     </Table>
                 </TableContainer>
             </StyledBox>
+            </div>
         </ThemeProvider>
     );
 }

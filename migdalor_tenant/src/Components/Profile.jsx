@@ -9,6 +9,7 @@ import {UserContext} from "../Auth/Auth.jsx";
 import moment from "moment";
 import MessageModal from "./MessageModal.jsx";
 import * as ResidentRequests from '../Requests/ResidentRequests/ResidentRequests.jsx'
+
 const StyledLabel = styled('Typography')({
     color: 'white',
     fontWeight: 'bold',
@@ -16,27 +17,23 @@ const StyledLabel = styled('Typography')({
 })
 
 const StyledBox = styled('Box')({
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    marginTop: '3rem',
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'start',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
-    width: '50%',
-    height: '75%',
-    borderRadius: 20
-
+    width: '75%',
+    height: '115vh',
+    borderRadius: 20,
+    overflow: 'auto'
 });
 const Row = styled('Box')({
     width: '100%',
-    marginRight: '5rem',
+    position: 'relative',
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: 10,
+    flexWrap:'wrap'
 })
 const Profile = () => {
     const [details, setDetails] = useState({
@@ -52,6 +49,7 @@ const Profile = () => {
         hobbies: '',
         courses: '',
         aboutMe: '',
+        phoneNumber: ''
     });
 
     const [showBirthDatePlaceholder, setShowBirthDatePlaceholder] = useState(true);
@@ -67,6 +65,7 @@ const Profile = () => {
             firstName: user.firstName,
             lastName: user.lastName,
             birthDate: user.dateOfBirth,
+            phoneNumber: user.phoneNumber,
             email: user.email,
             entryDate: '',
             city: user.previousAddress,
@@ -103,7 +102,7 @@ const Profile = () => {
             setShowEntryDatePlaceholder(true);
         }
     };
-    const handekModalClose = ()=>{
+    const handekModalClose = () => {
         setOpenModal(false)
     }
     const handleSubmit = async (e) => {
@@ -114,13 +113,13 @@ const Profile = () => {
             lastName: details.lastName,
             phoneNumber: user.phoneNumber,
             residentId: user.ResidentId,
-            dateOfBirth :details.birthDate,
+            dateOfBirth: details.birthDate,
             previousAddress: details.city,
             profession: details.profession,
             email: details.email,
             username: user.username,
             password: user.password,
-            currentAddress:details.city
+            currentAddress: details.city
         })
         setMessage("פרטייך נשמר בהצלחה")
         setOpenModal(true);
@@ -130,140 +129,182 @@ const Profile = () => {
     return (
         <div><BackButton/>
             <MessageModal message={message} open={openModal} handleClose={handekModalClose}/>
-            <StyledBox>
-                <Typography variant={"h2"} sx={{margin: 'auto'}}>איזור אישי</Typography>
-                <form onSubmit={handleSubmit}>
-                    <Row>
-                        <StyledLabel>שם פרטי</StyledLabel>
-                        <input
-                            style={{width: 400, height:25}}
-                            type="text"
-                            name="firstName"
-                            placeholder="שם פרטי"
-                            value={details.firstName}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>שם משפחה</StyledLabel>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 
-                        <input
-                            type="text"
-                            name="lastName"
-                            placeholder="שם משפחה"
-                            value={details.lastName}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>תאריך לידה</StyledLabel>
-                        <input
-                            type="text"
-                            name="birthDate"
-                            placeholder={showBirthDatePlaceholder ? "תאריך לידה" : ""}
-                            value={moment(details.birthDate, 'YYYY-MM-DDT00:00:00').format('YYYY-MM-DD')}
-                            onChange={handleChange}
-                            onFocus={() => handleDateFocus("birthDate")}
-                            onBlur={() => handleDateBlur("birthDate")}
-                            className="input"
-                            onClick={(e) => e.target.type = 'date'}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>אימייל</StyledLabel>
 
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="איימיל"
-                            value={details.email}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>תאריך כניסה לדיור מוגן</StyledLabel>
+                <StyledBox>
+                    <Typography variant={"h2"} sx={{margin: 'auto'}}>איזור אישי</Typography>
+                    <form onSubmit={handleSubmit} style={{width: "75%"}}>
+                        <Row>
+                            <StyledLabel>שם פרטי</StyledLabel>
+                            <input
+                                style={{width: 400, height: 25}}
+                                type="text"
+                                name="firstName"
+                                placeholder="שם פרטי"
+                                value={details.firstName}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>שם משפחה</StyledLabel>
 
-                        <input
-                            type="text"
-                            name="entryDate"
-                            placeholder={showEntryDatePlaceholder ? "תאריך כניסה לדיור המוגן" : ""}
-                            value={details.entryDate}
-                            onChange={handleChange}
-                            onFocus={() => handleDateFocus("entryDate")}
-                            onBlur={() => handleDateBlur("entryDate")}
-                            className="input"
-                            onClick={(e) => e.target.type = 'date'}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>עיר מגורים</StyledLabel>
-                        <input
-                            type="text"
-                            name="city"
-                            placeholder="עיר מגורים"
-                            value={details.city}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>מיקום הדירה הנוכחית</StyledLabel>
+                            <input
+                                style={{width: 400, height: 25}}
 
-                        <input
-                            type="text"
-                            name="apartmentLocation"
-                            placeholder="מיקום הדירה הנוכחית"
-                            value={details.apartmentLocation}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>מקצוע</StyledLabel>
-                        <input
-                            type="text"
-                            name="profession"
-                            placeholder="מקצוע"
-                            value={details.profession}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>תחביבים</StyledLabel>
+                                type="text"
+                                name="lastName"
+                                placeholder="שם משפחה"
+                                value={details.lastName}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>תאריך לידה</StyledLabel>
+                            <input
+                                type="text"
+                                name="birthDate"
+                                style={{width: 400, height: 25}}
 
-                        <input
-                            type="text"
-                            name="hobbies"
-                            placeholder="תחביבים"
-                            value={details.hobbies}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>חוגים בבית</StyledLabel>
+                                placeholder={showBirthDatePlaceholder ? "תאריך לידה" : ""}
+                                value={moment(details.birthDate, 'YYYY-MM-DDT00:00:00').format('YYYY-MM-DD')}
+                                onChange={handleChange}
+                                onFocus={() => handleDateFocus("birthDate")}
+                                onBlur={() => handleDateBlur("birthDate")}
+                                className="input"
+                                onClick={(e) => e.target.type = 'date'}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>טלפון</StyledLabel>
 
-                        <input
-                            type="text"
-                            name="courses"
-                            placeholder="חוגים בבית"
-                            value={details.courses}
-                            onChange={handleChange}
-                        />
-                    </Row>
-                    <Row>
-                        <StyledLabel>בקצרה עלי</StyledLabel>
+                            <input
+                                style={{width: 400, height: 25}}
 
-                        <textarea
-                            style={{resize: 'none', width: '43%'}}
-                            name="aboutMe"
-                            placeholder="בקצרה עלי"
-                            value={details.aboutMe}
-                            onChange={handleChange}
-                        ></textarea>
-                    </Row>
+                                type="text"
+                                name="phoneNumber"
+                                placeholder="טלפון"
+                                value={details.phoneNumber}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>אימייל</StyledLabel>
 
-                    <Button type={"submit"} color="ochre" sx={{fontWeight:'bold'}} variant="contained">עדכון פרטים</Button>
-                </form>
-                {/* כאן תוסיף את ה-CARD של הפעילויות */}
-            </StyledBox>
+                            <input
+                                style={{width: 400, height: 25}}
+
+                                type="email"
+                                name="email"
+                                placeholder="איימיל"
+                                value={details.email}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>תאריך כניסה לדיור מוגן</StyledLabel>
+
+                            <input
+                                type="text"
+                                name="entryDate"
+                                style={{width: 400, height: 25}}
+
+                                placeholder={showEntryDatePlaceholder ? "תאריך כניסה לדיור המוגן" : ""}
+                                value={details.entryDate}
+                                onChange={handleChange}
+                                onFocus={() => handleDateFocus("entryDate")}
+                                onBlur={() => handleDateBlur("entryDate")}
+                                className="input"
+                                onClick={(e) => e.target.type = 'date'}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>עיר מגורים</StyledLabel>
+                            <input
+                                type="text"
+                                name="city"
+                                placeholder="עיר מגורים"
+                                style={{width: 400, height: 25}}
+
+                                value={details.city}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>מיקום הדירה הנוכחית</StyledLabel>
+
+                            <input
+                                style={{width: 400, height: 25}}
+
+                                type="text"
+                                name="apartmentLocation"
+                                placeholder="מיקום הדירה הנוכחית"
+                                value={details.apartmentLocation}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>מקצוע</StyledLabel>
+                            <input
+                                style={{width: 400, height: 25}}
+
+                                type="text"
+                                name="profession"
+                                placeholder="מקצוע"
+                                value={details.profession}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>תחביבים</StyledLabel>
+
+                            <input
+                                style={{width: 400, height: 25}}
+
+                                type="text"
+                                name="hobbies"
+                                placeholder="תחביבים"
+                                value={details.hobbies}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>חוגים בבית</StyledLabel>
+
+                            <input
+                                style={{width: 400, height: 25}}
+
+                                type="text"
+                                name="courses"
+                                placeholder="חוגים בבית"
+                                value={details.courses}
+                                onChange={handleChange}
+                            />
+                        </Row>
+                        <Row>
+                            <StyledLabel>בקצרה עלי</StyledLabel>
+
+                            <textarea
+                                style={{width: 400, height: 75, resize: 'none'}}
+
+                                name="aboutMe"
+                                placeholder="בקצרה עלי"
+                                value={details.aboutMe}
+                                onChange={handleChange}
+                            ></textarea>
+                        </Row>
+                        <Row sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                            }}>
+                            <Button type={"submit"} color="ochre" sx={{fontWeight: 'bold', alignSelf:'center'}} variant="contained">עדכון
+                                פרטים</Button>
+                        </Row>
+                    </form>
+                    {/* כאן תוסיף את ה-CARD של הפעילויות */}
+                </StyledBox>
+            </div>
         </div>
     );
 };

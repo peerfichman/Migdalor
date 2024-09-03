@@ -16,7 +16,10 @@ import {UserContext} from "../../Auth/Auth.jsx";
 
 
 const Row = styled('Box')({
+    display:'flex',
+    flexDirection:'column',
     marginBottom: 10,
+    gap:10
 })
 const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onInitiativeJoined}) => {
 
@@ -74,7 +77,7 @@ const InitiativeModal = ({isParticipating, initiativeNumber, open, onClose, onIn
                     left: '50%',
                     top: '50%',
                     transform: 'translate(-50%, -50%)',
-                    height: "80%",
+                    height: "90vh",
                     width: "80%",
                     backgroundColor: '#F6F2E4',
                     borderRadius: 10,

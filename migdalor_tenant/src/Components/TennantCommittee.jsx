@@ -122,18 +122,17 @@ function TablePaginationActions(props) {
 }
 
 const StyledBox = styled('Box')({
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+
     display: 'flex',
-    justifyContent:'center',
     alignItems: 'center',
+    justifyContent:'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
     width: '75%',
-    height: '75%',
-    borderRadius: 20
+    height: '85vh',
+    borderRadius: 20,
+    overflow:'auto',
+    gap:20
 
 });
 
@@ -177,16 +176,18 @@ export default function TennantCommittee() {
     return (
         <ThemeProvider theme={theme}>
             <BackButton/>
-            <StyledBox>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+                <StyledBox>
+
                 <Typography variant={"h2"}> וועדי דיירים </Typography>
                 <TableContainer component={Paper} sx={{width:'90%' ,maxHeight: 400, height:800 }}>
                     <Table stickyHeader  sx={{minWidth: 500}} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{width: 5}}/>
-                                <TableCell align="right" sx={{width: '20%'}}>שם הוועד</TableCell>
-                                <TableCell align="right" sx={{width: '20%'}}>שם מהל הוועד</TableCell>
-                                <TableCell align="right">מס' טלפון מנהל הוועד</TableCell>
+                                <TableCell align="right" sx={{width: '20%' , fontWeight:'bold', fontSize:16}}>שם הוועד</TableCell>
+                                <TableCell align="right" sx={{width: '20%', fontWeight:'bold', fontSize:16}}>שם מהל הוועד</TableCell>
+                                <TableCell align="right" sx={{ fontWeight:'bold', fontSize:16}}>מס' טלפון מנהל הוועד</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -227,6 +228,7 @@ export default function TennantCommittee() {
                     </Table>
                 </TableContainer>
             </StyledBox>
+           </div>
         </ThemeProvider>
     );
 }

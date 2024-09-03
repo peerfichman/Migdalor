@@ -103,7 +103,7 @@ const CheckInPage = () => {
                                 border: '3px solid white',
                             }}
                             >
-                                <Typography variant={'h3'} noWrap={true}>דיווח נוהל בוקר טוב</Typography>
+                                <Typography variant={'h3'} style={{fontFamily: "\"Open Sans\", sans-serif"}}>דיווח נוהל בוקר טוב</Typography>
                             </IconButton>
                         </StyledBox>
                     )}

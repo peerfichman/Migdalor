@@ -17,6 +17,10 @@ import {UserContext} from "../../Auth/Auth.jsx";
 
 const Row = styled('Box')({
     marginBottom: 10,
+    display:'flex',
+    flexDirection:'column',
+
+    gap:10
 })
 const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActivityJoined}) => {
 
@@ -74,12 +78,13 @@ const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActi
                     left: '50%',
                     top: '50%',
                     transform: 'translate(-50%, -50%)',
-                    height: "80%",
+                    height: "90vh",
                     width: "80%",
                     backgroundColor: '#F6F2E4',
                     borderRadius: 10,
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
+                    alignItems: 'center'
                 }}>
                 <Button sx={{
                     alignSelf: 'start',
@@ -91,10 +96,9 @@ const ActivityModal = ({isParticipating, initiativeNumber, open, onClose, onActi
                 <Typography variant={"h2"} sx={{color: 'black', alignSelf: 'center'}}>פרטי הפעילות</Typography>
                 <Box
                     sx={{
-                        marginRight: '10%',
-                        marginTop: '5%'
-                    }}>
-
+                        width:'100vh'
+                    }}
+                >
                     <Row>
                         <Typography variant={"h5"}>שם הפעילות:</Typography>
                         <Typography>{activity?.activityName}</Typography>

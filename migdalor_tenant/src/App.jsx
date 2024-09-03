@@ -17,6 +17,8 @@ import Initiatives from "./Components/Initiatives.jsx";
 import OpeningHours from "./Components/OpeningHours.jsx";
 import TennantComitte from "./Components/TennantCommittee.jsx"
 import ForgotPassword from "./Components/ForgotPassword.jsx";
+import Header from "./Components/Header.jsx";
+import Footer from "./Components/Footer.jsx";
 const App = () => {
 
     return (
@@ -32,7 +34,9 @@ const App = () => {
                                     path="/*"
                                     element={
                                         <ProtectedRoute>
+                                            <Header/>
                                             <AppRoutes/>
+                                            <Footer/>
                                         </ProtectedRoute>
                                     }
                                 />

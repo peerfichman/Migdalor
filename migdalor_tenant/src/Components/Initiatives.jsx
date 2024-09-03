@@ -12,19 +12,16 @@ import {Message} from "@mui/icons-material";
 import MessageModal from "./MessageModal.jsx";
 
 const StyledBox = styled('Box')({
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    marginTop: '3rem',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent:'center',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary.main,
     width: '75%',
-    height: '500px',
-    borderRadius: 20
+    height: '85vh',
+    borderRadius: 20,
+    overflow:'auto',
+    gap: 10
 
 });
 
@@ -59,6 +56,7 @@ const Initiatives = () => {
     return (
         <div>
             <BackButton/>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
             <StyledBox>
                 <Typography variant={"h2"}
                 >היוזמות שלי</Typography>
@@ -66,6 +64,7 @@ const Initiatives = () => {
                 <Button color="success" variant="contained" onClick={toggleModal}> יצירת יוזמה </Button>
 
             </StyledBox>
+            </div>
             <InitiativeCreateModal open={open}  onClose={toggleModal}/>
             <InitiativeEditModal open={edit!==0} edit={edit}  onClose={closeEdit}/>
         </div>

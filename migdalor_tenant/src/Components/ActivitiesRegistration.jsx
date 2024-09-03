@@ -28,7 +28,7 @@ const ActivitiesRegistration =()=>{
             }}
           >
           <div style={{ display: 'flex', alignItems: 'flex', direction: 'rtl'}}>
-            <Typography variant="h6" className="welcom-header" style={{ marginTop: 8,color:'#000',fontWeight: 'bold',fontSize: 15, fontFamily: 'Arial'}}>
+            <Typography variant="h6" className="welcom-header" style={{ marginTop: 8,color:'#000',fontWeight: 'bold',fontSize: 15}}>
               {item.text}
             </Typography>
             <Typography variant="h6" style={{ color: '#000',fontSize: 15}}>
