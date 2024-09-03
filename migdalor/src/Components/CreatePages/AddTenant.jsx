@@ -38,7 +38,7 @@ console.log(generateUUID());
 //   return password;
 // };//guid
 
-const AddTenant = ({isEdit, tenantId, setModalOpen}) => {
+const AddTenant = ({isEdit, tenantId, setModalOpen, onUpdate}) => {
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -93,7 +93,8 @@ const AddTenant = ({isEdit, tenantId, setModalOpen}) => {
                 }
             });
         }
-        // setModalOpen(false);
+        onUpdate();
+         setModalOpen(false);
     };
 
     useEffect(() => {

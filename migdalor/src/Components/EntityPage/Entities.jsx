@@ -32,7 +32,7 @@ const Entities = ({EntityName}) =>{
                 <Typography color='white' fontSize='Large'>{EntitiesMap[EntityName].createLabel}</Typography>
             </IconButton>
             <EntitiesTable entities={entities} entityName={EntityName} onUpdate={onUpdate}></EntitiesTable>
-            {openCreate && EntitiesMap[EntityName].createPage(setOpenCreate)}
+            {openCreate && EntitiesMap[EntityName].createPage(setOpenCreate, onUpdate)}
         </div>
     )
 

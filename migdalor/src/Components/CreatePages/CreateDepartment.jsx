@@ -4,7 +4,7 @@ import departmentRequests from "../../Requests/Department/index.jsx";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 
-const CreateDepartment = ({isEdit, departmentNumber, setModalOpen}) => {
+const CreateDepartment = ({isEdit, departmentNumber, setModalOpen, onUpdate}) => {
     const [formData, setFormData] = useState({
         departmentName: '',
         departmentManager: '',
@@ -44,6 +44,7 @@ const CreateDepartment = ({isEdit, departmentNumber, setModalOpen}) => {
                 }
             });
         }
+        onUpdate()
         setModalOpen(false)
     }
 

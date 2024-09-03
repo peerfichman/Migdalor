@@ -8,7 +8,7 @@ import Modal from "@mui/material/Modal";
 
 // const apiUrl = "https://localhost:7149/api/activity/";
 
-const TenantCommittee = ({isEdit, committeeId, setModalOpen}) => {
+const TenantCommittee = ({isEdit, committeeId, setModalOpen, onUpdate}) => {
 
     const [residents, setResidents] = useState([])
 
@@ -55,6 +55,8 @@ const TenantCommittee = ({isEdit, committeeId, setModalOpen}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await CommitteeRequests.create(formData);
+        onUpdate();
+        setModalOpen(false);
 
     };
 

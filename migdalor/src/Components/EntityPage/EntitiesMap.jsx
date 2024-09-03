@@ -26,11 +26,11 @@ const EntitiesMap = {
             ]
         ),
         createLabel: "צור פעילות",
-        createPage: (setOpenCreate) => {
-            return <CreateActivity isEdit={false} activityNumber={null} setModalOpen={setOpenCreate}/>
+        createPage: (setOpenCreate, onUpdate) => {
+            return <CreateActivity isEdit={false} activityNumber={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
         editPage: (activityId, setOpenEdit) => {
-            return <CreateActivity isEdit={true} activityNumber={activityId} setModalOpen={setOpenEdit}/>
+            return <CreateActivity isEdit={true} activityNumber={activityId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
 
     },
@@ -40,7 +40,7 @@ const EntitiesMap = {
             ...TenantRequests
         }
         , columns: new Map([
-                ['firstName', "שפ פרטי"],
+                ['firstName', "שם; פרטי"],
                 ['lastName', "שם משפחה"],
                 ['dateOfBirth', "תאריך לידה"],
                 ['email', "כתובת מייל"],
@@ -48,11 +48,11 @@ const EntitiesMap = {
             ]
         ),
         createLabel: "דייר חדש",
-        createPage: (setOpenCreate) => {
-            return <AddTenant isEdit={false} tenantId={null} setModalOpen={setOpenCreate}/>
+        createPage: (setOpenCreate, onUpdate) => {
+            return <AddTenant isEdit={false} tenantId={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
-        editPage: (tenantId, setOpenEdit) => {
-            return <AddTenant isEdit={true} tenantId={tenantId} setModalOpen={setOpenEdit}/>
+        editPage: (tenantId, setOpenEdit, onUpdate) => {
+            return <AddTenant isEdit={true} tenantId={tenantId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
     },
     Department: {
@@ -69,11 +69,11 @@ const EntitiesMap = {
             ]
         ),
         createLabel: "צור מחלקה",
-        createPage: (setOpenCreate) => {
-            return <CreateDepartment isEdit={false} departmentNumber={null} setModalOpen={setOpenCreate}/>
+        createPage: (setOpenCreate, onUpdate) => {
+            return <CreateDepartment isEdit={false} departmentNumber={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
-        editPage: (departmentId, setOpenEdit) => {
-            return <CreateDepartment isEdit={true} departmentNumber={departmentId} setModalOpen={setOpenEdit}/>
+        editPage: (departmentId, setOpenEdit, onUpdate) => {
+            return <CreateDepartment isEdit={true} departmentNumber={departmentId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
     },
     Message: {
@@ -87,11 +87,11 @@ const EntitiesMap = {
             ]
         ),
         createLabel: "שלח הודעה לדיירים",
-        createPage: (setOpenCreate) => {
-            return <SendMessage isEdit={false} messageNumber={null} setModalOpen={setOpenCreate}/>
+        createPage: (setOpenCreate, onUpdate) => {
+            return <SendMessage isEdit={false} messageNumber={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
-        editPage: (messageId, setOpenEdit) => {
-            return <SendMessage isEdit={true} messageNumber={messageId} setModalOpen={setOpenEdit}/>
+        editPage: (messageId, setOpenEdit, onUpdate) => {
+            return <SendMessage isEdit={true} messageNumber={messageId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
     },
     Obituary: {
@@ -109,11 +109,11 @@ const EntitiesMap = {
             ]
         ),
         createLabel: "פרסם מודעת אבל",
-        createPage: (setOpenCreate) => {
-            return <AddObituaryNotice isEdit={false} obituaryNumber={null} setModalOpen={setOpenCreate}/>
+        createPage: (setOpenCreate, onUpdate) => {
+            return <AddObituaryNotice isEdit={false} obituaryNumber={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
-        editPage: (obituaryNumber, setOpenEdit) => {
-            return <AddObituaryNotice isEdit={true} obituaryNumber={obituaryNumber} setModalOpen={setOpenEdit}/>
+        editPage: (obituaryNumber, setOpenEdit, onUpdate) => {
+            return <AddObituaryNotice isEdit={true} obituaryNumber={obituaryNumber} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
     } ,
     Committee: {
@@ -129,10 +129,10 @@ const EntitiesMap = {
         ),
         createLabel: "צור וועד חדש",
         createPage: (setOpenCreate ,onUpdate) => {
-            return <TennantCommittee isEdit={false} obituaryNumber={null} setModalOpen={setOpenCreate}/>
+            return <TennantCommittee isEdit={false} obituaryNumber={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
-        editPage: (obituaryNumber, setOpenEdit) => {
-            return <TennantCommittee isEdit={true} obituaryNumber={obituaryNumber} setModalOpen={setOpenEdit}/>
+        editPage: (obituaryNumber, setOpenEdit, onUpdate) => {
+            return <TennantCommittee isEdit={true} obituaryNumber={obituaryNumber} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
     }
 }

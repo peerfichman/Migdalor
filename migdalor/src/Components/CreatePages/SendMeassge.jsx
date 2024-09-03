@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
 
-const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
+const SendMessage = ({isEdit, messageNumber, setModalOpen, onUpdate}) => {
 
     const [message, setMessage] = useState('');
     const [subject, setSubject] = useState('');
@@ -43,6 +43,7 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen}) => {
                 }
             });
         }
+        onUpdate();
         setModalOpen(false)
     }
 

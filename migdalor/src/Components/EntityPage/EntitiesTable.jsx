@@ -16,7 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EntitiesMap from "./EntitiesMap.jsx";
 import moment from "moment";
-const  EntityRow = ({entity, entityName})=> {
+const  EntityRow = ({entity, entityName , onUpdate})=> {
     const [open, setOpen] = React.useState(false);
     const [modalOpen, setModalOpen] =React.useState(false);
 
@@ -24,6 +24,7 @@ const  EntityRow = ({entity, entityName})=> {
     const handelDelete = async (e)=>{
         e.preventDefault();
         await EntitiesMap[entityName].requests.delete(entity[entityPK]);
+        onUpdate()
     }
 
     const descriptionTitle = (entity) => {
@@ -57,8 +58,6 @@ const  EntityRow = ({entity, entityName})=> {
                     <IconButton color='primary' onClick={(e) =>setModalOpen(true)}>
                         <EditIcon/>
                     </IconButton>
-                </TableCell>
-                <TableCell>
                     <IconButton color='error' onClick={handelDelete}>
                         <DeleteIcon/>
                     </IconButton>
@@ -80,14 +79,14 @@ const  EntityRow = ({entity, entityName})=> {
                 </TableCell>
                 }
             </TableRow>
-            {modalOpen && EntitiesMap[entityName].editPage(entity[entityPK],setModalOpen)}
+            {modalOpen && EntitiesMap[entityName].editPage(entity[entityPK],setModalOpen, onUpdate)}
         </React.Fragment>
     );
 }
 
 
 // eslint-disable-next-line react/prop-types
-const  EntityTable = ({entityName, entities})=> {
+const  EntityTable = ({entityName, entities, onUpdate})=> {
     const entityPK = EntitiesMap[entityName].primaryKey;
 
     return (
@@ -100,12 +99,11 @@ const  EntityTable = ({entityName, entities})=> {
                             return <TableCell sx={{ fontWeight:'bold', fontSize:16}} key={colName} align="right">{colName}</TableCell>
                         })}
                         <TableCell/>
-                        <TableCell/>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {entities.map((entity) => {
-                        return <EntityRow key={entity[entityPK]} entity={entity} entityName={entityName}/>
+                        return <EntityRow key={entity[entityPK]} entity={entity} entityName={entityName} onUpdate={onUpdate}/>
                         }
                     )}
                 </TableBody>

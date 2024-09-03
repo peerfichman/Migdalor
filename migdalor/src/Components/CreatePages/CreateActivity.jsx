@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment';
 
 // eslint-disable-next-line react/prop-types
-const CreateActivity = ({isEdit, activityNumber, setModalOpen}) => {
+const CreateActivity = ({isEdit, activityNumber, setModalOpen, onUpdate}) => {
 
     const [formData, setFormData] = useState({
         Date: '',
@@ -65,6 +65,7 @@ const CreateActivity = ({isEdit, activityNumber, setModalOpen}) => {
                 }
             });
         }
+        onUpdate();
         setModalOpen(false)
     }
 
