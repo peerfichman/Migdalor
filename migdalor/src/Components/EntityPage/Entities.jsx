@@ -7,12 +7,23 @@ import EntitiesTable from "./EntitiesTable.jsx";
 const Entities = ({EntityName}) =>{
     const [entities, setEntities] = useState([]);
     const [openCreate, setOpenCreate] = useState(false)
-
+    const [update, setUpdate] = useState(false)
     useEffect(() => {
        EntitiesMap[EntityName].requests.getAll().then(as =>{
             setEntities(as)
         })
     },[]);
+    useEffect(() => {
+       EntitiesMap[EntityName].requests.getAll().then(as =>{
+            setEntities(as)
+        })
+        setUpdate(false)
+    },[update]);
+
+    const onUpdate =()=>{
+        setUpdate(true);
+    }
+
 
     return(
         <div style={{display:'flex', flexDirection:'column', width:'75%'}}>
@@ -20,7 +31,7 @@ const Entities = ({EntityName}) =>{
                 <AddIcon fontSize='large' sx={{color:'white'}} />
                 <Typography color='white' fontSize='Large'>{EntitiesMap[EntityName].createLabel}</Typography>
             </IconButton>
-            <EntitiesTable entities={entities} entityName={EntityName}></EntitiesTable>
+            <EntitiesTable entities={entities} entityName={EntityName} onUpdate={onUpdate}></EntitiesTable>
             {openCreate && EntitiesMap[EntityName].createPage(setOpenCreate)}
         </div>
     )

@@ -19,6 +19,7 @@ import TennantComitte from "./Components/TennantCommittee.jsx"
 import ForgotPassword from "./Components/ForgotPassword.jsx";
 import Header from "./Components/Header.jsx";
 import Footer from "./Components/Footer.jsx";
+import Contacts from './Components/Contacts.jsx';
 const App = () => {
 
     return (
@@ -95,7 +96,12 @@ const AppRoutes = () => {
         {
             path: '/tenantCommittee',
             element: <TennantComitte/>
+        },
+        {
+            path: '/contacts',
+            element: <Contacts/>
         }
+
     ];
 
     return useRoutes(routes);

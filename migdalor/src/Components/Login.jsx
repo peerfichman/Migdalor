@@ -61,7 +61,7 @@ export default function Login(props) {
     
     
   return (
-    <div style={{ backgroundImage: backgroundImg }}>
+    <div style={{ backgroundImage: backgroundImg, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
     <img src={myImage} alt="react logo" />
    
 

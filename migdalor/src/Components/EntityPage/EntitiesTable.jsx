@@ -50,7 +50,7 @@ const  EntityRow = ({entity, entityName})=> {
                     if(col==='date') val = moment(val, 'yyyy-MM-DDT00:00:00').format('DD/MM/yyyy')
                     if(col==='dateOfBirth') val = moment(val, 'yyyy-MM-DDT00:00:00').format('DD/MM/yyyy')
                     if(col === 'residentManager') val = val.firstName + " " + val.lastName;
-                    return <TableCell key={col} >{val}</TableCell>
+                    return <TableCell align="right" key={col} >{val}</TableCell>
                 })
                 }
                 <TableCell>
@@ -97,7 +97,7 @@ const  EntityTable = ({entityName, entities})=> {
                     <TableRow >
                         {(entities[0]?.description || entities[0]?.content || entities[0]?.responsibilityDescription) && <TableCell sx={{width: '1%'}}/>}
                         {Array.from(EntitiesMap[entityName].columns.values()).map((colName) => {
-                            return <TableCell key={colName} align="right">{colName}</TableCell>
+                            return <TableCell sx={{ fontWeight:'bold', fontSize:16}} key={colName} align="right">{colName}</TableCell>
                         })}
                         <TableCell/>
                         <TableCell/>

@@ -58,7 +58,6 @@ const Profile = () => {
     const [openModal, setOpenModal] = useState(false)
 
     const {user} = useContext(UserContext);
-    console.log(user)
 
     useEffect(() => {
         setDetails({
@@ -112,18 +111,18 @@ const Profile = () => {
             firstName: details.firstName,
             lastName: details.lastName,
             phoneNumber: user.phoneNumber,
-            residentId: user.ResidentId,
+            residentId: user.residentID,
             dateOfBirth: details.birthDate,
             previousAddress: details.city,
             profession: details.profession,
             email: details.email,
             username: user.username,
             password: user.password,
-            currentAddress: details.city
+            currentAddress: details.city,
+            aboutMe: details.aboutMe
         })
-        setMessage("פרטייך נשמר בהצלחה")
+        setMessage("פרטייך נשמרו בהצלחה")
         setOpenModal(true);
-        // כאן תוסיף את הקוד לשמירת הנתונים על השרת
     };
 
     return (

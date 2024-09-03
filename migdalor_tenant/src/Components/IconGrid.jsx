@@ -27,7 +27,7 @@ const items = [
   { icon: <ContactPhoneIcon style={{ fontSize: 40 }} />, text: 'אנשי', subtext: 'קשר', route: '/contacts' },
   { icon: <AccessTimeIcon style={{ fontSize: 40 }} />, text: 'שעות', subtext: 'פתיחה', route: '/openingHours' },
   { icon: <GroupIcon style={{ fontSize: 40 }} />, text: 'ועד', subtext: 'דיירים', route: '/tenantCommittee' },
-  { icon: <AnnouncementIcon style={{ fontSize: 40 }} />, text: 'הודעות', subtext: 'אבל', route: '/obituaries' },
+  { icon: <AnnouncementIcon style={{ fontSize: 40 }} />, text: 'מודעות', subtext: 'אבל', route: '/obituaries' },
   // { icon: <MapIcon style={{ fontSize: 40 }} />, text: 'מפת', subtext: 'הבית', route: '/' }
 ];
 

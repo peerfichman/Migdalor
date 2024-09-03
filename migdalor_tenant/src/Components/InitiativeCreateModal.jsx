@@ -12,6 +12,7 @@ import {UserContext} from "../Auth/Auth.jsx";
 import moment from "moment";
 import * as InitiativeRequests from '../Requests/Initatives/InitativesRequests.jsx'
 import Box from "@mui/material/Box";
+import CloseIcon from "@mui/icons-material/Close";
 
 const StyledLabel = styled('Typography')({
     color: 'white',
@@ -24,7 +25,6 @@ const StyledBox = styled('Box')({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    marginTop: '3rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -32,7 +32,8 @@ const StyledBox = styled('Box')({
     backgroundColor: theme.palette.primary.main,
     width: '50%',
     height: '75%',
-    borderRadius: 20
+    borderRadius: 20,
+    gap: 15
 
 });
 const Row = styled('Box')({
@@ -78,7 +79,7 @@ const InitiativeCreateModal = ({open, onClose}) => {
 
 
     const handleDateFocus = (name) => {
-        if (name === "date" ) {
+        if (name === "date") {
             setShowDatePlaceholder(false);
         }
 
@@ -123,14 +124,18 @@ const InitiativeCreateModal = ({open, onClose}) => {
                 aria-Typographyledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
+
                 <StyledBox>
-                    <Typography variant={"h2"}>יצירת יוזמה</Typography>
+
+                        <Typography variant={"h2"} sx={{marginTop: 5}}>יצירת יוזמה</Typography>
+
                     <form onSubmit={handleSubmit}
                           style={{
-                              marginLeft:20,
-                              marginTop:20,
-                              width:"90%",
-                              height:"100%"}}
+                              marginLeft: 20,
+                              marginTop: 20,
+                              width: "90%",
+                              height: "100%"
+                          }}
                     >
 
                         <Row>
@@ -243,9 +248,10 @@ const InitiativeCreateModal = ({open, onClose}) => {
                                 }}
                             ></textarea>
                         </Row>
-                        <Box sx={{display: 'flex', justifyContent:'space-evenly', height:100, alignItems:'center'}}>
+                        <Box sx={{display: 'flex', justifyContent: 'space-evenly', height: 100, alignItems: 'center'}}>
 
-                            <Button  sx={{height:35}} type={"submit"} color="ochre" variant="contained">שמירת היוזמה</Button>
+                            <Button sx={{height: 35}} type={"submit"} color="ochre" variant="contained">שמירת
+                                היוזמה</Button>
 
                         </Box>
 
@@ -253,7 +259,7 @@ const InitiativeCreateModal = ({open, onClose}) => {
                     {/* כאן תוסיף את ה-CARD של הפעילויות */}
                 </StyledBox>
             </Modal>
-            <MessageModal message={message}open={message !==''} handleClose={closeMessageDialog}/>
+            <MessageModal message={message} open={message !== ''} handleClose={closeMessageDialog}/>
 
         </div>
     );

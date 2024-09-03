@@ -36,7 +36,7 @@ namespace WebApplication1.Controllers
             if (user != null)
             {
                 var token = GenerateJwtToken(user);
-                return Ok(new { Token = token });
+                return Ok(new { Token = token,  User=user });
             }
             return response;
         }

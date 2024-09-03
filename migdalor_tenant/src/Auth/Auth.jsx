@@ -5,25 +5,25 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(
-        {
-            "id": 415124019,
-            "firstName": "פאר זוהר",
-            "lastName": "פיכמן",
-            "phoneNumber": "0526770546",
-            "residentID": "666",
-            "dateOfBirth": "2024-09-26T00:00:00",
-            "previousAddress": "רמת גן",
-            "seniority": null,
-            "currentAddress": null,
-            "profession": "שינוי",
-            "email": "peerfikhman@gmail.com",
-            "aboutMe": null,
-            "username": "666",
-            "password": "a165e952",
-            "departmentId": null
-        }
+    {
+        "id": 886119921,
+        "firstName": "פאר",
+        "lastName": "פיכמן",
+        "phoneNumber": "0526770546",
+        "residentID": "204683650",
+        "dateOfBirth": "2024-08-30T00:00:00",
+        "previousAddress": "רמת גן",
+        "seniority": null,
+        "currentAddress": null,
+        "profession": "מתכנת",
+        "email": "peerfikhman@gmail.com",
+        "aboutMe": null,
+        "username": "204683650",
+        "password": "02cf8e28",
+        "departmentId": null
+    }
 
-    );
+);
     const login = async (username, password) => {
         try {
             const response = await axios.post('https://localhost:7149/api/login/ResidentLogin', {

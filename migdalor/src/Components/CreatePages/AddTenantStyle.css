@@ -15,7 +15,6 @@
 .add-tenant-title {
   color: #38588e;
   margin-bottom: 20px;
-  font-family: 'sans-serif';
 }
 
 .add-tenant-form-row {
@@ -35,7 +34,6 @@
   text-align: right;
   color: black;
   font-weight: bold;
-  font-family: 'sans-serif';
   background-color: white;
 }
 
@@ -52,7 +50,6 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  font-family: 'sans-serif';
 }
 
 .add-tenant-form-button:hover {

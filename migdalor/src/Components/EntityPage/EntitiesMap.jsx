@@ -128,7 +128,7 @@ const EntitiesMap = {
             ]
         ),
         createLabel: "צור וועד חדש",
-        createPage: (setOpenCreate) => {
+        createPage: (setOpenCreate ,onUpdate) => {
             return <TennantCommittee isEdit={false} obituaryNumber={null} setModalOpen={setOpenCreate}/>
         },
         editPage: (obituaryNumber, setOpenEdit) => {

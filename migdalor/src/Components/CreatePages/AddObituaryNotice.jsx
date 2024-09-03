@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
 
-const AddObituaryNotice = ({isEdit, obituaryNumber, setModalOpen}) => {
+const AddObituaryNotice = ({isEdit, obituaryNumber, setModalOpen , onUpdate}) => {
     const [formData, setFormData] = useState({
         deceasedName: '',
         residentId: '',
@@ -59,6 +59,7 @@ const AddObituaryNotice = ({isEdit, obituaryNumber, setModalOpen}) => {
                 }
             });
         }
+        onUpdate();
         setModalOpen(false)
 
     };

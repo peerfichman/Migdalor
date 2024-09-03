@@ -75,7 +75,8 @@ const CreateDepartment = ({isEdit, departmentNumber, setModalOpen}) => {
                         <CloseIcon
                             onClick={handleClose}/>
                     </Button>
-                    <div className="title">עדכון פרטי מחלקה</div>
+                    <div className="title">{isEdit ? "עדכון פרטי מחלקה" : "צור מחלקה"}</div>
+
                     <div className="additional-info-container">
                         <div className="left-container">
                             <input
