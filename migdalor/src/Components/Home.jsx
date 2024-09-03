@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Icons from '/public/Image/Logo1.png';
 import SendMeassge from './CreatePages/SendMeassge.jsx';
@@ -9,12 +9,14 @@ import GoodMorningPolicy from './GoodMorningPolicy';
 import AddObituaryNotice from './CreatePages/AddObituaryNotice.jsx';
 import TenantCommittee from './CreatePages/TenantCommittee.jsx';
 import Entities from "./EntityPage/Entities.jsx";
+import {UserContext} from "../Auth/Auth.jsx";
 
 const Home = () => {
   const [activeComponent, setActiveComponent] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const contentRef = useRef(null);
 
+  const {logout} =useContext(UserContext)
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -64,12 +66,12 @@ const Home = () => {
           <button className="menu-button" onClick={() => handleClick('form')}>שליחת הודעה</button>
           <button className="menu-button" onClick={() => handleClick('hours')}>שעות פעילות</button>
           <button className="menu-button" onClick={() => handleClick('addTenant')}>הוספת דייר</button>
-          <button className="menu-button" onClick={() => handleClick('createActivity')}>יצירת פעילות</button>
+          <button className="menu-button" onClick={() => handleClick('activities')}>יצירת פעילות</button>
           <button className="menu-button" onClick={() => handleClick('addObituaryNotice')}>כתיבת מודעת אבל</button>
           <button className="menu-button" onClick={() => handleClick('goodMorningPolicy')}>נוהל בוקר טוב</button>
-          <button className="button" onClick={() => handleClick('tenantCommittee')}>ועד דיירים</button>
+          <button className="menu-button" onClick={() => handleClick('tenantCommittee')}>ועד דיירים</button>
           <button className="menu-button" onClick={() => handleClick('updateDepartmentDetails')}>עדכון פרטי מחלקה</button>
-          <button className="logout-button">התנתקות</button>
+          <button className="logout-button" onClick={(e)=>logout()}>התנתקות</button>
         </div>
       </div>
     </>

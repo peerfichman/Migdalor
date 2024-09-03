@@ -33,7 +33,6 @@
   box-sizing: border-box;
   text-align: right;
   color: black;
-  font-weight: bold;
   background-color: white;
 }
 
@@ -44,6 +43,7 @@
 .add-tenant-form-button {
   background-color: #BEA029;
   color: #fff;
+  align-self: center;
   padding: 10px 20px;
   margin-top: 20px;
   border: none;

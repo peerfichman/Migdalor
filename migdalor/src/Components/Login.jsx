@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Box from '@mui/material/Box';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
@@ -8,6 +8,7 @@ import Link from '@mui/material/Link';
 // import myImage from "./Image/logo.png";
 import myImage from "/public/Image/logo.png";
 import backgroundImg from "/public/Image/backgroundImg.jpeg";
+import {UserContext} from "../Auth/Auth.jsx";
 
 const apiUrl = "https://localhost:7149/api/Login/";
 // const apiUrl = "https://proj.ruppin.ac.il/bgroup32/test2/tar1/api/Login/";
@@ -21,6 +22,8 @@ export default function Login(props) {
         })
 
     const navigate = useNavigate();
+
+    const {login} = useContext(UserContext);
     
       
     const handleChange = (e) => {
@@ -31,32 +34,10 @@ export default function Login(props) {
     }
 
      
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        fetch(apiUrl+"Login",{
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: new Headers({
-                'Content-type': 'application/json; charset=UTF-8' // very important to add the 'charset=UTF-8'!!!!
-            })
-        })
-        .then(res => {
-            if (!res.ok) {
-                console.log("HTTP error! status: ", res.status);
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json()
-        })
-        .then(
-            (result) => {
-                console.log("Successfully logged in!", result);//save the user
-                navigate('/home'); // navigate to the home page
-            },
-            (error) => {
-                console.log("Error during POST:", error);
-            }
-        );
+        await login(formData.username, formData.password)
+        navigate('/home')
     }
     
     
@@ -96,7 +77,6 @@ export default function Login(props) {
 
         <Button type="submit" variant="contained" color="primary"><b>התחברות</b></Button>
         <br/>
-        <Link onClick={()=>navigate('home')}>שכחתי סיסמה</Link>
         </Box>
     
     </div>

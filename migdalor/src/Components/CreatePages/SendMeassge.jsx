@@ -64,7 +64,7 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen, onUpdate}) => {
                         <CloseIcon
                             onClick={handleClose}/>
                     </Button>
-                    <h1 className="form-title">שליחת הודעה</h1>
+                    <h1 className="form-title">{isEdit? "עריכת הודעה" : "שליחת הודעה"}</h1>
                     <form onSubmit={handleSubmit} className="form-layout" style={{
 
                         width: '75%',
@@ -116,7 +116,7 @@ const SendMessage = ({isEdit, messageNumber, setModalOpen, onUpdate}) => {
                                 style={{width: '100%'}}
                             />
                         </div>
-                            <button style={{marginTop:0, width:"60%", fontWeight:'bold'}} type="submit" className="form-button">שלח</button>
+                            <button style={{marginTop:0, width:"60%", fontWeight:'bold', fontFamily: "\"Open Sans\", sans-serif"}} type="submit" className="form-button">שלח</button>
                     </form>
                     {showSuccessMessage && (
                         <div className="success-message">ההודעה נשלחה בהצלחה</div>

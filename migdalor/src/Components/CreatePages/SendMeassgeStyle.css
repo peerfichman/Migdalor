@@ -43,8 +43,6 @@
   box-sizing: border-box;
   text-align: right;
   color: black;
-  font-weight: bold;
-  font-family: 'sans-serif';
   background-color: white;
 }
 input:placeholder-shown{

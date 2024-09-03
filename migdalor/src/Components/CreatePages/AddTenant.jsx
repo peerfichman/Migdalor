@@ -203,6 +203,7 @@ const AddTenant = ({isEdit, tenantId, setModalOpen, onUpdate}) => {
                                     <input type="text" name="password" className="add-tenant-input"
                                            value={userDetails.password} readOnly/>
                                 </div>
+
                                 <button onClick={handleSuccessMessageClose} className="add-tenant-form-button">אישור
                                 </button>
                             </div>

@@ -10,3 +10,9 @@ export const GetAllResidents = async ()=>{
     const {data} =   await axios.get(BASE_URL+'api/Resident/GetAllResidents');
     return data;
 }
+
+export const ForgotPassword =async (userId)=>{
+    const response = await axios.post(BASE_URL +'api/Resident/forgotpassword', {residentID: userId})
+        .catch((badResponse)=> badResponse)
+    return response
+}

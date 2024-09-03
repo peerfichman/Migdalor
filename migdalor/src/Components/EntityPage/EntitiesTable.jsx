@@ -55,9 +55,10 @@ const  EntityRow = ({entity, entityName , onUpdate})=> {
                 })
                 }
                 <TableCell>
-                    <IconButton color='primary' onClick={(e) =>setModalOpen(true)}>
+                    {entityName ==='Tenant' ?<div></div>:
+                        <IconButton color='primary' onClick={(e) => setModalOpen(true)}>
                         <EditIcon/>
-                    </IconButton>
+                    </IconButton>}
                     <IconButton color='error' onClick={handelDelete}>
                         <DeleteIcon/>
                     </IconButton>

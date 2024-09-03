@@ -29,7 +29,7 @@ const EntitiesMap = {
         createPage: (setOpenCreate, onUpdate) => {
             return <CreateActivity isEdit={false} activityNumber={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
-        editPage: (activityId, setOpenEdit) => {
+        editPage: (activityId, setOpenEdit, onUpdate) => {
             return <CreateActivity isEdit={true} activityNumber={activityId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
         }
 
@@ -40,7 +40,7 @@ const EntitiesMap = {
             ...TenantRequests
         }
         , columns: new Map([
-                ['firstName', "שם; פרטי"],
+                ['firstName', "שם פרטי"],
                 ['lastName', "שם משפחה"],
                 ['dateOfBirth', "תאריך לידה"],
                 ['email', "כתובת מייל"],
@@ -52,7 +52,8 @@ const EntitiesMap = {
             return <AddTenant isEdit={false} tenantId={null} setModalOpen={setOpenCreate} onUpdate={onUpdate}/>
         },
         editPage: (tenantId, setOpenEdit, onUpdate) => {
-            return <AddTenant isEdit={true} tenantId={tenantId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
+            // return <AddTenant isEdit={true} tenantId={tenantId} setModalOpen={setOpenEdit} onUpdate={onUpdate}/>
+            return <di></di>
         }
     },
     Department: {

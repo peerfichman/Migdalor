@@ -5,9 +5,11 @@ import LogoAndText from '../Images/LogoAndText.png';
 import TextField from '@mui/material/TextField';
 import {UserContext} from "../Auth/Auth.jsx";
 import {Typography} from "@mui/material";
-
+import * as ResidentRequests from '../Requests/ResidentRequests/ResidentRequests.jsx'
+import Message from '../Components/MessageModal.jsx'
 const ForgotPassword = () => {
     const [residentId, setResidentId] = useState('')
+    const [message, setMessage] = useState('')
     const navigate = useNavigate();
 
 
@@ -15,10 +17,16 @@ const ForgotPassword = () => {
         setResidentId(e.target.value)
 
     }
+    const closeMessage =()=>{
+        setMessage('');
+    }
 
-    // const onSubmit = async()=>{
-    //     await
-    // }
+    const onSubmit = async(e)=>{
+        e.preventDefault();
+        const response = await ResidentRequests.ForgotPassword(residentId);
+        if(response.status!==200) setMessage(`משתמש  לא נמצא `)
+        else setMessage("פרטי ההתחברות נשלחו לכתובת המייל של הדייר")
+    }
 
 
     return (
@@ -26,7 +34,7 @@ const ForgotPassword = () => {
             <div className="login-logo">
                 <img src={LogoAndText} alt="Logo" />
             </div>
-            <form className="login-form" >
+            <form className="login-form">
                 <Typography>שחזור סיסמה</Typography>
                 <TextField
                     id="id"
@@ -39,9 +47,13 @@ const ForgotPassword = () => {
                     onChange={handleInputChange}
                 />
 
-                <button type="submit" className="login-button">שחזר ססמה</button>
-                <a href="/" className="forgot-password" onClick={(e)=>navigate('/login')}>חזרה להתחברות</a>
+                <button  className="login-button" onClick={onSubmit}>שחזר סיסמה</button>
+                <a href="/" className="forgot-password" onClick={(e)=> {
+                    e.preventDefault();
+                    navigate('/login')
+                }}>חזרה להתחברות</a>
             </form>
+            <Message message={message} open={message!== ''} handleClose={closeMessage} />
         </div>
     );
 }

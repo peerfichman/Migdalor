@@ -33,6 +33,13 @@ const items = [
 
 const IconGrid = () => {
   const navigate = useNavigate();
+  const handleMouseEnter = (e) => {
+    e.currentTarget.style.transform = 'scale(1.05)'; //
+  }
+
+  const handleMouseLeave = (e) => {
+    e.currentTarget.style.transform = 'scale(1)'; //
+  }
 
   const handleItemClick = (route) => {
     if (route) {
@@ -46,7 +53,7 @@ const IconGrid = () => {
       {items.map((item, index) => (
         <Grid item xs={4} key={index}>
           <Paper 
-            elevation={3} 
+            elevation={6}
             style={{ 
               display: 'flex', 
               flexDirection: 'column', 
@@ -55,7 +62,11 @@ const IconGrid = () => {
               color: '#38588e',
               cursor: item.route ? 'pointer' : 'default'
             }}
-            onClick={() => handleItemClick(item.route)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleItemClick(item.route)
+
+          }
           >
             {item.icon}
             <Typography variant="h6" className="welcom-header" style={{ marginTop: 8, color: '#000', fontWeight: 'bold', fontSize: 22 }}>

@@ -21,7 +21,40 @@ namespace WebApplication1.Controllers
             Mail_Service = _MailService;
 
         }
+        [HttpPost]
+        [Route("forgotpassword")]
+        public IActionResult forgotpassword([FromBody] RestoreUserDTO request)
+        {
+            // find the user in the database based on the provided username
+            var user = (from resident in db.TblResidents
+                        where resident.ResidentID == request.ResidentID
+                        select resident).FirstOrDefault();
 
+            if (user == null)
+            {
+                // user not found
+                return BadRequest("user not found");
+            }
+
+            MailData Mail_data = new MailData()
+            {
+                EmailToId = user.Email,
+                EmailSubject = "שחזור פרטי ההתחברות שלך למערכת מגדלור",
+                EmailToName = user.FirstName + " " + user.LastName,
+                EmailBody = "פרטי ההתחברות שלך למערכת מגדלור:" +
+                $"שם משתמש:\n" +
+                    $" {user.Username}\n" +
+                    $"סיסמה: \n " +
+                    $"{user.Password}\n" +
+                    $"בברכה,\n" +
+                    $" צוות מגדלור"
+            };
+
+            // implement your logic for password reset here
+            // for example, you could send an email to the user with a link to reset their password
+            Mail_Service.SendMail(Mail_data);
+            return Ok("password reset instructions sent to your email");
+        }
 
         [HttpPost]
         [Route("AddResident")]

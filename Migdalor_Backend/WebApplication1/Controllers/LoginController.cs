@@ -18,6 +18,7 @@ namespace WebApplication1.Controllers
     {
         MigdalorContext db = new MigdalorContext();
 
+
         //provides methods to retrieve configuration values, typically from sources like JSON files
         private readonly IConfiguration _configuration;
         public LoginController(IConfiguration configuration)
@@ -52,23 +53,30 @@ namespace WebApplication1.Controllers
 
         private string GenerateJwtToken(TblUser user)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var Claims = new[]
+            try
             {
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+                var Claims = new[]
+                {
                 new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
                 new Claim(ClaimTypes.GivenName,user.Username),
                 new Claim(ClaimTypes.Role,user.RoleName)
             };
-            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-                _configuration["Jwt:Audience"],
-                Claims,
-                expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: credentials
-                );
+                var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+                    _configuration["Jwt:Audience"],
+                    Claims,
+                    expires: DateTime.UtcNow.AddHours(1),
+                    signingCredentials: credentials
+                    );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            }
 
 
         [HttpPost]
@@ -84,6 +92,7 @@ namespace WebApplication1.Controllers
                 if (resident != null)
                 {
                     var token = GenerateJwtTokenForResident(resident);
+                    if(token == null) { return StatusCode(500); }
                     return Ok(new { Token = token, resident = resident });
                 }
                 return response;
@@ -150,26 +159,7 @@ namespace WebApplication1.Controllers
 
 
 
-        //for future developing
-        //create API for Forgot Password
-        //[HttpPost]
-        //[Route("ForgotPassword")]
-        //public IActionResult ForgotPassword(string username)
-        //{
-        //    // Find the user in the database based on the provided username
-        //    var user = db.TblUsers.FirstOrDefault(u => u.Username == username);
 
-        //    if (user == null)
-        //    {
-        //        // User not found
-        //        return BadRequest("User not found");
-        //    }
-
-        //    // Implement your logic for password reset here
-        //    // For example, you could send an email to the user with a link to reset their password
-
-        //    return Ok("Password reset instructions sent to your email");
-        //}
 
     }
 }
